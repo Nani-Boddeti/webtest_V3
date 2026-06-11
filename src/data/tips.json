@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "title": "Always Remove Makeup Before Bed",
+    "content": "Sleeping with makeup on can clog pores, cause breakouts, and accelerate skin aging. Make it a habit to gently remove all makeup with a micellar water or oil-based cleanser, then follow with your regular skincare routine. Your skin repairs itself at night, so a clean canvas is essential.",
+    "excerpt": "Sleeping with makeup on can clog pores, cause breakouts, and accelerate skin aging. Make it a habit to gently remove all makeup before bed.",
+    "source": "American Academy of Dermatology",
+    "category": "Skincare"
+  },
+  {
+    "id": 2,
+    "title": "Use a Silk Pillowcase for Hair and Skin",
+    "content": "Cotton pillowcases absorb moisture and create friction that leads to wrinkles and hair breakage. Silk pillowcases help retain moisture, reduce friction, and can prevent sleep creases. They are also gentler on hair, reducing tangles and frizz.",
+    "excerpt": "Cotton pillowcases absorb moisture and create friction that leads to wrinkles and hair breakage. Silk pillowcases help retain moisture and reduce friction.",
+    "source": "Dermatology Times",
+    "category": "Skincare"
+  },
+  {
+    "id": 3,
+    "title": "Always Use Heat Protectant Before Styling",
+    "content": "Heat styling tools can reach temperatures over 400°F, causing damage to the hair cuticle. A quality heat protectant spray or serum creates a barrier that minimizes moisture loss and prevents breakage. Apply evenly on damp hair before blow-drying or on dry hair before using flat irons or curling wands.",
+    "excerpt": "Heat styling tools can reach temperatures over 400°F, causing damage to the hair cuticle. A quality heat protectant creates a protective barrier.",
+    "source": "Cosmopolitan",
+    "category": "Hair Care"
+  },
+  {
+    "id": 4,
+    "title": "Apply Sunscreen Every Day, Even Indoors",
+    "content": "UVA rays can penetrate windows and clouds, leading to premature aging and skin damage. Apply a broad-spectrum sunscreen with at least SPF 30 every morning as the last step of your skincare routine, regardless of weather or whether you plan to stay indoors.",
+    "excerpt": "UVA rays can penetrate windows and clouds, leading to premature aging. Apply broad-spectrum sunscreen with at least SPF 30 every morning.",
+    "source": "Skin Cancer Foundation",
+    "category": "Skincare"
+  },
+  {
+    "id": 5,
+    "title": "Don't Skip Eye Cream",
+    "content": "The skin around your eyes is thinner and more delicate than the rest of your face. Using a dedicated eye cream with ingredients like caffeine, peptides, or hyaluronic acid can help reduce puffiness, dark circles, and fine lines. Pat gently with your ring finger to avoid tugging.",
+    "excerpt": "The skin around your eyes is thinner and more delicate. Using a dedicated eye cream can help reduce puffiness, dark circles, and fine lines.",
+    "source": "Allure",
+    "category": "Skincare"
+  },
+  {
+    "id": 6,
+    "title": "Trim Your Hair Regularly",
+    "content": "Regular trims every 6-8 weeks help prevent split ends from traveling up the hair shaft, which can cause breakage. Even if you are growing your hair out, getting a trim removes damaged ends and keeps your hair looking healthy and full.",
+    "excerpt": "Regular trims every 6-8 weeks help prevent split ends from traveling up the hair shaft, keeping hair healthy and full.",
+    "source": "Hair.com",
+    "category": "Hair Care"
+  },
+  {
+    "id": 7,
+    "title": "Use a Primer Before Foundation",
+    "content": "Primer creates a smooth base for foundation, helping it last longer and apply more evenly. Choose a primer based on your skin concerns—silicone-based for filling pores, hydrating for dry skin, or mattifying for oily skin. Let it set for 30 seconds before applying foundation.",
+    "excerpt": "Primer creates a smooth base for foundation, helping it last longer and apply more evenly. Choose based on your skin concerns.",
+    "source": "Sephora Beauty Blog",
+    "category": "Makeup"
+  },
+  {
+    "id": 8,
+    "title": "Always Patch Test New Products",
+    "content": "Before applying a new skincare or makeup product to your face, test it on a small area of skin like behind your ear or on your inner arm. Apply a small amount and wait 24-48 hours to check for any allergic reaction, redness, or irritation.",
+    "excerpt": "Before applying a new product to your face, test it on a small area like behind your ear or on your inner arm. Wait 24-48 hours.",
+    "source": "WebMD",
+    "category": "Skincare"
+  },
+  {
+    "id": 9,
+    "title": "Layer Skincare Products Correctly",
+    "content": "The general rule is to apply products from thinnest to thickest consistency. Start with cleanser, then toner, serums, moisturizer, and finally sunscreen. This ensures each product can penetrate effectively. Wait 30-60 seconds between layers for better absorption.",
+    "excerpt": "Apply products from thinnest to thickest consistency: cleanser, toner, serums, moisturizer, then sunscreen. Wait between layers for better absorption.",
+    "source": "Vogue Beauty",
+    "category": "Skincare"
+  },
+  {
+    "id": 10,
+    "title": "Clean Your Makeup Brushes Weekly",
+    "content": "Dirty makeup brushes can harbor bacteria, leading to breakouts and skin infections. Wash your brushes at least once a week with a gentle shampoo or brush cleanser. Rinse thoroughly, reshape the bristles, and let them dry flat on a towel to prevent water from loosening the handle glue.",
+    "excerpt": "Dirty makeup brushes can harbor bacteria, leading to breakouts. Wash them weekly with gentle shampoo, reshape bristles, and dry flat.",
+    "source": "Mayo Clinic",
+    "category": "Makeup"
+  },
+  {
+    "id": 11,
+    "title": "Use a Hydrating Face Mist Throughout the Day",
+    "content": "Face mists can replenish moisture, refresh your skin, and give you a healthy glow. Look for mists containing hyaluronic acid, glycerin, or rose water. Hold the bottle about 8 inches from your face and spray in an 'X' and 'T' pattern for even coverage.",
+    "excerpt": "Face mists replenish moisture and refresh your skin. Look for ones with hyaluronic acid, glycerin, or rose water.",
+    "source": "Harper's Bazaar",
+    "category": "Skincare"
+  },
+  {
+    "id": 12,
+    "title": "Don't Over-Wash Your Hair",
+    "content": "Washing your hair daily can strip it of natural oils, leading to dryness and scalp irritation. Most hair types benefit from washing 2-3 times per week. Use dry shampoo between washes to absorb excess oil and extend your style.",
+    "excerpt": "Washing your hair daily strips natural oils. Most hair types benefit from washing 2-3 times per week. Use dry shampoo between washes.",
+    "source": "Healthline",
+    "category": "Hair Care"
+  },
+  {
+    "id": 13,
+    "title": "Apply Blush to the Apples of Your Cheeks",
+    "content": "Smile to find the apples of your cheeks, then apply blush in a circular motion and blend upward toward your temples. Cream blushes work well for dry skin, while powder blushes are better for oily skin. Choose a shade that mimics your natural flush for the most flattering look.",
+    "excerpt": "Smile to find the apples of your cheeks, apply blush in a circular motion, and blend upward toward your temples.",
+    "source": "Marie Claire",
+    "category": "Makeup"
+  },
+  {
+    "id": 14,
+    "title": "Use a Lip Scrub Once a Week",
+    "content": "Exfoliating your lips removes dead skin cells and allows lip products to apply smoothly. You can use a store-bought lip scrub or make one at home by mixing sugar with honey or coconut oil. Gently massage in circular motions for 30 seconds, then rinse.",
+    "excerpt": "Exfoliating your lips removes dead skin cells. Use a sugar and honey scrub, gently massage in circles, then rinse.",
+    "source": "Byrdie",
+    "category": "Makeup"
+  },
+  {
+    "id": 15,
+    "title": "Invest in a Good Moisturizer for Your Skin Type",
+    "content": "Moisturizer is essential for all skin types, including oily skin. Gel-based moisturizers work well for oily skin, cream-based for dry skin, and lightweight lotions for combination skin. Apply moisturizer while skin is still slightly damp to lock in extra hydration.",
+    "excerpt": "Moisturizer is essential for all skin types. Gel-based for oily, cream for dry, and lightweight lotions for combination skin.",
+    "source": "Dermatology Insights",
+    "category": "Skincare"
+  },
+  {
+    "id": 16,
+    "title": "Use Purple Shampoo for Blonde or Gray Hair",
+    "content": "Purple shampoo neutralizes brassy and yellow tones in blonde, silver, or gray hair. Use it once or twice a week, leaving it on for 2-5 minutes depending on desired tone. Overuse can lead to a purple tint, so adjust frequency as needed.",
+    "excerpt": "Purple shampoo neutralizes brassy tones in blonde or gray hair. Use 1-2 times per week, leaving on for 2-5 minutes.",
+    "source": "Glamour",
+    "category": "Hair Care"
+  },
+  {
+    "id": 17,
+    "title": "Always Curl Lashes Before Applying Mascara",
+    "content": "Curling your lashes before mascara opens up your eyes and makes them appear larger. Hold the curler at the base of your lashes and gently squeeze for 5-10 seconds. Never curl after applying mascara as this can cause lashes to break or stick to the curler.",
+    "excerpt": "Curling lashes before mascara opens up your eyes. Hold at the base and gently squeeze for 5-10 seconds. Never curl after mascara.",
+    "source": "InStyle",
+    "category": "Makeup"
+  },
+  {
+    "id": 18,
+    "title": "Stay Hydrated for Healthy Skin",
+    "content": "Drinking enough water helps maintain skin elasticity, reduces puffiness, and flushes out toxins. Aim for at least 8 glasses of water per day. Herbal teas and water-rich foods like cucumber and watermelon also contribute to your hydration goals.",
+    "excerpt": "Drinking enough water maintains skin elasticity and reduces puffiness. Aim for at least 8 glasses per day.",
+    "source": "Harvard Health",
+    "category": "Skincare"
+  },
+  {
+    "id": 19,
+    "title": "Use a Wide-Tooth Comb on Wet Hair",
+    "content": "Wet hair is more fragile and prone to breakage. Instead of a brush, use a wide-tooth comb to gently detangle hair starting from the ends and working your way up. Apply a leave-in conditioner or detangling spray for extra slip and to minimize damage.",
+    "excerpt": "Wet hair is fragile and prone to breakage. Use a wide-tooth comb starting from ends working up, with leave-in conditioner for slip.",
+    "source": "NaturallyCurly",
+    "category": "Hair Care"
+  },
+  {
+    "id": 20,
+    "title": "Set Your Makeup with Setting Spray",
+    "content": "Setting spray helps your makeup last longer by locking everything in place. Hold the bottle 8-10 inches from your face and mist in an X and T pattern. Allow it to dry naturally—don't fan or blot. Choose a dewy finish for dry skin or matte for oily skin.",
+    "excerpt": "Setting spray helps makeup last longer. Hold 8-10 inches from face, mist in X and T pattern, let dry naturally.",
+    "source": "Allure",
+    "category": "Makeup"
+  },
+  {
+    "id": 21,
+    "title": "Exfoliate Your Skin 1-2 Times Per Week",
+    "content": "Exfoliation removes dead skin cells, unclogs pores, and promotes cell turnover for a brighter complexion. Use a chemical exfoliant (AHAs or BHAs) for gentle exfoliation or a physical scrub for manual exfoliation. Avoid over-exfoliating, which can damage your skin barrier.",
+    "excerpt": "Exfoliation removes dead skin cells and unclogs pores. Use chemical (AHAs/BHAs) or physical scrubs 1-2 times weekly. Don't over-exfoliate.",
+    "source": "American Academy of Dermatology",
+    "category": "Skincare"
+  },
+  {
+    "id": 22,
+    "title": "Choose the Right Foundation Shade",
+    "content": "Test foundation shades along your jawline rather than on your wrist or hand, as your face and neck may differ from your arm. The right shade should disappear seamlessly into your skin. Check in natural light and consider getting a sample to wear for a day before purchasing.",
+    "excerpt": "Test foundation along your jawline, not your wrist. The right shade should disappear into your skin. Check in natural light.",
+    "source": "Fenty Beauty",
+    "category": "Makeup"
+  },
+  {
+    "id": 23,
+    "title": "Use Hair Oil for Shine and Nourishment",
+    "content": "Hair oils like argan, coconut, or jojoba oil can add shine, reduce frizz, and nourish the scalp. Apply a few drops to the mid-lengths and ends of damp or dry hair, avoiding the roots to prevent greasiness. Warm the oil between your palms before applying for even distribution.",
+    "excerpt": "Hair oils like argan or coconut oil add shine and reduce frizz. Apply a few drops to mid-lengths and ends, avoiding roots.",
+    "source": "Elle",
+    "category": "Hair Care"
+  },
+  {
+    "id": 24,
+    "title": "Apply Concealer in a Triangle Shape Under Eyes",
+    "content": "For brightening under-eye concealer, apply in an inverted triangle shape rather than a half-moon. This creates a lifting effect and blends more naturally. Use a shade one to two shades lighter than your foundation, and blend with a damp beauty sponge or ring finger.",
+    "excerpt": "Apply under-eye concealer in an inverted triangle shape for a lifting effect. Use a shade 1-2 shades lighter than foundation.",
+    "source": "Tarte Cosmetics",
+    "category": "Makeup"
+  },
+  {
+    "id": 25,
+    "title": "Protect Your Hair from Chlorine and Salt Water",
+    "content": "Before swimming, wet your hair with fresh water and apply a leave-in conditioner or hair oil to create a protective barrier. After swimming, rinse hair thoroughly and use a clarifying shampoo to remove chlorine or salt residue. Follow with a deep conditioning treatment.",
+    "excerpt": "Before swimming, wet hair and apply leave-in conditioner as a barrier. Rinse thoroughly after and use clarifying shampoo.",
+    "source": "SwimOutlet",
+    "category": "Hair Care"
+  },
+  {
+    "id": 26,
+    "title": "Use Toner to Balance Skin pH",
+    "content": "Toner helps remove any leftover impurities after cleansing and restores your skin's natural pH balance. Apply with a cotton pad or pat directly with clean hands. Look for alcohol-free formulas with ingredients like witch hazel, rose water, or niacinamide for added benefits.",
+    "excerpt": "Toner removes leftover impurities and restores skin pH. Apply with a cotton pad or hands. Look for alcohol-free formulas.",
+    "source": "Paula's Choice",
+    "category": "Skincare"
+  },
+  {
+    "id": 27,
+    "title": "Fill in Your Brows with Light Strokes",
+    "content": "Use a brow pencil or powder with light, feathery strokes that mimic natural hair. Start at the inner corner and work outward, following your natural brow shape. Set with a clear or tinted brow gel for all-day hold. Avoid harsh, drawn-on lines.",
+    "excerpt": "Use light, feathery strokes that mimic natural hair. Start at inner corner and work outward. Set with brow gel for all-day hold.",
+    "source": "Anastasia Beverly Hills",
+    "category": "Makeup"
+  },
+  {
+    "id": 28,
+    "title": "Deep Condition Your Hair Weekly",
+    "content": "A weekly deep conditioning treatment restores moisture, repairs damage, and improves hair elasticity. Apply to clean, damp hair, focusing on mid-lengths and ends. Leave on for 15-30 minutes, using a shower cap to trap heat for deeper penetration. Rinse with cool water to seal the cuticle.",
+    "excerpt": "Weekly deep conditioning restores moisture and repairs damage. Apply to damp hair, leave 15-30 minutes, rinse with cool water.",
+    "source": "L'Oréal Paris",
+    "category": "Hair Care"
+  },
+  {
+    "id": 29,
+    "title": "Use a Setting Powder to Lock Foundation",
+    "content": "Setting powder helps foundation stay in place and controls shine throughout the day. Use a fluffy brush to apply translucent powder in pressing and rolling motions, focusing on the T-zone. For dry skin, use a light hand to avoid a cakey appearance.",
+    "excerpt": "Setting powder helps foundation stay in place and controls shine. Apply with a fluffy brush in pressing motions, focus on T-zone.",
+    "source": "Laura Mercier",
+    "category": "Makeup"
+  },
+  {
+    "id": 30,
+    "title": "Don't Pop Pimples",
+    "content": "Popping pimples can push bacteria deeper into the skin, causing inflammation, infection, and scarring. Instead, apply a spot treatment containing benzoyl peroxide or salicylic acid. If you must extract, use a clean comedone extractor or visit a professional esthetician.",
+    "excerpt": "Popping pimples pushes bacteria deeper, causing inflammation and scarring. Use spot treatment with benzoyl peroxide or salicylic acid instead.",
+    "source": "Cleveland Clinic",
+    "category": "Skincare"
+  }
+]
