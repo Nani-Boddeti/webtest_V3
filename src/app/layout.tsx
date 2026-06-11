@@ -13,6 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  title: "Beauty Tips",
+  description: "A curated collection of beauty tips covering skincare, makeup, and hair care.",
   title: "Beauty Tips Hub - Expert Skincare, Makeup & Hair Advice",
   description:
     "Discover expert beauty tips on skincare routines, makeup tutorials, and hair care. Your daily guide to looking and feeling your best.",
@@ -31,6 +33,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <body className="min-h-full flex flex-col">{children}</body>
       <body className="min-h-full flex flex-col bg-white dark:bg-zinc-900 text-gray-900 dark:text-gray-100">
         <header className="border-b border-gray-200 dark:border-zinc-700">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
