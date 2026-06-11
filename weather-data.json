@@ -1,0 +1,86 @@
+[
+  {
+    "city": "Miami",
+    "state": "Florida",
+    "country": "USA",
+    "weather": "Sunny, 85°F"
+  },
+  {
+    "city": "Springfield",
+    "state": "Illinois",
+    "country": "USA",
+    "weather": "Partly cloudy, 72°F"
+  },
+  {
+    "city": "Springfield",
+    "state": "Missouri",
+    "country": "USA",
+    "weather": "Rainy, 62°F"
+  },
+  {
+    "city": "Springfield",
+    "state": "Oregon",
+    "country": "USA",
+    "weather": "Foggy, 55°F"
+  },
+  {
+    "city": "Portland",
+    "state": "Oregon",
+    "country": "USA",
+    "weather": "Cloudy, 68°F"
+  },
+  {
+    "city": "Portland",
+    "state": "Maine",
+    "country": "USA",
+    "weather": "Snowy, 30°F"
+  },
+  {
+    "city": "Tokyo",
+    "state": null,
+    "country": "Japan",
+    "weather": "Clear, 78°F"
+  },
+  {
+    "city": "Paris",
+    "state": null,
+    "country": "France",
+    "weather": "Light rain, 60°F"
+  },
+  {
+    "city": "London",
+    "state": null,
+    "country": "UK",
+    "weather": "Overcast, 55°F"
+  },
+  {
+    "city": "Berlin",
+    "state": null,
+    "country": "Germany",
+    "weather": "Windy, 50°F"
+  },
+  {
+    "city": "Sydney",
+    "state": null,
+    "country": "Australia",
+    "weather": "Sunny, 90°F"
+  },
+  {
+    "city": "Cairo",
+    "state": null,
+    "country": "Egypt",
+    "weather": "Hot, 95°F"
+  },
+  {
+    "city": "Austin",
+    "state": "Texas",
+    "country": "USA",
+    "weather": "Humid, 88°F"
+  },
+  {
+    "city": "Seattle",
+    "state": "Washington",
+    "country": "USA",
+    "weather": "Drizzle, 52°F"
+  }
+]
