@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   title: "Beauty Tips Hub - Expert Skincare, Makeup & Hair Advice",
   description:
     "Discover expert beauty tips on skincare routines, makeup tutorials, and hair care. Your daily guide to looking and feeling your best.",
+  title: "Beauty Tips",
+  description:
+    "Discover expert beauty tips for skincare, haircare, makeup, nails, and wellness.",
 };
 
 export default function RootLayout({
@@ -73,6 +76,8 @@ export default function RootLayout({
             <p>&copy; {new Date().getFullYear()} BeautyTipsHub. All beauty tips are for informational purposes only.</p>
           </div>
         </footer>
+      <body className="min-h-full flex flex-col bg-white text-gray-900">
+        {children}
       </body>
     </html>
   );
