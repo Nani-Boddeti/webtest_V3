@@ -7,6 +7,18 @@ interface TipCardProps {
 
 export default function TipCard({ tip }: TipCardProps) {
   return (
+    <Link
+      href={`/tips/${tip.id}`}
+      className="group block rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:shadow-md hover:border-gray-300"
+    >
+      <span className="inline-block rounded-full bg-pink-100 px-3 py-1 text-xs font-medium text-pink-700 mb-3">
+        {tip.category}
+      </span>
+      <h2 className="text-lg font-semibold text-gray-900 group-hover:text-pink-600 transition-colors mb-2">
+        {tip.title}
+      </h2>
+      <p className="text-sm text-gray-600 line-clamp-2">{tip.excerpt}</p>
+    </Link>
     <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 shadow-sm transition-all hover:shadow-md hover:-translate-y-1">
       <div className="flex-1 p-6">
         <span className="inline-block rounded-full bg-pink-50 dark:bg-pink-900/30 px-3 py-1 text-xs font-medium text-pink-600 dark:text-pink-300">
