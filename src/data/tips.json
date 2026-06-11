@@ -238,5 +238,273 @@
     "excerpt": "Popping pimples pushes bacteria deeper, causing inflammation and scarring. Use spot treatment with benzoyl peroxide or salicylic acid instead.",
     "source": "Cleveland Clinic",
     "category": "Skincare"
+    "id": "tip-001",
+    "title": "Always Remove Makeup Before Bed",
+    "content": "Sleeping with makeup on can clog pores, cause breakouts, and accelerate skin aging. Use a gentle makeup remover or micellar water followed by your regular cleanser to ensure all traces of makeup are gone before you hit the pillow.",
+    "category": "Skincare",
+    "source": "American Academy of Dermatology",
+    "attribution": "AAD.org",
+    "createdAt": "2024-01-15T10:00:00Z"
+  },
+  {
+    "id": "tip-002",
+    "title": "Apply Sunscreen Every Single Day",
+    "content": "UV damage is the number one cause of premature skin aging. Wear a broad-spectrum sunscreen with at least SPF 30 every day, even when it's cloudy or you're indoors. Reapply every two hours if you're outside.",
+    "category": "Skincare",
+    "source": "Skin Cancer Foundation",
+    "attribution": "SkinCancer.org",
+    "createdAt": "2024-01-16T10:00:00Z"
+  },
+  {
+    "id": "tip-003",
+    "title": "Hydrate from the Inside Out",
+    "content": "Drinking enough water is essential for maintaining plump, glowing skin. Aim for at least 8 glasses of water per day. Herbal teas and water-rich fruits like cucumber and watermelon also contribute to your hydration goals.",
+    "category": "Skincare",
+    "source": "Mayo Clinic",
+    "attribution": "MayoClinic.org",
+    "createdAt": "2024-01-17T10:00:00Z"
+  },
+  {
+    "id": "tip-004",
+    "title": "Exfoliate Gently Once or Twice a Week",
+    "content": "Exfoliation removes dead skin cells and reveals brighter skin underneath. Choose a gentle chemical exfoliant like lactic acid or a soft physical scrub. Avoid over-exfoliating, which can damage your skin barrier.",
+    "category": "Skincare",
+    "source": "Dermatology Times",
+    "attribution": "DermatologyTimes.com",
+    "createdAt": "2024-01-18T10:00:00Z"
+  },
+  {
+    "id": "tip-005",
+    "title": "Use a Silk Pillowcase for Hair and Skin",
+    "content": "Silk pillowcases create less friction than cotton, reducing hair breakage and sleep lines on your face. They also absorb less moisture, helping your skincare products work longer and keeping your hair hydrated.",
+    "category": "Skincare",
+    "source": "Allure Magazine",
+    "attribution": "Allure.com",
+    "createdAt": "2024-01-19T10:00:00Z"
+  },
+  {
+    "id": "tip-006",
+    "title": "Layer Skincare Products Correctly",
+    "content": "Apply skincare products from thinnest to thickest consistency. Start with cleanser, then toner, serums, moisturizer, and finish with sunscreen. This layering technique ensures each product absorbs properly.",
+    "category": "Skincare",
+    "source": "Vogue Beauty",
+    "attribution": "Vogue.com",
+    "createdAt": "2024-01-20T10:00:00Z"
+  },
+  {
+    "id": "tip-007",
+    "title": "Don't Skip the Eye Cream",
+    "content": "The skin around your eyes is thinner and more delicate than the rest of your face. Use an eye cream with ingredients like caffeine or vitamin C to reduce puffiness, dark circles, and fine lines.",
+    "category": "Skincare",
+    "source": "Harper's Bazaar",
+    "attribution": "HarpersBazaar.com",
+    "createdAt": "2024-01-21T10:00:00Z"
+  },
+  {
+    "id": "tip-008",
+    "title": "Trim Your Hair Regularly",
+    "content": "Getting a trim every 6-8 weeks prevents split ends from traveling up the hair shaft and causing further damage. Regular trims keep your hair looking healthy, shiny, and full of life.",
+    "category": "Haircare",
+    "source": "Good Housekeeping",
+    "attribution": "GoodHousekeeping.com",
+    "createdAt": "2024-01-22T10:00:00Z"
+  },
+  {
+    "id": "tip-009",
+    "title": "Use a Heat Protectant Before Styling",
+    "content": "Heat styling tools can reach temperatures high enough to damage hair proteins. Always apply a heat protectant spray or serum before using blow dryers, curling irons, or straighteners to minimize damage.",
+    "category": "Haircare",
+    "source": "Cosmopolitan",
+    "attribution": "Cosmopolitan.com",
+    "createdAt": "2024-01-23T10:00:00Z"
+  },
+  {
+    "id": "tip-010",
+    "title": "Don't Wash Your Hair Every Day",
+    "content": "Over-washing strips your scalp of natural oils, leading to dryness and irritation. Depending on your hair type, washing 2-3 times per week is sufficient. Use dry shampoo between washes to refresh your hair.",
+    "category": "Haircare",
+    "source": "Healthline",
+    "attribution": "Healthline.com",
+    "createdAt": "2024-01-24T10:00:00Z"
+  },
+  {
+    "id": "tip-011",
+    "title": "Deep Condition Once a Week",
+    "content": "Weekly deep conditioning treatments restore moisture and strengthen your hair from within. Look for masks containing ingredients like shea butter, argan oil, or keratin for the best results.",
+    "category": "Haircare",
+    "source": "Women's Health",
+    "attribution": "WomensHealthMag.com",
+    "createdAt": "2024-01-25T10:00:00Z"
+  },
+  {
+    "id": "tip-012",
+    "title": "Brush Your Hair Gently from Ends to Roots",
+    "content": "Start brushing from the ends and work your way up to avoid pulling and breaking hair. Use a wide-tooth comb on wet hair when it's most fragile, and a boar bristle brush for distributing natural oils.",
+    "category": "Haircare",
+    "source": "Byrdie",
+    "attribution": "Byrdie.com",
+    "createdAt": "2024-01-26T10:00:00Z"
+  },
+  {
+    "id": "tip-013",
+    "title": "Protect Hair from Chlorine and Salt Water",
+    "content": "Before swimming, wet your hair with clean water and apply a leave-in conditioner to create a protective barrier. Rinse your hair immediately after swimming and use a clarifying shampoo weekly.",
+    "category": "Haircare",
+    "source": "InStyle",
+    "attribution": "InStyle.com",
+    "createdAt": "2024-01-27T10:00:00Z"
+  },
+  {
+    "id": "tip-014",
+    "title": "Choose a Foundation That Matches Your Neck",
+    "content": "Test foundation shades along your jawline and blend toward your neck. The right shade should disappear into your skin without a visible line. Check in natural light before purchasing.",
+    "category": "Makeup",
+    "source": "Sephora Beauty Insider",
+    "attribution": "Sephora.com",
+    "createdAt": "2024-01-28T10:00:00Z"
+  },
+  {
+    "id": "tip-015",
+    "title": "Prime Your Face Before Foundation",
+    "content": "A good primer creates a smooth base for foundation, minimizes the appearance of pores, and helps your makeup last longer. Choose a primer suited to your skin type—hydrating for dry skin, mattifying for oily skin.",
+    "category": "Makeup",
+    "source": "Allure Magazine",
+    "attribution": "Allure.com",
+    "createdAt": "2024-01-29T10:00:00Z"
+  },
+  {
+    "id": "tip-016",
+    "title": "Curl Lashes Before Applying Mascara",
+    "content": "Using an eyelash curler before mascara opens up your eyes and makes lashes appear longer. Squeeze gently at the base of your lashes for 10 seconds, then move to the middle and tips for a natural curl.",
+    "category": "Makeup",
+    "source": "Glamour",
+    "attribution": "Glamour.com",
+    "createdAt": "2024-01-30T10:00:00Z"
+  },
+  {
+    "id": "tip-017",
+    "title": "Use a Lip Liner to Prevent Feathering",
+    "content": "Lip liner creates a barrier that keeps lipstick from bleeding into fine lines around the mouth. Choose a liner close to your natural lip color or matching your lipstick for a seamless finish.",
+    "category": "Makeup",
+    "source": "Marie Claire",
+    "attribution": "MarieClaire.com",
+    "createdAt": "2024-01-31T10:00:00Z"
+  },
+  {
+    "id": "tip-018",
+    "title": "Set Your Makeup with Setting Spray",
+    "content": "A setting spray locks in your makeup look for hours, prevents creasing, and gives a natural finish. Hold the bottle 8-10 inches from your face and mist in an X and T pattern for even coverage.",
+    "category": "Makeup",
+    "source": "Refinery29",
+    "attribution": "Refinery29.com",
+    "createdAt": "2024-02-01T10:00:00Z"
+  },
+  {
+    "id": "tip-019",
+    "title": "Clean Your Makeup Brushes Weekly",
+    "content": "Dirty brushes harbor bacteria that can cause breakouts and eye infections. Wash your brushes weekly with a gentle soap or brush cleanser, rinse thoroughly, and let them air dry flat.",
+    "category": "Makeup",
+    "source": "WebMD",
+    "attribution": "WebMD.com",
+    "createdAt": "2024-02-02T10:00:00Z"
+  },
+  {
+    "id": "tip-020",
+    "title": "Keep Your Nails Shaped and Filed",
+    "content": "Regular filing prevents snags and breaks. File in one direction rather than sawing back and forth to avoid splitting. Oval or squoval shapes are most durable and less prone to breaking.",
+    "category": "Nails",
+    "source": "Nailpro Magazine",
+    "attribution": "Nailpro.com",
+    "createdAt": "2024-02-03T10:00:00Z"
+  },
+  {
+    "id": "tip-021",
+    "title": "Apply Cuticle Oil Daily",
+    "content": "Cuticle oil keeps the nail bed hydrated and prevents hangnails and cracking. Apply a drop to each cuticle and massage in gently. For best results, use a oil with vitamin E or jojoba oil.",
+    "category": "Nails",
+    "source": "Oprah Daily",
+    "attribution": "OprahDaily.com",
+    "createdAt": "2024-02-04T10:00:00Z"
+  },
+  {
+    "id": "tip-022",
+    "title": "Use a Base Coat to Prevent Staining",
+    "content": "A base coat creates a barrier between your nail and colored polish, preventing yellow staining. It also helps polish adhere better and extends the life of your manicure by several days.",
+    "category": "Nails",
+    "source": "Essie",
+    "attribution": "Essie.com",
+    "createdAt": "2024-02-05T10:00:00Z"
+  },
+  {
+    "id": "tip-023",
+    "title": "Let Each Coat of Polish Dry Completely",
+    "content": "Apply thin coats of nail polish and wait at least two minutes between each layer. Thick coats take longer to dry and are more likely to smudge or bubble. Finish with a quick-dry top coat for a glossy finish.",
+    "category": "Nails",
+    "source": "Nails Magazine",
+    "attribution": "NailsMag.com",
+    "createdAt": "2024-02-06T10:00:00Z"
+  },
+  {
+    "id": "tip-024",
+    "title": "Moisturize Your Hands After Washing",
+    "content": "Frequent hand washing can strip moisture from your hands and nails. Keep a hand cream at every sink and apply after washing. Look for ingredients like shea butter, glycerin, and ceramides.",
+    "category": "Nails",
+    "source": "American Academy of Dermatology",
+    "attribution": "AAD.org",
+    "createdAt": "2024-02-07T10:00:00Z"
+  },
+  {
+    "id": "tip-025",
+    "title": "Get at Least 7 Hours of Sleep for Beauty Rest",
+    "content": "Quality sleep is essential for skin repair and regeneration. During deep sleep, your body produces human growth hormone that helps repair skin cells. Aim for 7-9 hours of uninterrupted sleep each night.",
+    "category": "Wellness",
+    "source": "National Sleep Foundation",
+    "attribution": "SleepFoundation.org",
+    "createdAt": "2024-02-08T10:00:00Z"
+  },
+  {
+    "id": "tip-026",
+    "title": "Eat a Diet Rich in Antioxidants",
+    "content": "Antioxidant-rich foods like berries, dark leafy greens, and nuts help fight free radicals that cause premature aging. Vitamin C from citrus fruits boosts collagen production, while omega-3s from fish support skin health.",
+    "category": "Wellness",
+    "source": "Cleveland Clinic",
+    "attribution": "ClevelandClinic.org",
+    "createdAt": "2024-02-09T10:00:00Z"
+  },
+  {
+    "id": "tip-027",
+    "title": "Exercise Regularly for a Natural Glow",
+    "content": "Physical activity increases blood flow, delivering oxygen and nutrients to your skin. Regular exercise also helps reduce stress, which can improve skin conditions like acne and eczema. Aim for 30 minutes most days.",
+    "category": "Wellness",
+    "source": "Harvard Health Publishing",
+    "attribution": "Health.Harvard.edu",
+    "createdAt": "2024-02-10T10:00:00Z"
+  },
+  {
+    "id": "tip-028",
+    "title": "Manage Stress for Clearer Skin",
+    "content": "Chronic stress triggers cortisol production, which can increase oil production and lead to breakouts. Practice stress management techniques like meditation, yoga, or deep breathing exercises for clearer skin.",
+    "category": "Wellness",
+    "source": "Psychology Today",
+    "attribution": "PsychologyToday.com",
+    "createdAt": "2024-02-11T10:00:00Z"
+  },
+  {
+    "id": "tip-029",
+    "title": "Use a Fragrance-Free Moisturizer for Sensitive Skin",
+    "content": "Fragrances are common irritants for sensitive skin. Choose moisturizers labeled 'fragrance-free' rather than 'unscented,' which may still contain masking fragrances. Look for soothing ingredients like aloe vera and oat extract.",
+    "category": "Skincare",
+    "source": "National Eczema Association",
+    "attribution": "NationalEczema.org",
+    "createdAt": "2024-02-12T10:00:00Z"
+  },
+  {
+    "id": "tip-030",
+    "title": "Replace Your Beauty Sponges Regularly",
+    "content": "Damp makeup sponges are breeding grounds for bacteria. Replace disposable sponges every month and clean reusable ones after each use with a gentle soap. Store them in a clean, dry place.",
+    "category": "Makeup",
+    "source": "Real Simple",
+    "attribution": "RealSimple.com",
+    "createdAt": "2024-02-13T10:00:00Z"
   }
 ]
