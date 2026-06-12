@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5ede4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#eedcc8;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#g2)"/>
+  <circle cx="400" cy="200" r="80" fill="#ffffff" opacity="0.6"/>
+  <text x="400" y="210" font-family="Inter,sans-serif" font-size="22" fill="#d4b896" text-anchor="middle" font-weight="600">✦ Haircare</text>
+  <text x="400" y="310" font-family="Inter,sans-serif" font-size="14" fill="#b89a72" text-anchor="middle">DIY Hair Masks</text>
+</svg>

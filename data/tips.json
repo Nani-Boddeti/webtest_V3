@@ -1,0 +1,194 @@
+[
+  {
+    "id": 1,
+    "title": "Morning Skincare Routine for Glowing Skin",
+    "summary": "Start your day with a simple 5-step routine that will leave your skin radiant and refreshed.",
+    "category": "skincare",
+    "image": "images/tip-skincare-morning.svg",
+    "author": "Emma Chen",
+    "date": "2025-01-15",
+    "content": [
+      {
+        "heading": "Step 1: Gentle Cleanser",
+        "text": "Begin your morning routine with a gentle, sulfate-free cleanser. This removes any impurities that accumulated overnight without stripping your skin of natural oils. Look for ingredients like aloe vera, green tea, or chamomile that soothe while they cleanse."
+      },
+      {
+        "heading": "Step 2: Vitamin C Serum",
+        "text": "Vitamin C is a powerful antioxidant that protects your skin from environmental damage and brightens your complexion. Apply a few drops to damp skin after cleansing. For best results, choose a serum with L-ascorbic acid in a dark, airless pump bottle."
+      },
+      {
+        "heading": "Step 3: Hydrating Moisturizer",
+        "text": "Lock in moisture with a lightweight, hydrating moisturizer. Gel-based formulas work well for oily skin, while cream-based options are better for dry skin. Look for hyaluronic acid, glycerin, or ceramides in the ingredients list."
+      },
+      {
+        "heading": "Step 4: Eye Cream",
+        "text": "The skin around your eyes is delicate and often shows the first signs of fatigue. Dab a small amount of eye cream with your ring finger, gently tapping from the inner corner outward. Caffeine-based formulas can help reduce puffiness."
+      },
+      {
+        "heading": "Step 5: Sunscreen",
+        "text": "Never skip sunscreen, even on cloudy days. Use at least SPF 30 and reapply every two hours if you're outdoors. Mineral sunscreens with zinc oxide or titanium dioxide are excellent choices for sensitive skin."
+      }
+    ],
+    "tags": ["skincare", "morning routine", "glowing skin"]
+  },
+  {
+    "id": 2,
+    "title": "5 Natural Hair Masks You Can Make at Home",
+    "summary": "Nourish your hair with these simple DIY masks using ingredients from your kitchen.",
+    "category": "haircare",
+    "image": "images/tip-hair-mask.svg",
+    "author": "Sofia Patel",
+    "date": "2025-02-03",
+    "content": [
+      {
+        "heading": "Coconut & Honey Mask",
+        "text": "Mix 2 tablespoons of coconut oil with 1 tablespoon of raw honey. Warm slightly and apply from roots to ends. Leave on for 30 minutes before shampooing. Coconut oil penetrates the hair shaft while honey locks in moisture."
+      },
+      {
+        "heading": "Avocado & Banana Mask",
+        "text": "Mash half a ripe avocado with one ripe banana. Add a tablespoon of olive oil for extra nourishment. This mask is packed with vitamins B and E, potassium, and healthy fats that strengthen and soften hair."
+      },
+      {
+        "heading": "Egg & Yogurt Mask",
+        "text": "Whisk one egg with 3 tablespoons of plain yogurt. Apply to damp hair and leave for 20 minutes. The protein in eggs helps repair damage while yogurt's lactic acid gently exfoliates the scalp."
+      },
+      {
+        "heading": "Aloe Vera & Green Tea Mask",
+        "text": "Brew a cup of green tea and let it cool. Mix with 3 tablespoons of aloe vera gel. This soothing mask is perfect for an irritated scalp and can help reduce dandruff."
+      },
+      {
+        "heading": "Apple Cider Vinegar Rinse",
+        "text": "Mix 2 tablespoons of apple cider vinegar with 1 cup of water. Use as a final rinse after shampooing. This restores pH balance, adds shine, and helps remove product buildup."
+      }
+    ],
+    "tags": ["haircare", "DIY", "natural", "home remedies"]
+  },
+  {
+    "id": 3,
+    "title": "Clean Beauty: Understanding Ingredient Labels",
+    "summary": "Learn how to read beauty product labels and identify truly clean, non-toxic ingredients.",
+    "category": "clean-beauty",
+    "image": "images/tip-clean-beauty.svg",
+    "author": "Dr. Lisa Grant",
+    "date": "2025-02-20",
+    "content": [
+      {
+        "heading": "The Dirty Dozen to Avoid",
+        "text": "Familiarize yourself with the most common harmful ingredients: parabens, phthalates, sodium lauryl sulfate (SLS), formaldehyde-releasing preservatives, synthetic fragrances, oxybenzone, triclosan, hydroquinone, PEG compounds, coal tar dyes, BHA/BHT, and aluminum compounds. Start by checking your current products for these."
+      },
+      {
+        "heading": "Understanding Certifications",
+        "text": "Look for third-party certifications like USDA Organic, Ecocert, Leaping Bunny (cruelty-free), and EWG Verified. These logos indicate the product has met specific standards. However, be aware that 'natural' and 'clean' are not regulated terms."
+      },
+      {
+        "heading": "Reading the INCI List",
+        "text": "The International Nomenclature of Cosmetic Ingredients (INCI) list shows ingredients in descending order of concentration. Ingredients with names that look like Latin (e.g., Cocos Nucifera) are typically plant-derived. Watch out for 'fragrance' or 'parfum' which can hide hundreds of undisclosed chemicals."
+      },
+      {
+        "heading": "Preservatives Aren't Always Bad",
+        "text": "Some preservatives are necessary to prevent bacterial growth, especially in water-based products. Safe options include phenoxyethanol, potassium sorbate, and sodium benzoate in small amounts. Completely preservative-free products in jars can actually be more risky."
+      },
+      {
+        "heading": "Greenwashing Red Flags",
+        "text": "Be suspicious of vague claims like 'eco-friendly,' 'plant-based,' or 'chemical-free' without specific explanations. Green packaging doesn't mean green ingredients. Always flip the bottle and read the actual ingredient list."
+      }
+    ],
+    "tags": ["clean beauty", "ingredients", "label reading", "non-toxic"]
+  },
+  {
+    "id": 4,
+    "title": "Sustainable Beauty: Zero-Waste Swaps",
+    "summary": "Small changes in your beauty routine can make a big difference for the planet. Here are easy swaps.",
+    "category": "sustainability",
+    "image": "images/tip-sustainable.svg",
+    "author": "Maya Johnson",
+    "date": "2025-03-08",
+    "content": [
+      {
+        "heading": "Switch to Bar Shampoo",
+        "text": "Shampoo bars last 2-3 times longer than liquid shampoo and come without plastic packaging. Look for sulfate-free formulas with nourishing butters. Store your bar on a draining soap dish to make it last even longer."
+      },
+      {
+        "heading": "Reusable Cotton Rounds",
+        "text": "Replace disposable cotton rounds with washable bamboo or organic cotton alternatives. A set of 10 rounds can last over a year. Simply toss them in a mesh bag and wash with your regular laundry."
+      },
+      {
+        "heading": "Refillable Perfume",
+        "text": "Many brands now offer refillable fragrance bottles. You buy the beautiful atomizer once, then purchase refills in minimal packaging. Some companies even offer subscription refill programs with carbon-neutral shipping."
+      },
+      {
+        "heading": "Glass Over Plastic",
+        "text": "Choose products packaged in glass, aluminum, or paper whenever possible. Glass is infinitely recyclable and doesn't leach chemicals. Many indie beauty brands now offer return-and-refill programs for their glass bottles."
+      },
+      {
+        "heading": "DIY Beauty Products",
+        "text": "Making your own face masks, body scrubs, and hair treatments eliminates packaging entirely. Start simple: sugar and coconut oil makes an excellent body scrub. Store in a glass jar and use within 3 months."
+      }
+    ],
+    "tags": ["sustainability", "zero waste", "eco-friendly", "beauty swaps"]
+  },
+  {
+    "id": 5,
+    "title": "Nighttime Skincare Ritual for Deep Repair",
+    "summary": "While you sleep, your skin works hard to repair itself. Support the process with this evening routine.",
+    "category": "skincare",
+    "image": "images/tip-night-routine.svg",
+    "author": "Emma Chen",
+    "date": "2025-03-22",
+    "content": [
+      {
+        "heading": "Double Cleanse Method",
+        "text": "Start with an oil-based cleanser to dissolve makeup, sunscreen, and excess sebum. Follow with a water-based cleanser to remove any remaining residue. This two-step method ensures your skin is completely clean without over-stripping."
+      },
+      {
+        "heading": "Exfoliate (2-3 Times per Week)",
+        "text": "Chemical exfoliants like AHAs (glycolic, lactic) or BHAs (salicylic) are gentler than physical scrubs. Apply after cleansing and before serums. AHA works on the skin's surface for brightness, while BHA penetrates pores for clarity."
+      },
+      {
+        "heading": "Active Serums",
+        "text": "Night is the perfect time for retinol or peptide serums. Retinol boosts collagen production and cell turnover. Start with a low concentration (0.25%) once a week and gradually increase. Always follow with a rich moisturizer."
+      },
+      {
+        "heading": "Rich Night Cream",
+        "text": "Your skin's moisture barrier repairs overnight, so use a richer moisturizer at night. Look for ingredients like shea butter, squalane, and ceramides. Apply in upward motions to support lymphatic drainage."
+      },
+      {
+        "heading": "Lip and Eye Care",
+        "text": "Finish with a thick lip mask or balm and an eye cream. Lip balms with lanolin or beeswax create a protective seal. For eyes, ingredients like peptides and caffeine can help reduce the appearance of fine lines over time."
+      }
+    ],
+    "tags": ["skincare", "night routine", "repair", "anti-aging"]
+  },
+  {
+    "id": 6,
+    "title": "How to Build a Capsule Makeup Collection",
+    "summary": "Streamline your makeup bag with versatile, multi-purpose products that work for any occasion.",
+    "category": "makeup",
+    "image": "images/tip-capsule-makeup.svg",
+    "author": "Aria Kim",
+    "date": "2025-04-05",
+    "content": [
+      {
+        "heading": "The Perfect Foundation or Tinted Moisturizer",
+        "text": "Choose one base product that matches your skin type and provides the coverage you need. A tinted moisturizer with SPF can serve as foundation, sunscreen, and hydration in one step. For more coverage, a buildable liquid foundation is versatile."
+      },
+      {
+        "heading": "Multi-Use Lip and Cheek Product",
+        "text": "A cream blush that works on lips and cheeks saves space and creates a cohesive look. Cream formulas blend easily with fingers and can be sheered out for a natural flush or built up for more intensity."
+      },
+      {
+        "heading": "The Only Eye Palette You Need",
+        "text": "Invest in a neutral eyeshadow palette with 6-9 shades that includes a matte cream (base), a warm brown (crease), a shimmer (lid), and a dark shade (liner). This single palette can create everything from a no-makeup look to a smoky eye."
+      },
+      {
+        "heading": "Mascara and Brow Gel",
+        "text": "A good mascara opens up your eyes, while a tinted brow gel shapes and fills in brows quickly. Look for a brown-black mascara that's softer than pure black. Clear brow gel works for natural, brushed-up brows."
+      },
+      {
+        "heading": "Tools: Quality Over Quantity",
+        "text": "You only need 4 brushes: a foundation brush or sponge, a fluffy crease brush, a flat shader brush, and an angled brush for brows or liner. Keep them clean with weekly washes using gentle soap."
+      }
+    ],
+    "tags": ["makeup", "capsule collection", "minimalist", "essentials"]
+  }
+]

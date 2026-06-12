@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Clean Beauty Tips - Your guide to natural skincare, haircare, and sustainable beauty practices.">
+  <title>Clean Beauty Tips</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Skip to main content for accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Navigation Bar -->
+  <header class="header">
+    <div class="header__container">
+      <a href="#/" class="header__logo" aria-label="Clean Beauty Tips Home">
+        <span class="header__logo-icon">✦</span>
+        <span class="header__logo-text">Clean Beauty</span>
+      </a>
+
+      <!-- Hamburger toggle -->
+      <button class="header__hamburger" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="header__hamburger-line"></span>
+        <span class="header__hamburger-line"></span>
+        <span class="header__hamburger-line"></span>
+      </button>
+
+      <!-- Navigation links -->
+      <nav class="header__nav" id="main-nav" role="navigation" aria-label="Main navigation">
+        <ul class="header__nav-list">
+          <li class="header__nav-item">
+            <a href="#/" class="header__nav-link" data-route="home">Home</a>
+          </li>
+          <li class="header__nav-item">
+            <a href="#/tips" class="header__nav-link" data-route="tips">All Tips</a>
+          </li>
+          <li class="header__nav-item">
+            <a href="#/category/skincare" class="header__nav-link" data-route="category">Skincare</a>
+          </li>
+          <li class="header__nav-item">
+            <a href="#/category/haircare" class="header__nav-link" data-route="category">Haircare</a>
+          </li>
+          <li class="header__nav-item">
+            <a href="#/category/clean-beauty" class="header__nav-link" data-route="category">Clean Beauty</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main id="main-content" class="main">
+    <div class="main__container">
+      <div id="app" class="app">
+        <!-- Loading state -->
+        <div class="loading" id="loading">
+          <div class="loading__spinner"></div>
+          <p class="loading__text">Loading beauty tips...</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__container">
+      <p class="footer__text">Clean Beauty Tips &mdash; Empowering your natural beauty journey</p>
+      <p class="footer__credit">Built with &hearts; for a cleaner, greener world</p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
