@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin - Service Booking</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f2f5; }
+nav { background: #1a1a2e; color: white; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; }
+nav h1 { font-size: 18px; }
+nav .user { font-size: 13px; opacity: 0.8; }
+.container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+.tabs { display: flex; gap: 4px; margin-bottom: 24px; flex-wrap: wrap; }
+.tab { padding: 10px 20px; background: #e0e0e0; border: none; border-radius: 8px 8px 0 0; cursor: pointer; font-size: 14px; }
+.tab.active { background: white; font-weight: 600; color: #1a73e8; }
+.tab-content { display: none; background: white; border-radius: 0 8px 8px 8px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.tab-content.active { display: block; }
+h2 { margin-bottom: 16px; font-size: 20px; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #eee; }
+th { background: #f8f9fa; font-weight: 600; }
+tr:hover { background: #f8f9fa; }
+.btn { padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; }
+.btn-primary { background: #1a73e8; color: white; }
+.btn-danger { background: #dc3545; color: white; }
+.btn-sm { padding: 4px 10px; font-size: 12px; }
+.form-group { margin-bottom: 12px; }
+.form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.form-group input, .form-group select, .form-group textarea { width: 100%; padding: 8px 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; }
+.form-row { display: flex; gap: 12px; }
+.form-row .form-group { flex: 1; }
+.override-warning { background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; padding: 12px; margin: 12px 0; font-size: 13px; }
+.chart-container { height: 300px; display: flex; align-items: flex-end; gap: 2px; padding: 20px 0; }
+.bar { flex: 1; background: #1a73e8; min-height: 2px; border-radius: 4px 4px 0 0; position: relative; }
+.bar:hover { opacity: 0.8; }
+.bar-label { position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); font-size: 11px; white-space: nowrap; }
+.log-entry { background: #f8f9fa; border-radius: 8px; padding: 12px; margin-bottom: 8px; }
+.log-entry .msg { margin: 4px 0; font-size: 13px; }
+.log-entry .meta { font-size: 11px; color: #666; }
+#loginForm { max-width: 400px; margin: 100px auto; background: white; padding: 32px; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.12); }
+#loginForm h2 { text-align: center; margin-bottom: 24px; }
+.hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="loginForm">
+    <h2>🔐 Admin Login</h2>
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" id="loginUser" value="admin">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="loginPass" value="admin123">
+    </div>
+    <button class="btn btn-primary" onclick="login()" style="width:100%">Sign In</button>
+    <p id="loginError" style="color:red;font-size:13px;margin-top:8px;text-align:center"></p>
+  </div>
+
+  <div id="dashboard" class="hidden">
+    <nav>
+      <h1>📊 Service Booking Admin</h1>
+      <span class="user">Admin | <a href="#" onclick="logout()" style="color:#aaa">Logout</a></span>
+    </nav>
+    <div class="container">
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab('bookings')">Bookings</button>
+        <button class="tab" onclick="switchTab('services')">Services</button>
+        <button class="tab" onclick="switchTab('hours')">Hours</button>
+        <button class="tab" onclick="switchTab('analytics')">Analytics</button>
+        <button class="tab" onclick="switchTab('logs')">Logs</button>
+      </div>
+
+      <div id="tab-bookings" class="tab-content active">
+        <h2>📋 All Bookings</h2>
+        <div style="margin-bottom:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <input type="text" id="bookingFilterStatus" placeholder="Filter by status" style="padding:6px 10px;border:1px solid #ddd;border-radius:4px;font-size:13px">
+          <button class="btn btn-sm btn-primary" onclick="loadBookings()">Refresh</button>
+          <button class="btn btn-sm btn-primary" onclick="showAddBooking()">+ New Booking</button>
+        </div>
+        <div id="bookingList"></div>
+      </div>
+
+      <div id="tab-services" class="tab-content">
+        <h2>🔧 Services</h2>
+        <div id="serviceList"></div>
+        <hr style="margin:16px 0">
+        <h3>Add Service</h3>
+        <div class="form-row">
+          <div class="form-group"><label>Name</label><input type="text" id="svcName"></div>
+          <div class="form-group"><label>Duration (min)</label><input type="number" id="svcDuration" value="60"></div>
+        </div>
+        <div class="form-group"><label>Description</label><textarea id="svcDesc" rows="2"></textarea></div>
+        <button class="btn btn-primary" onclick="addService()">Add Service</button>
+      </div>
+
+      <div id="tab-hours" class="tab-content">
+        <h2>🕐 Business Hours</h2>
+        <div id="hoursList"></div>
+      </div>
+
+      <div id="tab-analytics" class="tab-content">
+        <h2>📈 Daily Booking Counts</h2>
+        <div class="form-row">
+          <div class="form-group"><label>From</label><input type="date" id="analyticsFrom"></div>
+          <div class="form-group"><label>To</label><input type="date" id="analyticsTo"></div>
+        </div>
+        <button class="btn btn-primary" onclick="loadAnalytics()">Load</button>
+        <div id="analyticsChart" class="chart-container"></div>
+      </div>
+
+      <div id="tab-logs" class="tab-content">
+        <h2>💬 Conversation Logs</h2>
+        <button class="btn btn-primary" onclick="loadLogs()">Refresh</button>
+        <div id="logsList" style="margin-top:12px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const API_BASE = window.location.origin.replace(/:\d+$/, '') + ':8000';
+let authToken = '';
+
+function getAuthHeaders() {
+  return { 'Authorization': 'Basic ' + btoa('admin:admin123'), 'Content-Type': 'application/json' };
+}
+
+function login() {
+  document.getElementById('loginError').textContent = '';
+  authToken = btoa('admin:admin123');
+  document.getElementById('loginForm').classList.add('hidden');
+  document.getElementById('dashboard').classList.remove('hidden');
+  loadBookings();
+  loadServices();
+  loadHours();
+}
+
+function logout() {
+  authToken = '';
+  document.getElementById('dashboard').classList.add('hidden');
+  document.getElementById('loginForm').classList.remove('hidden');
+}
+
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+  if (name === 'analytics') loadAnalytics();
+  if (name === 'logs') loadLogs();
+  if (name === 'bookings') loadBookings();
+  if (name === 'services') loadServices();
+}
+
+async function apiFetch(path, options = {}) {
+  const resp = await fetch(`${API_BASE}/api${path}`, {
+    headers: getAuthHeaders(),
+    ...options
+  });
+  if (!resp.ok) throw new Error(await resp.text());
+  return resp.json();
+}
+
+async function loadBookings() {
+  try {
+    const data = await apiFetch('/admin/bookings');
+    let html = '<table><thead><tr><th>Ref</th><th>Customer</th><th>Service</th><th>Date</th><th>Status</th><th>Override</th></tr></thead><tbody>';
+    data.forEach(b => {
+      html += `<tr><td>${b.reference_id}</td><td>${b.customer_name}</td><td>${b.service_name || 'N/A'}</td><td>${new Date(b.appointment_start).toLocaleString()}</td><td>${b.status}</td><td>${b.is_admin_override ? '⚠️' : '-'}</td></tr>`;
+    });
+    html += '</tbody></table>';
+    document.getElementById('bookingList').innerHTML = html;
+  } catch(e) {
+    document.getElementById('bookingList').innerHTML = '<p style="color:red">Error loading bookings</p>';
+  }
+}
+
+function showAddBooking() {
+  const name = prompt('Customer name:');
+  if (!name) return;
+  const svcId = prompt('Service ID:');
+  if (!svcId) return;
+  const date = prompt('Date/time (ISO format, e.g. 2025-01-15T14:00:00):');
+  if (!date) return;
+  const override = confirm('Override constraints?');
+  const reason = override ? prompt('Override reason:') || '' : '';
+
+  apiFetch('/admin/bookings', {
+    method: 'POST',
+    body: JSON.stringify({ customer_name: name, service_id: parseInt(svcId), appointment_start: date, is_override: override, override_reason: reason })
+  }).then(() => loadBookings()).catch(e => alert('Error: ' + e.message));
+}
+
+async function loadServices() {
+  try {
+    const data = await apiFetch('/services');
+    let html = '<table><thead><tr><th>ID</th><th>Name</th><th>Duration</th><th>Active</th><th>Actions</th></tr></thead><tbody>';
+    data.forEach(s => {
+      html += `<tr><td>${s.id}</td><td>${s.name}</td><td>${s.duration_minutes}min</td><td>${s.is_active ? '✅' : '❌'}</td><td><button class="btn btn-sm btn-danger" onclick="toggleService(${s.id}, ${!s.is_active})">${s.is_active ? 'Deactivate' : 'Activate'}</button></td></tr>`;
+    });
+    html += '</tbody></table>';
+    document.getElementById('serviceList').innerHTML = html;
+  } catch(e) {
+    document.getElementById('serviceList').innerHTML = '<p style="color:red">Error loading services</p>';
+  }
+}
+
+async function addService() {
+  const name = document.getElementById('svcName').value;
+  const duration = parseInt(document.getElementById('svcDuration').value);
+  const desc = document.getElementById('svcDesc').value;
+  if (!name) return alert('Name required');
+  try {
+    await apiFetch('/admin/services', {
+      method: 'POST',
+      body: JSON.stringify({ name, duration_minutes: duration, description: desc })
+    });
+    document.getElementById('svcName').value = '';
+    document.getElementById('svcDesc').value = '';
+    loadServices();
+  } catch(e) { alert('Error: ' + e.message); }
+}
+
+async function toggleService(id, active) {
+  try {
+    await apiFetch(`/admin/services/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ is_active: active })
+    });
+    loadServices();
+  } catch(e) { alert('Error: ' + e.message); }
+}
+
+async function loadHours() {
+  try {
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    let html = '<table><thead><tr><th>Day</th><th>Open</th><th>Close</th><th>Actions</th></tr></thead><tbody>';
+    for (let i = 0; i < 7; i++) {
+      html += `<tr><td>${days[i]}</td><td><input type="time" id="open${i}" value="09:00" style="padding:4px;border:1px solid #ddd;border-radius:4px"></td><td><input type="time" id="close${i}" value="17:00" style="padding:4px;border:1px solid #ddd;border-radius:4px"></td><td><button class="btn btn-sm btn-primary" onclick="saveHour(${i})">Save</button></td></tr>`;
+    }
+    html += '</tbody></table>';
+    document.getElementById('hoursList').innerHTML = html;
+
+    // Load existing hours
+    const data = await apiFetch('/business-hours');
+    data.forEach(h => {
+      document.getElementById(`open${h.day_of_week}`).value = h.open_time;
+      document.getElementById(`close${h.day_of_week}`).value = h.close_time;
+    });
+  } catch(e) {
+    document.getElementById('hoursList').innerHTML = '<p style="color:red">Error loading hours</p>';
+  }
+}
+
+async function saveHour(day) {
+  const open = document.getElementById(`open${day}`).value;
+  const close = document.getElementById(`close${day}`).value;
+  try {
+    await apiFetch('/admin/business-hours', {
+      method: 'POST',
+      body: JSON.stringify({ day_of_week: day, open_time: open, close_time: close })
+    });
+    alert('Hours saved for day ' + day);
+  } catch(e) { alert('Error: ' + e.message); }
+}
+
+async function loadAnalytics() {
+  const from = document.getElementById('analyticsFrom').value || '2025-01-01';
+  const to = document.getElementById('analyticsTo').value || '2025-12-31';
+  try {
+    const data = await apiFetch(`/admin/analytics?date_from=${from}T00:00:00&date_to=${to}T23:59:59`);
+    const max = Math.max(...data.map(d => d.count), 1);
+    let html = '';
+    data.forEach(d => {
+      const h = Math.max(2, (d.count / max) * 280);
+      html += `<div class="bar" style="height:${h}px" title="${d.date}: ${d.count} bookings"><span class="bar-label">${d.date.slice(5)}</span></div>`;
+    });
+    document.getElementById('analyticsChart').innerHTML = html;
+  } catch(e) {
+    document.getElementById('analyticsChart').innerHTML = '<p style="color:red">Error loading analytics</p>';
+  }
+}
+
+async function loadLogs() {
+  try {
+    const data = await apiFetch('/admin/conversation-logs?limit=10');
+    let html = '';
+    data.forEach(s => {
+      html += `<div class="log-entry"><div class="meta">Session: ${s.session_id.slice(0, 20)}... | ${s.created_at}</div>`;
+      s.messages.forEach(m => {
+        html += `<div class="msg"><strong>${m.role}:</strong> ${m.content.substring(0, 100)}${m.content.length > 100 ? '...' : ''} <span class="meta">${m.intent ? '(' + m.intent + ')' : ''}</span></div>`;
+      });
+      html += '</div>';
+    });
+    document.getElementById('logsList').innerHTML = html || '<p>No logs found</p>';
+  } catch(e) {
+    document.getElementById('logsList').innerHTML = '<p style="color:red">Error loading logs</p>';
+  }
+}
+</script>
+</body>
+</html>

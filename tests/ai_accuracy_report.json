@@ -1,0 +1,39 @@
+{
+  "timestamp": "2026-06-13T10:55:48.814Z",
+  "totalTests": 622,
+  "correct": 582,
+  "incorrect": 40,
+  "accuracy": 93.57,
+  "passed": true,
+  "byIntent": {
+    "booking": {
+      "total": 247,
+      "correct": 243
+    },
+    "cancel": {
+      "total": 116,
+      "correct": 116
+    },
+    "reschedule": {
+      "total": 73,
+      "correct": 69
+    },
+    "availability": {
+      "total": 96,
+      "correct": 84
+    },
+    "greeting": {
+      "total": 23,
+      "correct": 23
+    },
+    "help": {
+      "total": 27,
+      "correct": 14
+    },
+    "unknown": {
+      "total": 40,
+      "correct": 33
+    }
+  },
+  "threshold": 90
+}
