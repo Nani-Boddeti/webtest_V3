@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Primary -->
+  <title>Android Apps Showcase — AutoScroll, SharePark &amp; WakeMust</title>
+  <meta name="description" content="Discover three premium Android apps: AutoScroll, SharePark, and WakeMust. Built with care for real-world productivity and convenience." />
+  <link rel="canonical" href="https://your-username.github.io/webtest_V3/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Android Apps Showcase — AutoScroll, SharePark &amp; WakeMust" />
+  <meta property="og:description" content="Discover three premium Android apps built for real-world productivity and convenience." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://your-username.github.io/webtest_V3/" />
+  <meta property="og:image" content="https://your-username.github.io/webtest_V3/og-image.png" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Android Apps Showcase — AutoScroll, SharePark &amp; WakeMust" />
+  <meta name="twitter:description" content="Discover three premium Android apps for productivity and convenience." />
+  <meta name="twitter:image" content="https://your-username.github.io/webtest_V3/twitter-image.png" />
+
+  <!-- Structured Data (Organization + WebSite) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Android Apps Showcase",
+    "url": "https://your-username.github.io/webtest_V3/",
+    "description": "Showcase of three Android apps: AutoScroll, SharePark, and WakeMust.",
+    "author": {
+      "@type": "Person",
+      "name": "App Developer"
+    }
+  }
+  </script>
+
+  <!-- Structured Data (ItemList for apps) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "AutoScroll",
+        "url": "https://play.google.com/store/apps/details?id=com.autoscroll.app"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "SharePark",
+        "url": "https://play.google.com/store/apps/details?id=com.sharepark.app"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "WakeMust",
+        "url": "https://play.google.com/store/apps/details?id=com.wakemust.app"
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #121212;
+      --surface: #1E1E1E;
+      --primary: #BB86FC;
+      --secondary: #03DAC6;
+      --text: #FFFFFF;
+      --text-secondary: #B0B0B0;
+      --elevation-1: 0 1px 3px rgba(0,0,0,0.3);
+      --elevation-2: 0 4px 12px rgba(0,0,0,0.4);
+      --elevation-3: 0 8px 24px rgba(0,0,0,0.5);
+      --radius: 16px;
+      --max-width: 1200px;
+      --nav-height: 64px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--primary); text-decoration: none; transition: color 0.3s; }
+    a:hover, a:focus-visible { color: var(--secondary); }
+    a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; border-radius: 4px; }
+
+    img { max-width: 100%; height: auto; display: block; }
+    ul { list-style: none; }
+
+    /* ===== Scrollbar ===== */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+    /* ===== Navigation ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-height);
+      background: rgba(18, 18, 18, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 24px;
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.5); }
+
+    .nav-inner {
+      width: 100%;
+      max-width: var(--max-width);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+    .nav-logo .logo-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--primary);
+      display: inline-block;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+    }
+    .nav-links a {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: background 0.3s, color 0.3s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+      background: rgba(187, 134, 252, 0.12);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ===== Sections Common ===== */
+    section {
+      padding: 100px 24px 120px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .section-container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    /* ===== Hero ===== */
+    #hero {
+      padding-top: calc(var(--nav-height) + 80px);
+      min-height: 100vh;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 30%, rgba(187,134,252,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 70% 70%, rgba(3,218,198,0.05) 0%, transparent 60%);
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(187, 134, 252, 0.12);
+      border: 1px solid rgba(187, 134, 252, 0.2);
+      padding: 6px 18px;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--secondary); }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--text) 0%, var(--primary) 50%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 36px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.3s, background 0.3s;
+      text-decoration: none;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0); }
+    .btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #000;
+    }
+    .btn-primary:hover { box-shadow: 0 4px 20px rgba(187,134,252,0.4); }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--text-secondary);
+      color: var(--text);
+    }
+    .btn-outline:hover {
+      border-color: var(--primary);
+      background: rgba(187,134,252,0.08);
+      box-shadow: 0 4px 20px rgba(187,134,252,0.2);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      justify-content: center;
+      margin-top: 60px;
+      flex-wrap: wrap;
+    }
+    .hero-stat-item {
+      text-align: center;
+    }
+    .hero-stat-number {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+    .hero-stat-label {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    .hero-scroll-indicator {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+    .hero-scroll-indicator .arrow {
+      width: 20px;
+      height: 20px;
+      border-right: 2px solid var(--text-secondary);
+      border-bottom: 2px solid var(--text-secondary);
+      transform: rotate(45deg);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ===== Section Headers ===== */
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .section-desc {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.7;
+    }
+
+    /* ===== Apps Section ===== */
+    #apps {
+      background: linear-gradient(180deg, var(--bg) 0%, #0f0f0f 100%);
+    }
+
+    .apps-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .apps-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    /* ===== App Card ===== */
+    .app-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 48px;
+      box-shadow: var(--elevation-2);
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: transform 0.4s, box-shadow 0.4s;
+    }
+    .app-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--elevation-3);
+    }
+
+    .app-card.reverse {
+      direction: rtl;
+    }
+    .app-card.reverse > * {
+      direction: ltr;
+    }
+
+    .app-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 240px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(187,134,252,0.06) 0%, rgba(3,218,198,0.06) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .app-icon-placeholder {
+      width: 120px;
+      height: 120px;
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      font-weight: 800;
+      box-shadow: var(--elevation-2);
+    }
+    .app-icon-placeholder.auto { background: linear-gradient(135deg, #BB86FC, #7C4DFF); color: #fff; }
+    .app-icon-placeholder.share { background: linear-gradient(135deg, #03DAC6, #018786); color: #000; }
+    .app-icon-placeholder.wake { background: linear-gradient(135deg, #FF7597, #E040FB); color: #fff; }
+
+    .app-info { direction: ltr; }
+    .app-card.reverse .app-info { direction: ltr; }
+
+    .app-number {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--secondary);
+      margin-bottom: 8px;
+    }
+
+    .app-name {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .app-description {
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .app-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .app-feature-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+    .app-feature-item .check {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(187,134,252,0.15);
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      flex-shrink: 0;
+    }
+
+    .btn-play {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #1a1a1a;
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--text);
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: background 0.3s, border-color 0.3s, transform 0.2s;
+      text-decoration: none;
+    }
+    .btn-play:hover {
+      background: #222;
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+    .btn-play .play-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* ===== About / Developer Section ===== */
+    #about {
+      background: var(--surface);
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .about-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .dev-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #000;
+      margin: 0 auto 24px;
+    }
+
+    .about-name {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .about-bio {
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+      line-height: 1.7;
+    }
+
+    .about-links {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .about-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
+    }
+    .about-links a:hover {
+      background: rgba(187,134,252,0.1);
+      color: var(--text);
+      border-color: var(--primary);
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      background: #0a0a0a;
+      padding: 32px 24px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    footer p {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+    footer a { color: var(--text-secondary); }
+    footer a:hover { color: var(--primary); }
+
+    /* ===== Fade-in (Intersection Observer) ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.0),
+                  transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.0);
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-in-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.0),
+                  transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.0);
+    }
+    .fade-in-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .fade-in-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.0),
+                  transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.0);
+    }
+    .fade-in-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .fade-in-scale {
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1.0),
+                  transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1.0);
+    }
+    .fade-in-scale.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Stagger delay helpers */
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 900px) {
+      .app-card {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 36px 28px;
+      }
+      .app-card.reverse {
+        direction: ltr;
+      }
+      .app-visual { min-height: 180px; }
+      .app-features { grid-template-columns: 1fr; }
+      .hero-stats { gap: 32px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .nav-links.mobile-open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: var(--nav-height);
+        left: 0;
+        right: 0;
+        background: rgba(18,18,18,0.98);
+        backdrop-filter: blur(12px);
+        padding: 16px 24px 24px;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+        gap: 4px;
+      }
+      .nav-links.mobile-open a { padding: 12px 16px; }
+
+      section { padding: 80px 20px 100px; }
+      #hero { padding-top: calc(var(--nav-height) + 60px); }
+
+      .app-card { padding: 28px 20px; }
+      .app-features { grid-template-columns: 1fr; }
+
+      .hero-stats { gap: 24px; }
+      .hero-stat-number { font-size: 1.4rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-actions { flex-direction: column; align-items: center; }
+      .btn { width: 100%; justify-content: center; }
+      .section-title { font-size: 1.5rem; }
+      .app-name { font-size: 1.25rem; }
+    }
+
+    /* ===== Reduced Motion ===== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+      .fade-in, .fade-in-left, .fade-in-right, .fade-in-scale {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Navigation ===== -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo" aria-label="Home">
+        <span class="logo-dot" aria-hidden="true"></span>
+        <span>AppStudio</span>
+      </a>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#hero" class="active">Home</a>
+        <a href="#apps">Apps</a>
+        <a href="#about">About</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== Hero Section ===== -->
+  <section id="hero">
+    <div class="section-container hero-content">
+
+      <div class="hero-badge fade-in">
+        <span class="dot" aria-hidden="true"></span>
+        Android App Developer
+      </div>
+
+      <h1 class="hero-title fade-in delay-1">Apps That Make<br />a Difference</h1>
+
+      <p class="hero-subtitle fade-in delay-2">
+        Three carefully crafted Android applications designed to simplify
+        your digital life — from productivity to convenience.
+      </p>
+
+      <div class="hero-actions fade-in delay-3">
+        <a href="#apps" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          Explore Apps
+        </a>
+        <a href="#about" class="btn btn-outline">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          About the Developer
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat-item fade-in-scale delay-1">
+          <div class="hero-stat-number">3</div>
+          <div class="hero-stat-label">Apps Published</div>
+        </div>
+        <div class="hero-stat-item fade-in-scale delay-2">
+          <div class="hero-stat-number">10K+</div>
+          <div class="hero-stat-label">Downloads</div>
+        </div>
+        <div class="hero-stat-item fade-in-scale delay-3">
+          <div class="hero-stat-number">4.6</div>
+          <div class="hero-stat-label">Avg. Rating</div>
+        </div>
+      </div>
+
+      <div class="hero-scroll-indicator" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="arrow"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Apps Section ===== -->
+  <section id="apps">
+    <div class="section-container">
+      <div class="apps-header fade-in">
+        <span class="section-label">Our Apps</span>
+        <h2 class="section-title">Built for Real Life</h2>
+        <p class="section-desc">
+          Each app addresses a specific need with a clean, intuitive interface.
+          Download from Google Play and start simplifying your day.
+        </p>
+      </div>
+
+      <div class="apps-grid">
+
+        <!-- App 1: AutoScroll -->
+        <div class="app-card fade-in-left" id="app-autoscroll">
+          <div class="app-visual">
+            <div class="app-icon-placeholder auto" aria-label="AutoScroll app icon">AS</div>
+          </div>
+          <div class="app-info">
+            <div class="app-number">App 01</div>
+            <h3 class="app-name">AutoScroll</h3>
+            <p class="app-description">
+              AutoScroll automates repetitive scrolling tasks on your Android device.
+              Whether you're reading long articles, browsing social media, or testing
+              apps, AutoScroll keeps the page moving so you don't have to.
+            </p>
+            <ul class="app-features">
+              <li class="app-feature-item"><span class="check" aria-hidden="true">✓</span> Adjustable scroll speed</li>
+              <li class="app-feature-item"><span class="check" aria-hidden="true">✓</span> Start / stop widget</li>
+              <li class="app-feature-item"><span class="check" aria-hidden="true">✓</span> Works in any app</li>
+              <li class="app-feature-item"><span class="check" aria-hidden="true">✓</span> Battery efficient</li>
+            </ul>
+            <a href="https://play.google.com/store/apps/details?id=com.autoscroll.app" target="_blank" rel="noopener noreferrer" class="btn-play" aria-label="Get AutoScroll on Google Play">
+              <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.938 6.333 8.636-8.635zm3.199-3.199l2.807 1.626a1 1 0 0 1 0 1.732l-2.807 1.626L15.206 12l2.492-2.492zM5.863 3.458l10.937 6.333-2.301 2.302-8.636-8.635z"/></svg>
+              Get on Google Play
+            </a>
+          </div>
+        </div>
+
+        <!-- App 2: SharePark -->
+        <div class="app-card reverse fade-in-right" id="app-sharepark">
+          <div class="app-visual">
+            <div class="app-icon-placeholder share" aria-label="SharePark app icon">SP</div>
+          </div>
+          <div class="app-info">
+            <div class="app-number">App 02</div>
+            <h3 class="app-name">SharePark</h3>
+            <p class="app-description">
+              SharePark makes parking simple. Find, reserve, and share parking spots
+              with friends and family. No more circling the block — just park and go
+              about your day.
+            </p>
+            <ul class="app-features">
+              <li class="app-feature-item"><span class="check" aria-hidden="true">✓</span> Real-time spot sharing</li>
+              <li class="app-feature-item"><span class="check" aria-hidden="true">✓</span> Reserve in advance</li>
+              <li class="app-feature-item"><span class="check" aria-hidden="true">✓</span> Map integration</li>
+              <li class="app-feature-item"><span class="check" aria-hidden="true">✓</span> Social parking groups</li>
+            </ul>
+            <a href="https://play.google.com/store/apps/details?id=com.sharepark.app" target="_blank" rel="noopener noreferrer" class="btn-play" aria-label="Get SharePark on Google Play">
+              <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.938 6.333 8.636-8.635zm3.199-3.199l2.807 1.626a1 1 0 0 1 0 1.732l-2.807 1.626L15.206 12l2.492-2.492zM5.863 3.458l10.937 6.333-2.301 2.302-8.636-8.635z"/></svg>
+              Get on Google Play
+            </a>
+          </div>
+        </div>
+
+        <!-- App 3: WakeMust -->
+        <div class="app-card fade-in-left" id="app-wakemust">
+          <div class="app-visual">
+            <div class="app-icon-placeholder wake" aria-label="WakeMust app icon">WM</div>
+          </div>
+          <div class="app-info">
+            <div class="app-number">App 03</div>
+            <h3 class="app-name">WakeMust</h3>
+            <p class="app-description">
+              WakeMust is the alarm app that actually gets you out of bed. With
+              task-based alarms, QR code scanning, and math problems to dismiss,
+              you'll never hit snooze accidentally again.
+            </p>
+            <ul class="app-features">
+              <li class="app-feature-item"><span class="check" aria-hidden="true">✓</span> Task-based alarm dismiss</li>
+              <li class="app-feature-item"><span class="check" aria-hidden="true">✓</span> QR code scanning unlock</li>
+              <li class="app-feature-item"><span class="check" aria-hidden="true">✓</span> Math problem challenges</li>
+              <li class="app-feature-item"><span class="check" aria-hidden="true">✓</span> Smart wake-up window</li>
+            </ul>
+            <a href="https://play.google.com/store/apps/details?id=com.wakemust.app" target="_blank" rel="noopener noreferrer" class="btn-play" aria-label="Get WakeMust on Google Play">
+              <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.938 6.333 8.636-8.635zm3.199-3.199l2.807 1.626a1 1 0 0 1 0 1.732l-2.807 1.626L15.206 12l2.492-2.492zM5.863 3.458l10.937 6.333-2.301 2.302-8.636-8.635z"/></svg>
+              Get on Google Play
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== About / Developer Section ===== -->
+  <section id="about">
+    <div class="section-container about-content fade-in-scale">
+      <div class="dev-avatar" aria-hidden="true">AD</div>
+      <span class="section-label">About</span>
+      <h2 class="section-title">The Developer</h2>
+      <p class="about-name">App Developer</p>
+      <p class="about-bio">
+        Passionate about creating intuitive Android experiences that solve real-world
+        problems. Every app is designed with a focus on performance, usability, and
+        clean aesthetics. Based in the US, building for a global audience.
+      </p>
+      <div class="about-links">
+        <a href="https://play.google.com/store/apps/developer?id=App+Developer" target="_blank" rel="noopener noreferrer" aria-label="Google Play Developer Page">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.938 6.333 8.636-8.635zm3.199-3.199l2.807 1.626a1 1 0 0 1 0 1.732l-2.807 1.626L15.206 12l2.492-2.492zM5.863 3.458l10.937 6.333-2.301 2.302-8.636-8.635z"/></svg>
+          Google Play
+        </a>
+        <a href="mailto:developer@example.com" aria-label="Email the developer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Contact
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <p>
+      &copy; <span id="year"></span> App Developer &mdash;
+      Built with care for Android.
+      <br class="mobile-only" />
+      <a href="#hero">Back to top</a>
+    </p>
+  </footer>
+
+  <!-- ===== JavaScript ===== -->
+  <script>
+    (function() {
+      'use strict';
+
+      // ---- Footer year ----
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // ---- Mobile hamburger ----
+      const hamburger = document.getElementById('hamburger');
+      const navLinks = document.getElementById('navLinks');
+
+      hamburger.addEventListener('click', function() {
+        const isOpen = navLinks.classList.toggle('mobile-open');
+        hamburger.classList.toggle('open');
+        hamburger.setAttribute('aria-expanded', isOpen);
+      });
+
+      // Close mobile nav on link click
+      navLinks.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          navLinks.classList.remove('mobile-open');
+          hamburger.classList.remove('open');
+          hamburger.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      // ---- Navbar shadow on scroll ----
+      const navbar = document.getElementById('navbar');
+      let lastScrollY = 0;
+
+      function handleNavScroll() {
+        const scrollY = window.scrollY;
+        if (scrollY > 20) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+        lastScrollY = scrollY;
+      }
+
+      window.addEventListener('scroll', handleNavScroll, { passive: true });
+      handleNavScroll(); // initial check
+
+      // ---- Active nav link highlight ----
+      const navAnchors = navLinks.querySelectorAll('a');
+      const sections = [
+        document.getElementById('hero'),
+        document.getElementById('apps'),
+        document.getElementById('about')
+      ];
+
+      function updateActiveLink() {
+        const scrollPos = window.scrollY + 120;
+        let activeIndex = 0;
+
+        sections.forEach(function(section, index) {
+          if (section && section.offsetTop <= scrollPos) {
+            activeIndex = index;
+          }
+        });
+
+        navAnchors.forEach(function(anchor, index) {
+          anchor.classList.toggle('active', index === activeIndex);
+        });
+      }
+
+      window.addEventListener('scroll', updateActiveLink, { passive: true });
+      window.addEventListener('resize', updateActiveLink, { passive: true });
+      updateActiveLink();
+
+      // ---- Intersection Observer for fade-in animations ----
+      const fadeElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .fade-in-scale');
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              // Optionally unobserve after reveal for performance
+              // observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.12,
+          rootMargin: '0px 0px -40px 0px'
+        });
+
+        fadeElements.forEach(function(el) {
+          observer.observe(el);
+        });
+      } else {
+        // Fallback: show all elements immediately
+        fadeElements.forEach(function(el) {
+          el.classList.add('visible');
+        });
+      }
+
+      // ---- Smooth scroll for anchor links (fallback for older browsers) ----
+      document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+          const target = document.querySelector(targetId);
+          if (target) {
+            e.preventDefault();
+            const offset = navbar.offsetHeight;
+            const targetPos = target.getBoundingClientRect().top + window.scrollY - offset;
+            window.scrollTo({
+              top: targetPos,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+
+    })();
+  </script>
+
+</body>
+</html>
