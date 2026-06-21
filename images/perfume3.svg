@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="400" viewBox="0 0 300 400">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&amp;display=swap');
+      text { font-family: 'Playfair Display', Georgia, serif; font-style: italic; fill: #ffffff; }
+    </style>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1A3A4A"/>
+      <stop offset="100%" stop-color="#0D4F5E"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="400" fill="url(#bg3)"/>
+  <circle cx="150" cy="160" r="60" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+  <circle cx="150" cy="160" r="40" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <text x="150" y="248" text-anchor="middle" font-size="24">Océan Sauvage</text>
+  <text x="150" y="276" text-anchor="middle" font-size="14" opacity="0.6">Eau de Toilette</text>
+</svg>
