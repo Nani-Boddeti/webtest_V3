@@ -1,0 +1,89 @@
+{
+  "person": {
+    "name": "Alexander James Harrington",
+    "title": "Luxury Brand Strategist & Creative Director",
+    "email": "alex.harrington@luxe.co",
+    "phone": "+1 (212) 555-0189",
+    "location": "New York, NY",
+    "website": "https://alexharrington.dev",
+    "avatar": "",
+    "initials": "AH",
+    "summary": "Award-winning Creative Director with 15+ years of experience shaping luxury brand identities for Fortune 500 companies and boutique maisons. Proven track record of driving 40%+ revenue growth through strategic brand positioning, immersive storytelling, and cross-channel campaigns. Passionate about merging timeless elegance with modern digital innovation."
+  },
+  "skills": [
+    { "name": "Brand Strategy", "level": 95 },
+    { "name": "Creative Direction", "level": 92 },
+    { "name": "UX/UI Design", "level": 85 },
+    { "name": "Art Direction", "level": 90 },
+    { "name": "Digital Marketing", "level": 80 },
+    { "name": "Team Leadership", "level": 88 },
+    { "name": "Storytelling & Copy", "level": 82 },
+    { "name": "Data Analytics", "level": 75 }
+  ],
+  "experience": [
+    {
+      "company": "Maison Lumière",
+      "position": "Creative Director",
+      "startDate": "Jan 2020",
+      "endDate": "Present",
+      "description": "Lead creative vision for a heritage luxury house across all touchpoints. Orchestrated brand relaunch resulting in 52% increase in digital engagement and 38% revenue uplift within 18 months. Manage a team of 25 designers, copywriters, and strategists."
+    },
+    {
+      "company": "Sterling & Black Advisory",
+      "position": "Senior Brand Strategist",
+      "startDate": "Jun 2016",
+      "endDate": "Dec 2019",
+      "description": "Developed brand architectures for 12+ luxury clients across fashion, hospitality, and automotive sectors. Led workshops with C-suite executives to define brand purpose, positioning, and visual identity systems."
+    },
+    {
+      "company": "Vanguard Creative Agency",
+      "position": "Brand Strategist",
+      "startDate": "Sep 2012",
+      "endDate": "May 2016",
+      "description": "Executed go-to-market strategies for emerging luxury brands. Produced award-winning campaigns recognized at Cannes Lions and D&AD. Built client relationships from pitch to delivery, consistently exceeding KPIs."
+    },
+    {
+      "company": "Atelier Nine",
+      "position": "Junior Designer",
+      "startDate": "Jul 2010",
+      "endDate": "Aug 2012",
+      "description": "Supported senior designers on brand identity projects. Created mood boards, typographic systems, and visual assets for print and digital. Contributed to pitch decks that won three major accounts."
+    }
+  ],
+  "education": [
+    {
+      "institution": "Rhode Island School of Design",
+      "degree": "BFA in Graphic Design",
+      "year": "2010",
+      "honors": "Cum Laude"
+    },
+    {
+      "institution": "Harvard Business School Online",
+      "degree": "Certificate in Brand Management",
+      "year": "2018"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Certified Brand Strategist",
+      "issuer": "Brand Strategy Institute",
+      "year": "2019"
+    },
+    {
+      "name": "Adobe Creative Suite Master",
+      "issuer": "Adobe",
+      "year": "2017"
+    }
+  ],
+  "languages": [
+    { "name": "English", "level": "Native" },
+    { "name": "French", "level": "Advanced" },
+    { "name": "Italian", "level": "Intermediate" }
+  ],
+  "interests": ["Fine Watchmaking", "Classic Automobiles", "Architecture", "Wine & Spirits", "Modern Art", "Sailing"],
+  "social": {
+    "linkedin": "https://linkedin.com/in/alexharrington",
+    "twitter": "https://twitter.com/alexharrington",
+    "instagram": "https://instagram.com/alexharrington"
+  }
+}
