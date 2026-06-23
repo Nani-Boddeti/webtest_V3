@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meeting Summarizer — AI-Powered Transcript Analysis</title>
+  <meta name="description" content="Transform your meeting transcripts into structured summaries with action items using AI. Free online tool powered by OpenAI GPT.">
+  <meta property="og:title" content="Meeting Summarizer — AI-Powered Transcript Analysis">
+  <meta property="og:description" content="Transform your meeting transcripts into structured summaries with action items using AI.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://meetingsummarizer.app">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Meeting Summarizer — AI-Powered Transcript Analysis">
+  <meta name="twitter:description" content="Transform your meeting transcripts into structured summaries with action items using AI.">
+  <link rel="canonical" href="https://meetingsummarizer.app">
+  <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+  <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Meeting Summarizer",
+    "description": "AI-powered meeting transcript summarizer that generates structured summaries and action items.",
+    "applicationCategory": "Productivity",
+    "operatingSystem": "All",
+    "browserRequirements": "Requires JavaScript"
+  }
+  </script>
+</head>
+<body>
+  <div class="app-container" role="main">
+    <header class="app-header">
+      <h1>Meeting Summarizer</h1>
+      <p class="subtitle">Paste your transcript and get an AI-powered summary with action items</p>
+    </header>
+
+    <section class="input-section" aria-label="Input form">
+      <form id="summarizer-form" novalidate>
+        <div class="form-group">
+          <label for="transcript">Meeting Transcript</label>
+          <textarea
+            id="transcript"
+            name="transcript"
+            rows="8"
+            placeholder="Paste your meeting transcript here... (max 500 words)"
+            aria-describedby="word-count-hint"
+          ></textarea>
+          <div class="word-count-wrapper">
+            <span id="word-count" class="word-count">0 / 500 words</span>
+            <span id="word-warning" class="word-warning hidden" role="alert"></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="api-key">OpenAI API Key</label>
+          <div class="api-key-wrapper">
+            <input
+              type="password"
+              id="api-key"
+              name="api-key"
+              placeholder="sk-..."
+              aria-describedby="api-key-hint"
+              autocomplete="off"
+            >
+            <button type="button" id="toggle-key-visibility" class="toggle-visibility" aria-label="Toggle API key visibility">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+          <span id="api-key-hint" class="hint">Must start with <code>sk-</code></span>
+        </div>
+
+        <button
+          type="submit"
+          id="generate-btn"
+          class="btn btn-primary"
+          disabled
+        >
+          <span class="btn-text">Generate Summary</span>
+          <span class="spinner hidden" aria-hidden="true">
+            <svg class="spinner-icon" viewBox="0 0 50 50" width="20" height="20">
+              <circle class="spinner-path" cx="25" cy="25" r="20" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            Generating...
+          </span>
+        </button>
+      </form>
+    </section>
+
+    <div id="error-message" class="error-message hidden" role="alert" aria-live="assertive"></div>
+
+    <section class="editor-section hidden" id="editor-section" aria-label="Generated summary">
+      <div class="editor-toolbar-header">
+        <h2>Summary &amp; Action Items</h2>
+        <div class="editor-actions">
+          <button type="button" id="copy-btn" class="btn btn-secondary" title="Copy rich text to clipboard">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            Copy
+          </button>
+          <button type="button" id="regenerate-btn" class="btn btn-secondary" title="Regenerate summary with same inputs">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="23 4 23 10 17 10"></polyline>
+              <polyline points="1 20 1 14 7 14"></polyline>
+              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+            </svg>
+            Regenerate
+          </button>
+        </div>
+      </div>
+      <div id="editor-container" class="editor-container"></div>
+    </section>
+
+    <footer class="app-footer">
+      <p>Powered by OpenAI GPT. Your API key is sent directly to OpenAI and never stored.</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
