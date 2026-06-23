@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meeting Summarizer – AI-Powered Transcript Insights</title>
+  <meta name="description" content="Transform your meeting transcripts into concise summaries and actionable tasks using AI. Free tool with rich text editing and clipboard export." />
+  <meta property="og:title" content="Meeting Summarizer – AI-Powered Transcript Insights" />
+  <meta property="og:description" content="Transform your meeting transcripts into concise summaries and actionable tasks using AI." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://meeting-summarizer.example.com" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Meeting Summarizer" />
+  <meta name="twitter:description" content="Transform your meeting transcripts into concise summaries and actionable tasks using AI." />
+  <link rel="canonical" href="https://meeting-summarizer.example.com" />
+  <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Meeting Summarizer",
+    "description": "Transform meeting transcripts into concise summaries and actionable tasks using AI.",
+    "applicationCategory": "Productivity",
+    "browserRequirements": "Requires JavaScript"
+  }
+  </script>
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <h1>📋 Meeting Summarizer</h1>
+      <p class="subtitle">Paste your transcript, enter your API key, and generate a structured summary with action items.</p>
+    </header>
+
+    <section class="input-section" aria-label="Transcript and API key input">
+      <div class="form-group">
+        <label for="transcript-input">Transcript</label>
+        <textarea id="transcript-input" rows="8" placeholder="Paste meeting transcript here (max 500 words)..." aria-describedby="word-count-hint"></textarea>
+        <div class="input-footer">
+          <span id="word-count" class="word-count">0 / 500 words</span>
+          <span id="word-warning" class="warning-hidden" role="alert"></span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="api-key-input">OpenAI API Key</label>
+        <input type="password" id="api-key-input" placeholder="sk-..." autocomplete="off" aria-describedby="api-key-hint" />
+        <span id="api-key-hint" class="hint">Must start with <code>sk-</code></span>
+      </div>
+
+      <div class="button-group">
+        <button id="generate-btn" disabled>Generate Summary</button>
+      </div>
+
+      <div id="spinner" class="spinner hidden" role="status" aria-label="Loading">
+        <div class="spinner-circle"></div>
+        <span>Generating summary…</span>
+      </div>
+
+      <div id="error-display" class="error-display hidden" role="alert"></div>
+    </section>
+
+    <section class="editor-section" aria-label="Summary output">
+      <div id="editor-container"></div>
+      <div class="editor-actions">
+        <button id="copy-btn" disabled>📄 Copy to Clipboard</button>
+        <button id="regenerate-btn" disabled>🔄 Regenerate</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
