@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alexandra Chen — CV</title>
+  <meta name="description" content="Professional CV of Alexandra Chen, full-stack developer with 8+ years of experience." />
+  <meta property="og:title" content="Alexandra Chen — CV" />
+  <meta property="og:description" content="Professional CV of Alexandra Chen, full-stack developer with 8+ years of experience." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="canonical" href="https://example.com/cv" />
+
+  <!-- jsPDF for PDF download (placeholder integration) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #f5f5f5;
+      color: #1a1a1a;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Layout ── */
+    .cv-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+    }
+
+    .cv-inner {
+      padding: 2.5rem 2rem;
+    }
+
+    /* ── Header ── */
+    .cv-header {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .cv-photo {
+      flex-shrink: 0;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: #e8e8e8;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cv-photo svg {
+      width: 80px;
+      height: 80px;
+      fill: #888;
+    }
+
+    .cv-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .cv-title-group {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .cv-name {
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #111;
+      line-height: 1.2;
+    }
+
+    .cv-role {
+      font-size: 1.05rem;
+      color: #555;
+      margin-top: 0.25rem;
+    }
+
+    /* ── Sections ── */
+    .cv-section {
+      margin-bottom: 2rem;
+    }
+
+    .cv-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .cv-section-title {
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #666;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid #d4d4d4;
+    }
+
+    .cv-section-content {
+      color: #2a2a2a;
+    }
+
+    .cv-section-content p {
+      margin-bottom: 0.75rem;
+    }
+
+    .cv-section-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ── Experience items ── */
+    .cv-item {
+      margin-bottom: 1.25rem;
+    }
+
+    .cv-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .cv-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.25rem 0.75rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .cv-item-title {
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: #111;
+    }
+
+    .cv-item-subtitle {
+      color: #444;
+      font-size: 0.95rem;
+    }
+
+    .cv-item-date {
+      font-size: 0.85rem;
+      color: #777;
+      white-space: nowrap;
+    }
+
+    .cv-item-desc {
+      font-size: 0.95rem;
+      color: #333;
+      margin-top: 0.15rem;
+    }
+
+    .cv-item-desc ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .cv-item-desc li {
+      position: relative;
+      padding-left: 1.2rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .cv-item-desc li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: #999;
+    }
+
+    /* ── Skills ── */
+    .cv-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+      list-style: none;
+    }
+
+    .cv-skills li {
+      background: #eaeaea;
+      color: #222;
+      padding: 0.3rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+
+    /* ── Contact ── */
+    .cv-contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      list-style: none;
+    }
+
+    .cv-contact li {
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    .cv-contact a {
+      color: #333;
+      text-decoration: none;
+      border-bottom: 1px solid #bbb;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .cv-contact a:hover {
+      color: #000;
+      border-bottom-color: #000;
+    }
+
+    /* ── Download button ── */
+    .cv-download {
+      display: block;
+      width: 100%;
+      margin-top: 2rem;
+      padding: 0.9rem 1.5rem;
+      background: #222;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-align: center;
+    }
+
+    .cv-download:hover {
+      background: #000;
+    }
+
+    .cv-download:active {
+      background: #333;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      body { padding: 1rem 0.75rem; }
+      .cv-inner { padding: 1.5rem 1.25rem; }
+      .cv-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+      }
+      .cv-photo {
+        width: 100px;
+        height: 100px;
+      }
+      .cv-photo svg {
+        width: 60px;
+        height: 60px;
+      }
+      .cv-name {
+        font-size: 1.6rem;
+      }
+      .cv-item-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .cv-contact {
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+    }
+
+    /* ── Print styles ── */
+    @media print {
+      body {
+        background: #fff;
+        padding: 0.5in;
+        font-size: 11pt;
+      }
+
+      .cv-wrapper {
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+      .cv-inner {
+        padding: 0;
+      }
+
+      .cv-download {
+        display: none !important;
+      }
+
+      .cv-section {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cv-wrapper">
+    <div class="cv-inner">
+
+      <!-- ── Header ── -->
+      <header class="cv-header">
+        <div class="cv-photo">
+          <!-- Inline SVG silhouette (placeholder) -->
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="35" r="20" />
+            <ellipse cx="50" cy="80" rx="35" ry="25" />
+          </svg>
+          <!--
+            To use a real photo, replace the <svg> block above with:
+            <img src="path/to/photo.jpg" alt="Alexandra Chen" />
+          -->
+        </div>
+        <div class="cv-title-group">
+          <h1 class="cv-name">Alexandra Chen</h1>
+          <p class="cv-role">Full-Stack Developer</p>
+        </div>
+      </header>
+
+      <!-- ── Summary ── -->
+      <section class="cv-section">
+        <h2 class="cv-section-title">Summary</h2>
+        <div class="cv-section-content">
+          <p>
+            Experienced full-stack developer with 8+ years building scalable web applications
+            across fintech, e-commerce, and SaaS. Passionate about clean architecture,
+            performant UIs, and mentoring junior engineers.
+          </p>
+        </div>
+      </section>
+
+      <!-- ── Experience ── -->
+      <section class="cv-section">
+        <h2 class="cv-section-title">Experience</h2>
+        <div class="cv-section-content">
+
+          <div class="cv-item">
+            <div class="cv-item-header">
+              <span class="cv-item-title">Senior Full-Stack Developer</span>
+              <span class="cv-item-date">2021 – Present</span>
+            </div>
+            <div class="cv-item-subtitle">Synapse Technologies · Remote</div>
+            <div class="cv-item-desc">
+              <ul>
+                <li>Led the migration of a monolith into microservices, reducing deployment time by 60%.</li>
+                <li>Designed and built the internal tooling platform used by 200+ support agents.</li>
+                <li>Mentored 4 junior developers through structured code reviews and pair programming.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="cv-item">
+            <div class="cv-item-header">
+              <span class="cv-item-title">Full-Stack Developer</span>
+              <span class="cv-item-date">2018 – 2021</span>
+            </div>
+            <div class="cv-item-subtitle">Meridian Labs · San Francisco, CA</div>
+            <div class="cv-item-desc">
+              <ul>
+                <li>Built real-time collaborative dashboards serving 50K+ daily active users.</li>
+                <li>Optimized API response times by 40% through query tuning and caching strategies.</li>
+                <li>Introduced end-to-end testing with Cypress, raising coverage from 25% to 85%.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="cv-item">
+            <div class="cv-item-header">
+              <span class="cv-item-title">Junior Developer</span>
+              <span class="cv-item-date">2016 – 2018</span>
+            </div>
+            <div class="cv-item-subtitle">Nexa Digital · Austin, TX</div>
+            <div class="cv-item-desc">
+              <ul>
+                <li>Contributed to the core checkout flow for a high-traffic e-commerce platform.</li>
+                <li>Developed reusable React component library used across 5 product teams.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── Education ── -->
+      <section class="cv-section">
+        <h2 class="cv-section-title">Education</h2>
+        <div class="cv-section-content">
+
+          <div class="cv-item">
+            <div class="cv-item-header">
+              <span class="cv-item-title">B.S. in Computer Science</span>
+              <span class="cv-item-date">2012 – 2016</span>
+            </div>
+            <div class="cv-item-subtitle">University of California, Berkeley</div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── Skills ── -->
+      <section class="cv-section">
+        <h2 class="cv-section-title">Skills</h2>
+        <ul class="cv-skills">
+          <li>JavaScript / TypeScript</li>
+          <li>React &amp; Next.js</li>
+          <li>Node.js</li>
+          <li>Python</li>
+          <li>PostgreSQL</li>
+          <li>AWS</li>
+          <li>Docker</li>
+          <li>GraphQL</li>
+          <li>CI/CD</li>
+        </ul>
+      </section>
+
+      <!-- ── Contact ── -->
+      <section class="cv-section">
+        <h2 class="cv-section-title">Contact</h2>
+        <ul class="cv-contact">
+          <li>Email: <a href="mailto:alexandra.chen@example.com">alexandra.chen@example.com</a></li>
+          <li>LinkedIn: <a href="https://linkedin.com/in/alexandra-chen" target="_blank" rel="noopener">linkedin.com/in/alexandra-chen</a></li>
+          <li>GitHub: <a href="https://github.com/alexchen" target="_blank" rel="noopener">github.com/alexchen</a></li>
+        </ul>
+      </section>
+
+      <!-- ── Download Button (hidden in print) ── -->
+      <button class="cv-download" onclick="downloadPDF()">
+        ⬇ Download PDF
+      </button>
+
+    </div>
+  </div>
+
+  <script>
+    /**
+     * Generates and downloads a styled PDF of the CV using jsPDF.
+     * This is a placeholder integration ready for refinement.
+     */
+    function downloadPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF('p', 'mm', 'a4');
+
+      const pageWidth = doc.internal.pageSize.getWidth();
+      let y = 20;
+      const lineHeight = 7;
+      const margin = 20;
+      const maxWidth = pageWidth - margin * 2;
+
+      function textLine(text, size, style) {
+        doc.setFontSize(size || 11);
+        if (style) doc.setFont(undefined, style);
+        else doc.setFont(undefined, 'normal');
+        doc.text(text, margin, y);
+        y += (size || 11) * 0.45;
+      }
+
+      // Title
+      doc.setFontSize(22);
+      doc.setFont(undefined, 'bold');
+      doc.text('Alexandra Chen', margin, y);
+      y += 9;
+      doc.setFontSize(12);
+      doc.setFont(undefined, 'normal');
+      doc.setTextColor(100);
+      doc.text('Full-Stack Developer', margin, y);
+      doc.setTextColor(0);
+      y += 12;
+
+      // Separator
+      doc.setDrawColor(200);
+      doc.line(margin, y, pageWidth - margin, y);
+      y += 8;
+
+      // Summary
+      doc.setFontSize(11);
+      doc.setFont(undefined, 'bold');
+      textLine('SUMMARY', 11, 'bold');
+      doc.setFont(undefined, 'normal');
+      doc.setFontSize(10);
+      const summary = 'Experienced full-stack developer with 8+ years building scalable web applications across fintech, e-commerce, and SaaS. Passionate about clean architecture, performant UIs, and mentoring junior engineers.';
+      const lines = doc.splitTextToSize(summary, maxWidth);
+      doc.text(lines, margin, y);
+      y += lines.length * 5 + 6;
+
+      // Experience
+      doc.setFontSize(11);
+      doc.setFont(undefined, 'bold');
+      textLine('EXPERIENCE', 11, 'bold');
+      doc.setFont(undefined, 'normal');
+      doc.setFontSize(10);
+
+      const experiences = [
+        { title: 'Senior Full-Stack Developer', org: 'Synapse Technologies · Remote', date: '2021 – Present', items: ['Led the migration of a monolith into microservices, reducing deployment time by 60%.', 'Designed and built the internal tooling platform used by 200+ support agents.', 'Mentored 4 junior developers through structured code reviews and pair programming.'] },
+        { title: 'Full-Stack Developer', org: 'Meridian Labs · San Francisco, CA', date: '2018 – 2021', items: ['Built real-time collaborative dashboards serving 50K+ daily active users.', 'Optimized API response times by 40% through query tuning and caching strategies.', 'Introduced end-to-end testing with Cypress, raising coverage from 25% to 85%.'] },
+        { title: 'Junior Developer', org: 'Nexa Digital · Austin, TX', date: '2016 – 2018', items: ['Contributed to the core checkout flow for a high-traffic e-commerce platform.', 'Developed reusable React component library used across 5 product teams.'] }
+      ];
+
+      experiences.forEach(exp => {
+        // Check page break needed
+        if (y > 260) {
+          doc.addPage();
+          y = 20;
+        }
+
+        doc.setFont(undefined, 'bold');
+        doc.text(exp.title, margin, y);
+        y += 5;
+        doc.setFont(undefined, 'normal');
+        doc.setTextColor(80);
+        doc.text(exp.org + '   ' + exp.date, margin, y);
+        doc.setTextColor(0);
+        y += 5;
+        exp.items.forEach(item => {
+          const itemLines = doc.splitTextToSize('— ' + item, maxWidth - 4);
+          doc.text(itemLines, margin + 2, y);
+          y += itemLines.length * 4.5 + 1;
+        });
+        y += 3;
+      });
+
+      // Education
+      if (y > 250) { doc.addPage(); y = 20; }
+      doc.setFontSize(11);
+      doc.setFont(undefined, 'bold');
+      textLine('EDUCATION', 11, 'bold');
+      doc.setFont(undefined, 'normal');
+      doc.setFontSize(10);
+      doc.setFont(undefined, 'bold');
+      doc.text('B.S. in Computer Science', margin, y);
+      y += 5;
+      doc.setFont(undefined, 'normal');
+      doc.setTextColor(80);
+      doc.text('University of California, Berkeley   2012 – 2016', margin, y);
+      doc.setTextColor(0);
+      y += 8;
+
+      // Skills
+      if (y > 250) { doc.addPage(); y = 20; }
+      doc.setFontSize(11);
+      doc.setFont(undefined, 'bold');
+      textLine('SKILLS', 11, 'bold');
+      doc.setFont(undefined, 'normal');
+      doc.setFontSize(10);
+      const skills = ['JavaScript / TypeScript', 'React & Next.js', 'Node.js', 'Python', 'PostgreSQL', 'AWS', 'Docker', 'GraphQL', 'CI/CD'];
+      doc.text(skills.join('  ·  '), margin, y);
+      y += 8;
+
+      // Contact
+      if (y > 250) { doc.addPage(); y = 20; }
+      doc.setFontSize(11);
+      doc.setFont(undefined, 'bold');
+      textLine('CONTACT', 11, 'bold');
+      doc.setFont(undefined, 'normal');
+      doc.setFontSize(10);
+      doc.text('Email: alexandra.chen@example.com', margin, y);
+      y += 5;
+      doc.text('LinkedIn: linkedin.com/in/alexandra-chen', margin, y);
+      y += 5;
+      doc.text('GitHub: github.com/alexchen', margin, y);
+
+      doc.save('Alexandra_Chen_CV.pdf');
+    }
+  </script>
+
+</body>
+</html>
