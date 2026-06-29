@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>John Doe | Senior Software Engineer — CV / Resume</title>
+  <meta name="description" content="Professional CV of John Doe, a Senior Software Engineer with 10+ years of experience in full-stack development, cloud architecture, and team leadership." />
+  <meta property="og:title" content="John Doe — Senior Software Engineer CV" />
+  <meta property="og:description" content="Professional CV of John Doe, a Senior Software Engineer with 10+ years of experience." />
+  <meta property="og:type" content="profile" />
+  <meta property="og:url" content="https://johndoe.dev/cv" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="John Doe — Senior Software Engineer CV" />
+  <meta name="twitter:description" content="Professional CV of John Doe, a Senior Software Engineer with 10+ years of experience." />
+  <link rel="canonical" href="https://johndoe.dev/cv" />
+  <!-- jsPDF CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f0 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 1rem;
+      color: #1a1a2e;
+    }
+    /* ===== CV CARD ===== */
+    .cv-card {
+      max-width: 900px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.04);
+      overflow: hidden;
+      transition: box-shadow 0.3s ease;
+    }
+    .cv-card:hover {
+      box-shadow: 0 24px 72px rgba(0,0,0,0.10), 0 10px 28px rgba(0,0,0,0.05);
+    }
+    /* ===== HEADER ===== */
+    .cv-header {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      padding: 2.5rem 2.5rem 1.5rem;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #ffffff;
+    }
+    .cv-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(255,255,255,0.25);
+      flex-shrink: 0;
+      background: #2a2a4a;
+    }
+    .cv-header-info { flex: 1; }
+    .cv-header-info h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.2rem;
+    }
+    .cv-header-info .title {
+      font-size: 1.05rem;
+      font-weight: 400;
+      opacity: 0.85;
+      margin-bottom: 0.5rem;
+    }
+    .cv-header-info .email {
+      font-size: 0.9rem;
+      opacity: 0.75;
+    }
+    .cv-header-info .email a {
+      color: #ffffff;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+    }
+    .cv-header-info .email a:hover { opacity: 1; }
+    /* ===== BODY ===== */
+    .cv-body {
+      padding: 2rem 2.5rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+    /* ===== SECTIONS ===== */
+    .cv-section {
+      border-bottom: 1px solid #eaeef5;
+      padding-bottom: 1.5rem;
+    }
+    .cv-section:last-child { border-bottom: none; padding-bottom: 0; }
+    .cv-section h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #16213e;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .cv-section h2::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, #d0d7e2, transparent);
+    }
+    .cv-section p, .cv-section li {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #2d3a50;
+    }
+    .cv-section ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .cv-section ul li {
+      padding-left: 1.25rem;
+      position: relative;
+    }
+    .cv-section ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: #16213e;
+      font-weight: 700;
+    }
+    /* Experience entries */
+    .exp-item {
+      margin-bottom: 1.25rem;
+    }
+    .exp-item:last-child { margin-bottom: 0; }
+    .exp-item h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #16213e;
+    }
+    .exp-item .exp-meta {
+      font-size: 0.85rem;
+      color: #5a6b82;
+      margin-bottom: 0.4rem;
+    }
+    .exp-item p {
+      font-size: 0.9rem;
+    }
+    /* Skills tags */
+    .skills-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .skills-tags span {
+      background: #eef2f7;
+      color: #16213e;
+      font-size: 0.85rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+    /* ===== BUTTON BAR ===== */
+    .cv-actions {
+      padding: 0 2.5rem 2rem;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .btn-pdf {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #16213e;
+      color: #ffffff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.25s ease, transform 0.15s ease;
+      box-shadow: 0 4px 12px rgba(22,33,62,0.20);
+    }
+    .btn-pdf:hover {
+      background: #1a2a4e;
+      transform: translateY(-1px);
+    }
+    .btn-pdf:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 6px rgba(22,33,62,0.20);
+    }
+    .btn-pdf svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 640px) {
+      body { padding: 1rem 0.75rem; }
+      .cv-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem 1.5rem 1rem;
+      }
+      .cv-photo {
+        width: 100px;
+        height: 100px;
+      }
+      .cv-header-info h1 { font-size: 1.5rem; }
+      .cv-body { padding: 1.25rem 1.5rem 1.5rem; }
+      .cv-actions {
+        padding: 0 1.5rem 1.25rem;
+        justify-content: center;
+      }
+    }
+    /* ===== PRINT / PDF HIDE ===== */
+    @media print {
+      .cv-actions { display: none !important; }
+    }
+    .pdf-mode .cv-actions { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="cv-card" id="cvCard">
+    <!-- HEADER -->
+    <header class="cv-header">
+      <img
+        class="cv-photo"
+        id="cvPhoto"
+        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Crect fill='%232a2a4a' width='120' height='120'/%3E%3Ctext x='60' y='68' font-family='Arial' font-size='40' fill='%23ffffff' text-anchor='middle' dominant-baseline='middle'%3E👤%3C/text%3E%3C/svg%3E"
+        alt="John Doe portrait"
+      />
+      <div class="cv-header-info">
+        <h1 id="cvName">John Doe</h1>
+        <div class="title">Senior Software Engineer</div>
+        <div class="email">
+          <a id="cvEmail" href="mailto:john.doe@example.com">john.doe@example.com</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- BODY -->
+    <div class="cv-body" id="cvBody">
+
+      <!-- SUMMARY -->
+      <section class="cv-section" id="sectionSummary">
+        <h2>Summary</h2>
+        <p>
+          Senior Software Engineer with over 10 years of experience designing, building, and scaling
+          distributed systems across fintech, healthcare, and e-commerce. Passionate about clean
+          architecture, developer productivity, and mentoring teams to deliver high-impact products.
+        </p>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section class="cv-section" id="sectionExperience">
+        <h2>Experience</h2>
+        <div class="exp-item">
+          <h3>Senior Software Engineer — Acme Corp</h3>
+          <div class="exp-meta">Jan 2020 – Present · San Francisco, CA</div>
+          <p>
+            Led a team of 6 engineers to rebuild the core payments platform, reducing latency by 40%
+            and achieving 99.99% uptime. Architected a microservices migration that cut deployment
+            time from 45 minutes to under 2 minutes.
+          </p>
+        </div>
+        <div class="exp-item">
+          <h3>Software Engineer — Beacon Labs</h3>
+          <div class="exp-meta">Mar 2016 – Dec 2019 · New York, NY</div>
+          <p>
+            Designed and implemented the real-time analytics pipeline processing 10M+ events/day.
+            Introduced CI/CD practices, raising test coverage from 35% to 92%.
+          </p>
+        </div>
+        <div class="exp-item">
+          <h3>Junior Developer — Nimbus Inc</h3>
+          <div class="exp-meta">Jun 2014 – Feb 2016 · Austin, TX</div>
+          <p>
+            Built RESTful APIs and internal tooling for the CRM platform. Migrated legacy monolith
+            to a modular service-oriented architecture.
+          </p>
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section class="cv-section" id="sectionSkills">
+        <h2>Skills</h2>
+        <div class="skills-tags">
+          <span>TypeScript</span>
+          <span>Python</span>
+          <span>Go</span>
+          <span>React</span>
+          <span>Node.js</span>
+          <span>PostgreSQL</span>
+          <span>Kubernetes</span>
+          <span>AWS</span>
+          <span>Docker</span>
+          <span>GraphQL</span>
+          <span>REST</span>
+          <span>CI/CD</span>
+        </div>
+      </section>
+
+      <!-- EDUCATION -->
+      <section class="cv-section" id="sectionEducation">
+        <h2>Education</h2>
+        <div class="exp-item">
+          <h3>B.S. Computer Science</h3>
+          <div class="exp-meta">University of California, Berkeley · 2010 – 2014</div>
+          <p>Graduated with honors. Dean's list. Research assistant in distributed systems lab.</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="cv-actions" id="cvActions">
+      <button class="btn-pdf" id="downloadPdfBtn" type="button">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/>
+          <path d="M12 11v6l-2.5-2.5M12 17l2.5-2.5"/>
+        </svg>
+        Download PDF
+      </button>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      'use strict';
+
+      const DOWNLOAD_BTN = document.getElementById('downloadPdfBtn');
+      if (!DOWNLOAD_BTN) return;
+
+      DOWNLOAD_BTN.addEventListener('click', function () {
+        const { jsPDF } = window.jspdf;
+        if (!jsPDF) {
+          alert('PDF library is still loading. Please try again in a moment.');
+          return;
+        }
+        generatePdf(jsPDF);
+      });
+
+      /**
+       * Generate a styled PDF from the CV card content.
+       * @param {typeof window.jspdf.jsPDF} jsPDF
+       */
+      function generatePdf(jsPDF) {
+        const doc = new jsPDF('p', 'mm', 'a4');
+        const PAGE_WIDTH = 210;   // mm
+        const PAGE_HEIGHT = 297;  // mm
+        const MARGIN = 20;        // mm
+        const CONTENT_WIDTH = PAGE_WIDTH - 2 * MARGIN;
+        let y = MARGIN;
+
+        // ---- Helper: write a line of text, auto-advance y ----
+        function writeText(text, options, maxWidth) {
+          const opts = Object.assign({}, options);
+          const lines = doc.splitTextToSize(text, maxWidth || CONTENT_WIDTH);
+          doc.text(lines, MARGIN, y, opts);
+          y += lines.length * (opts.fontSize || 11) * 0.3528; // approximate mm per line
+          return lines;
+        }
+
+        // ---- Helper: draw a horizontal rule ----
+        function drawHr(color) {
+          const yLine = y + 2;
+          doc.setDrawColor(color || 200, 208, 220);
+          doc.setLineWidth(0.4);
+          doc.line(MARGIN, yLine, PAGE_WIDTH - MARGIN, yLine);
+          y = yLine + 5;
+        }
+
+        // =========================================================
+        // 1. PHOTO (top-left area)
+        // =========================================================
+        const PHOTO_SIZE_MM = 30;
+        const photoImg = document.getElementById('cvPhoto');
+        let photoDataUrl = null;
+        if (photoImg && photoImg.complete && photoImg.naturalWidth > 0) {
+          try {
+            const c = document.createElement('canvas');
+            c.width = photoImg.naturalWidth;
+            c.height = photoImg.naturalHeight;
+            const ctx = c.getContext('2d');
+            ctx.drawImage(photoImg, 0, 0);
+            photoDataUrl = c.toDataURL('image/png');
+          } catch (_) { /* use placeholder */ }
+        }
+        // Fallback: use the src directly if canvas fails (cross-origin may taint, but local files work)
+        if (!photoDataUrl && photoImg && photoImg.src) {
+          photoDataUrl = photoImg.src;
+        }
+
+        if (photoDataUrl) {
+          doc.addImage(photoDataUrl, 'PNG', MARGIN, y, PHOTO_SIZE_MM, PHOTO_SIZE_MM);
+        }
+
+        // ---- Name & title (beside photo or below if no photo) ----
+        const name = document.getElementById('cvName')?.textContent?.trim() || 'John Doe';
+        const titleEl = document.querySelector('.cv-header-info .title');
+        const title = titleEl?.textContent?.trim() || 'Senior Software Engineer';
+        const emailEl = document.getElementById('cvEmail');
+        const email = emailEl?.textContent?.trim() || 'john.doe@example.com';
+
+        const nameX = photoDataUrl ? MARGIN + PHOTO_SIZE_MM + 8 : MARGIN;
+        const nameY = y + 8;
+
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(20);
+        doc.setTextColor(26, 26, 46);
+        doc.text(name, nameX, nameY);
+
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(11);
+        doc.setTextColor(90, 107, 130);
+        doc.text(title, nameX, nameY + 7);
+
+        // Email displayed as plain text + URL reference
+        doc.setFontSize(9);
+        doc.setTextColor(110, 120, 140);
+        doc.text('Email: ' + email + '  |  ' + email, nameX, nameY + 14);
+
+        // advance y past photo area
+        if (photoDataUrl) {
+          y = y + PHOTO_SIZE_MM + 8;
+        } else {
+          y = nameY + 18;
+        }
+
+        // ---- Divider after header ----
+        drawHr();
+
+        // =========================================================
+        // 2. SECTIONS
+        // =========================================================
+        const sections = [
+          { id: 'sectionSummary',   title: 'Summary' },
+          { id: 'sectionExperience', title: 'Experience' },
+          { id: 'sectionSkills',     title: 'Skills' },
+          { id: 'sectionEducation',  title: 'Education' },
+        ];
+
+        for (const sec of sections) {
+          const el = document.getElementById(sec.id);
+          if (!el) continue;
+
+          // ---- Section heading ----
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(13);
+          doc.setTextColor(22, 33, 62);
+          doc.text(sec.title, MARGIN, y);
+          y += 7;
+
+          // ---- Gather child content ----
+          const children = el.children;
+
+          for (let i = 0; i < children.length; i++) {
+            const child = children[i];
+
+            // Skip the <h2> element (already rendered)
+            if (child.tagName === 'H2') continue;
+
+            // ---- <p> paragraphs ----
+            if (child.tagName === 'P') {
+              const text = child.textContent.trim();
+              if (text) {
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(10);
+                doc.setTextColor(45, 58, 80);
+                writeText(text, { maxWidth: CONTENT_WIDTH });
+                y += 1;
+              }
+              continue;
+            }
+
+            // ---- <ul> lists ----
+            if (child.tagName === 'UL') {
+              const items = child.querySelectorAll('li');
+              for (const li of items) {
+                const text = li.textContent.trim();
+                if (!text) continue;
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(10);
+                doc.setTextColor(45, 58, 80);
+                doc.text('•  ' + text, MARGIN, y);
+                y += 5.5;
+              }
+              y += 1;
+              continue;
+            }
+
+            // ---- <div> (exp-item) ----
+            if (child.tagName === 'DIV' && child.classList.contains('exp-item')) {
+              const h3 = child.querySelector('h3');
+              const meta = child.querySelector('.exp-meta');
+              const p = child.querySelector('p');
+
+              if (h3) {
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(10.5);
+                doc.setTextColor(26, 26, 46);
+                writeText(h3.textContent.trim(), { maxWidth: CONTENT_WIDTH });
+              }
+              if (meta) {
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(9);
+                doc.setTextColor(90, 107, 130);
+                writeText(meta.textContent.trim(), { maxWidth: CONTENT_WIDTH });
+              }
+              if (p) {
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(10);
+                doc.setTextColor(45, 58, 80);
+                writeText(p.textContent.trim(), { maxWidth: CONTENT_WIDTH });
+              }
+              y += 1.5;
+              continue;
+            }
+
+            // ---- Skills tags container ----
+            if (child.classList && child.classList.contains('skills-tags')) {
+              const tags = child.querySelectorAll('span');
+              const tagTexts = [];
+              tags.forEach(t => {
+                const txt = t.textContent.trim();
+                if (txt) tagTexts.push(txt);
+              });
+              if (tagTexts.length) {
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(10);
+                doc.setTextColor(45, 58, 80);
+                // Write tags as comma-separated
+                writeText(tagTexts.join(', '), { maxWidth: CONTENT_WIDTH });
+                y += 1;
+              }
+              continue;
+            }
+
+            // ---- Fallback: plain text ----
+            const text = child.textContent.trim();
+            if (text && child.children.length === 0) {
+              doc.setFont('helvetica', 'normal');
+              doc.setFontSize(10);
+              doc.setTextColor(45, 58, 80);
+              writeText(text, { maxWidth: CONTENT_WIDTH });
+            }
+          }
+
+          // ---- Divider after each section (except last) ----
+          if (sec.id !== 'sectionEducation') {
+            drawHr();
+          } else {
+            y += 3;
+          }
+        }
+
+        // =========================================================
+        // 3. FOOTER note
+        // =========================================================
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8);
+        doc.setTextColor(170, 180, 195);
+        doc.text('Generated from CV webpage', MARGIN, PAGE_HEIGHT - 10);
+
+        // ---- Save ----
+        doc.save('CV_John_Doe.pdf');
+      }
+
+    })();
+  </script>
+</body>
+</html>
