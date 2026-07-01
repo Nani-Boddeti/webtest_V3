@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maison Élégance — Luxury Product Collection</title>
+  <meta name="description" content="Discover the curated luxury collection at Maison Élégance. Featuring 10 hand-selected artisan pieces from diamond rings to cashmere overcoats." />
+  <meta property="og:title" content="Maison Élégance — Luxury Product Collection" />
+  <meta property="og:description" content="Discover the curated luxury collection at Maison Élégance. Featuring 10 hand-selected artisan pieces from diamond rings to cashmere overcoats." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=1200&h=630&fit=crop" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Maison Élégance — Luxury Product Collection" />
+  <meta name="twitter:description" content="Discover the curated luxury collection at Maison Élégance. 10 hand-selected artisan pieces." />
+  <link rel="canonical" href="https://maisonelegance.example.com/catalog" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #faf8f5;
+      color: #2c2418;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ── Brand Header ── */
+    .site-header {
+      background: #ffffff;
+      border-bottom: 1px solid #e8e0d4;
+      padding: 1.25rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .site-header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-line {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: #a0865c;
+      margin-bottom: 0.1rem;
+    }
+
+    .brand-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #1a1510;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .brand-tagline {
+      font-size: 0.82rem;
+      color: #8a7a64;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Main Container ── */
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    /* ── Section Heading ── */
+    .section-heading {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-heading h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: #1a1510;
+      letter-spacing: 0.01em;
+    }
+
+    .section-heading .subtitle {
+      font-size: 0.92rem;
+      color: #8a7a64;
+      margin-top: 0.5rem;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+    }
+
+    .section-heading::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 1px;
+      background: #c4b59a;
+      margin: 1.25rem auto 0;
+    }
+
+    /* ── Product Grid ── */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.75rem;
+    }
+
+    /* ── Product Card ── */
+    .product-card {
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  box-shadow 0.35s ease;
+      box-shadow: 0 1px 3px rgba(44, 36, 24, 0.06);
+      border: 1px solid #ede6dc;
+      position: relative;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(44, 36, 24, 0.1);
+      border-color: #d4c8b6;
+    }
+
+    .product-card:focus-visible {
+      outline: 2px solid #a0865c;
+      outline-offset: 2px;
+    }
+
+    .product-card-thumb {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+      background: #f0ece6;
+    }
+
+    .product-card-body {
+      padding: 1.25rem 1.25rem 1.4rem;
+    }
+
+    .product-card-category {
+      font-size: 0.68rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #a0865c;
+      margin-bottom: 0.35rem;
+    }
+
+    .product-card-name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #1a1510;
+      margin-bottom: 0.35rem;
+      line-height: 1.3;
+    }
+
+    .product-card-price {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #6b5d4b;
+    }
+
+    .product-card-price::before {
+      content: '$';
+      font-size: 0.85rem;
+      font-weight: 400;
+      margin-right: 0.05em;
+    }
+
+    /* ── Detail View ── */
+    .detail-view {
+      display: none;
+      opacity: 0;
+      animation: detailFadeIn 0.45s ease forwards;
+    }
+
+    .detail-view.active {
+      display: block;
+    }
+
+    @keyframes detailFadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .detail-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    .detail-image-wrapper {
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f0ece6;
+      border: 1px solid #ede6dc;
+    }
+
+    .detail-image {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+    }
+
+    .detail-info {
+      padding-top: 0.25rem;
+    }
+
+    .detail-category {
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #a0865c;
+      margin-bottom: 0.5rem;
+    }
+
+    .detail-name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: #1a1510;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+
+    .detail-price {
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: #6b5d4b;
+      margin-bottom: 1.5rem;
+    }
+
+    .detail-price::before {
+      content: '$';
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin-right: 0.05em;
+    }
+
+    .detail-divider {
+      height: 1px;
+      background: #e8e0d4;
+      margin: 1.25rem 0;
+    }
+
+    .detail-description {
+      font-size: 0.95rem;
+      color: #4a3f32;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .detail-attributes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem 1.5rem;
+    }
+
+    .detail-attribute {
+      font-size: 0.85rem;
+    }
+
+    .detail-attribute-label {
+      font-weight: 500;
+      color: #8a7a64;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 0.7rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .detail-attribute-value {
+      color: #2c2418;
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: none;
+      border: 1px solid #d4c8b6;
+      color: #6b5d4b;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.65rem 1.25rem;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-bottom: 2rem;
+    }
+
+    .back-button:hover {
+      background: #f5f0ea;
+      border-color: #a0865c;
+      color: #1a1510;
+    }
+
+    .back-button:focus-visible {
+      outline: 2px solid #a0865c;
+      outline-offset: 2px;
+    }
+
+    .back-button svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    /* ── Loading / Fallback States ── */
+    .loading-shimmer {
+      background: linear-gradient(90deg, #f0ece6 25%, #e8e0d4 50%, #f0ece6 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 8px;
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .grid-empty {
+      text-align: center;
+      padding: 4rem 1.5rem;
+      color: #8a7a64;
+    }
+
+    .grid-empty p {
+      font-size: 1.1rem;
+    }
+
+    /* ── Footer ── */
+    .site-footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border-top: 1px solid #e8e0d4;
+      font-size: 0.8rem;
+      color: #8a7a64;
+      font-weight: 300;
+    }
+
+    .site-footer span {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .detail-content {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+      }
+
+      .detail-name {
+        font-size: 1.6rem;
+      }
+
+      .detail-price {
+        font-size: 1.2rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .site-header {
+        padding: 1rem 1rem;
+      }
+
+      .brand-title {
+        font-size: 1.25rem;
+      }
+
+      .brand-tagline {
+        display: none;
+      }
+
+      .main-container {
+        padding: 1.5rem 1rem 3rem;
+      }
+
+      .section-heading h1 {
+        font-size: 1.8rem;
+      }
+
+      .product-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+
+      .detail-attributes {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .product-card-body {
+        padding: 1rem;
+      }
+    }
+
+    /* ── Print ── */
+    @media print {
+      .site-header { position: static; }
+      .product-card { break-inside: avoid; }
+      .back-button { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════════ Site Header ════════════ -->
+  <header class="site-header">
+    <div class="site-header-inner">
+      <div>
+        <div class="brand-line">Depuis 1924</div>
+        <div class="brand-title"><a href="#">Maison Élégance</a></div>
+      </div>
+      <div class="brand-tagline">Curated Luxury · Atelier Collection</div>
+    </div>
+  </header>
+
+  <!-- ════════════ Main Content ════════════ -->
+  <main class="main-container" id="app">
+
+    <!-- ── Grid View ── -->
+    <section id="grid-view" aria-label="Product Collection">
+      <div class="section-heading">
+        <h1>Autumn Collection</h1>
+        <p class="subtitle">Ten hand-selected artisan pieces, each defined by heritage and precision.</p>
+      </div>
+
+      <div class="product-grid" id="product-grid" role="list">
+        <!-- Products rendered by JavaScript -->
+      </div>
+    </section>
+
+    <!-- ── Detail View ── -->
+    <section id="detail-view" class="detail-view" aria-label="Product Detail">
+      <button class="back-button" id="back-button" aria-label="Back to collection">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 12L6 8L10 4" />
+        </svg>
+        Back to Collection
+      </button>
+
+      <div class="detail-content">
+        <div class="detail-image-wrapper">
+          <img class="detail-image" id="detail-image" src="" alt="" />
+        </div>
+        <div class="detail-info">
+          <div class="detail-category" id="detail-category"></div>
+          <h2 class="detail-name" id="detail-name"></h2>
+          <div class="detail-price" id="detail-price"></div>
+          <div class="detail-divider"></div>
+          <p class="detail-description" id="detail-description"></p>
+          <div class="detail-attributes">
+            <div class="detail-attribute">
+              <div class="detail-attribute-label">Material</div>
+              <div class="detail-attribute-value" id="detail-material"></div>
+            </div>
+            <div class="detail-attribute">
+              <div class="detail-attribute-label">Origin</div>
+              <div class="detail-attribute-value" id="detail-origin"></div>
+            </div>
+            <div class="detail-attribute">
+              <div class="detail-attribute-label">SKU</div>
+              <div class="detail-attribute-value" id="detail-sku"></div>
+            </div>
+            <div class="detail-attribute">
+              <div class="detail-attribute-label">Year</div>
+              <div class="detail-attribute-value" id="detail-year"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ════════════ Footer ════════════ -->
+  <footer class="site-footer">
+    <p>&copy; 2025 Maison Élégance — <span>l'art de vivre</span></p>
+  </footer>
+
+  <script>
+    /* ── Product Data ── */
+    const products = [
+      {
+        id: 1,
+        name: 'Diamond Eternity Ring',
+        category: 'Jewelry',
+        price: 12800,
+        description: 'A timeless band featuring 42 hand-set brilliant-cut diamonds channel-set in platinum. Each stone is graded F+/VS1 clarity, creating an uninterrupted cascade of light that symbolizes everlasting devotion. Presented in a hand-stitched leather box lined with velvet.',
+        material: 'Platinum · 42 diamonds (F+/VS1)',
+        origin: 'Antwerp, Belgium',
+        sku: 'ME-JR-001',
+        year: '2025',
+        image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&h=600&fit=crop&crop=center'
+      },
+      {
+        id: 2,
+        name: 'Italian Leather Watch',
+        category: 'Timepieces',
+        price: 4250,
+        description: 'A hand-wound mechanical movement encased in 316L stainless steel with a sunburst silver dial. The strap is crafted from full-grain Tuscan leather, aged naturally over six weeks. Sapphire crystal glass, 50 m water resistance, and a see-through case back revealing the Côtes de Genève finish.',
+        material: '316L Steel · Tuscan Leather',
+        origin: 'Florence, Italy',
+        sku: 'ME-TP-002',
+        year: '2025',
+        image: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=800&h=600&fit=crop&crop=center'
+      },
+      {
+        id: 3,
+        name: 'Silk Evening Gown',
+        category: 'Haute Couture',
+        price: 3900,
+        description: 'An floor-length gown cut from 22-momme silk charmeuse in an ivory blush tone. Features a cowl back neckline, delicate spaghetti straps, and a concealed side zipper. Entirely hand-finished with French seams and a silk chiffon underskirt for a weightless drape.',
+        material: '22‑momme Silk Charmeuse',
+        origin: 'Lyon, France',
+        sku: 'ME-HC-003',
+        year: '2025',
+        image: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=800&h=600&fit=crop&crop=center'
+      },
+      {
+        id: 4,
+        name: 'Handcrafted Crystal Vase',
+        category: 'Home',
+        price: 1850,
+        description: 'Individually mouth-blown by master glass artisans using a 24 % lead crystal formula. The organic spiral form captures and refracts light from every angle. Each piece is one-of-a-kind, signed and numbered on the base. Presented in a felt-lined walnut display box.',
+        material: '24 % Lead Crystal',
+        origin: 'Murano, Italy',
+        sku: 'ME-HM-004',
+        year: '2025',
+        image: 'https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=800&h=600&fit=crop&crop=center'
+      },
+      {
+        id: 5,
+        name: 'Gold-Plated Cufflinks',
+        category: 'Accessories',
+        price: 980,
+        description: 'Rectangular cufflinks crafted from sterling silver and plated with 18 kt yellow gold. The face features a subtle guilloché engine-turned pattern, while the reverse is engraved with the Maison hallmark. Supplied in a leather travel pouch.',
+        material: 'Sterling Silver · 18 kt Gold Plate',
+        origin: 'Paris, France',
+        sku: 'ME-AC-005',
+        year: '2025',
+        image: 'https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?w=800&h=600&fit=crop&crop=center'
+      },
+      {
+        id: 6,
+        name: 'Cashmere Overcoat',
+        category: 'Outerwear',
+        price: 2600,
+        description: 'A double-breasted overcoat tailored from 100 % pure Mongolian cashmere (2-ply, 280 g/m²). The silhouette is softly structured with a notched lapel, pick-stitched edges, and horn buttons. Fully lined in cupro with an interior security pocket.',
+        material: 'Mongolian Cashmere · Cupro Lining',
+        origin: 'Ulaanbaatar, Mongolia',
+        sku: 'ME-OW-006',
+        year: '2025',
+        image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=800&h=600&fit=crop&crop=center'
+      },
+      {
+        id: 7,
+        name: 'Pearl Drop Earrings',
+        category: 'Jewelry',
+        price: 1450,
+        description: 'Each earring suspends a single South Sea cultured pearl (12 – 13 mm, AAA lustre) from an 18 kt white gold hook set with a brilliant-cut diamond. The pearls are hand-matched for colour and orient. Clutch-back findings for secure wear.',
+        material: 'South Sea Pearl · 18 kt White Gold',
+        origin: 'Tokyo, Japan',
+        sku: 'ME-JR-007',
+        year: '2025',
+        image: 'https://images.unsplash.com/photo-1515562141589-54a2f12318b0?w=800&h=600&fit=crop&crop=center'
+      },
+      {
+        id: 8,
+        name: 'French Perfume Collection',
+        category: 'Fragrance',
+        price: 680,
+        description: 'A coffret of three extrait de parfum (28 ml each) composed in Grasse. Notes include: Iris & Bergamot, Oud & Rose Absolute, and Amber Vanilla. Each bottle is hand-poured and sealed with wax, housed in a lacquered wooden box.',
+        material: 'Extrait de Parfum · 3 × 28 ml',
+        origin: 'Grasse, France',
+        sku: 'ME-FR-008',
+        year: '2025',
+        image: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=800&h=600&fit=crop&crop=center'
+      },
+      {
+        id: 9,
+        name: 'Hand-Stitched Leather Satchel',
+        category: 'Accessories',
+        price: 3200,
+        description: 'A spacious satchel hand-cut and saddle-stitched from a single hide of full-grain French calfskin in cognac. Brass hardware, a leather-lined interior with two compartments, and a detachable shoulder strap. Aged bridle leather will develop a rich patina over time.',
+        material: 'Full‑Grain Calfskin · Brass',
+        origin: 'Milan, Italy',
+        sku: 'ME-AC-009',
+        year: '2025',
+        image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&h=600&fit=crop&crop=center'
+      },
+      {
+        id: 10,
+        name: 'Limited Edition Fountain Pen',
+        category: 'Writing',
+        price: 1100,
+        description: 'Number 10 of 100 pieces worldwide. The barrel is turned from ebonite and coated in multiple layers of urushi lacquer in a deep aogai (green shell) colour. The 18 kt gold nib is custom-ground to a fine cursive italic by a master nibmeister. Fills via piston mechanism.',
+        material: 'Ebonite · Urushi Lacquer · 18 kt Gold Nib',
+        origin: 'Wajima, Japan',
+        sku: 'ME-WR-010',
+        year: '2025',
+        image: 'https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=800&h=600&fit=crop&crop=center'
+      }
+    ];
+
+    /* ── DOM References ── */
+    const gridView = document.getElementById('grid-view');
+    const detailView = document.getElementById('detail-view');
+    const productGrid = document.getElementById('product-grid');
+    const backButton = document.getElementById('back-button');
+
+    const detailImage = document.getElementById('detail-image');
+    const detailCategory = document.getElementById('detail-category');
+    const detailName = document.getElementById('detail-name');
+    const detailPrice = document.getElementById('detail-price');
+    const detailDescription = document.getElementById('detail-description');
+    const detailMaterial = document.getElementById('detail-material');
+    const detailOrigin = document.getElementById('detail-origin');
+    const detailSku = document.getElementById('detail-sku');
+    const detailYear = document.getElementById('detail-year');
+
+    /* ── Render Grid ── */
+    function renderGrid() {
+      productGrid.innerHTML = products.map(product => `
+        <div class="product-card" role="listitem" tabindex="0"
+             data-id="${product.id}"
+             aria-label="${product.name} — $${product.price.toLocaleString()}"
+             onclick="showDetail(${product.id})"
+             onkeydown="if(event.key==='Enter'||event.key===' ') { event.preventDefault(); showDetail(${product.id}); }">
+          <img
+            class="product-card-thumb"
+            src="${product.image}"
+            alt="${product.name}"
+            loading="lazy"
+            onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22 fill=%22%23f0ece6%22%3E%3Crect width=%22400%22 height=%22300%22/%3E%3Ctext x=%22200%22 y=%22150%22 text-anchor=%22middle%22 fill=%22%23a0865c%22 font-family=%22serif%22 font-size=%2218%22%3E${product.name}%3C/text%3E%3C/svg%3E'"
+          />
+          <div class="product-card-body">
+            <div class="product-card-category">${product.category}</div>
+            <div class="product-card-name">${product.name}</div>
+            <div class="product-card-price">${product.price.toLocaleString()}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    /* ── Show Detail ── */
+    function showDetail(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+
+      detailImage.src = product.image;
+      detailImage.alt = product.name;
+      detailCategory.textContent = product.category;
+      detailName.textContent = product.name;
+      detailPrice.textContent = product.price.toLocaleString();
+      detailDescription.textContent = product.description;
+      detailMaterial.textContent = product.material;
+      detailOrigin.textContent = product.origin;
+      detailSku.textContent = product.sku;
+      detailYear.textContent = product.year;
+
+      gridView.style.display = 'none';
+      detailView.classList.add('active');
+      document.getElementById('app').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      backButton.focus();
+    }
+
+    /* ── Show Grid ── */
+    function showGrid() {
+      detailView.classList.remove('active');
+      gridView.style.display = 'block';
+      document.getElementById('app').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    /* ── Back Button ── */
+    backButton.addEventListener('click', showGrid);
+
+    /* ── Escape Key ── */
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape' && detailView.classList.contains('active')) {
+        showGrid();
+      }
+    });
+
+    /* ── Initialize ── */
+    renderGrid();
+  </script>
+
+</body>
+</html>
