@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research Document Generator — AI-powered topic analysis</title>
+  <meta name="description" content="Generate structured research documents on any topic. Enter a topic and get a downloadable .docx report with executive summary, key findings, and more." />
+  <meta property="og:title" content="Research Document Generator" />
+  <meta property="og:description" content="Generate structured research documents on any topic. Download a complete .docx report powered by AI." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/static/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Research Document Generator" />
+  <meta name="twitter:description" content="Generate structured research documents on any topic. Download a complete .docx report powered by AI." />
+  <link rel="canonical" href="http://localhost:8000/" />
+
+  <!-- Favicon (inline SVG) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%234f46e5'/><text x='50%25' y='54%25' dominant-baseline='central' text-anchor='middle' font-family='system-ui,sans-serif' font-size='20' font-weight='bold' fill='white'>R</text></svg>" />
+
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand: #4f46e5;
+      --brand-hover: #4338ca;
+      --brand-light: #eef2ff;
+      --brand-ring: rgba(79, 70, 229, 0.35);
+      --surface: #ffffff;
+      --surface-elevated: #fafbff;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --border: #e2e8f0;
+      --border-focus: #4f46e5;
+      --radius-sm: 8px;
+      --radius: 12px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 1px 4px rgba(0, 0, 0, 0.06), 0 8px 32px rgba(0, 0, 0, 0.06);
+      --transition: 0.2s cubic-bezier(0.2, 0, 0, 1);
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(160deg, #f8fafc 0%, #eef2ff 40%, #f8fafc 100%);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ── Decorative background elements ── */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -30%;
+      width: 80%;
+      height: 120%;
+      background: radial-gradient(ellipse at center, rgba(79, 70, 229, 0.04) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -40%;
+      right: -20%;
+      width: 70%;
+      height: 100%;
+      background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.04) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Main card ── */
+    .app-container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .app-card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      padding: 2.5rem 2rem;
+      border: 1px solid var(--border);
+      transition: box-shadow var(--transition);
+    }
+
+    /* ── Header ── */
+    .app-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .app-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      background: var(--brand-light);
+      border-radius: var(--radius);
+      margin-bottom: 1.25rem;
+    }
+
+    .app-icon svg {
+      width: 28px;
+      height: 28px;
+      color: var(--brand);
+    }
+
+    .app-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--text-primary);
+      margin-bottom: 0.35rem;
+      line-height: 1.3;
+    }
+
+    .app-subtitle {
+      font-size: 0.925rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+
+    /* ── Form ── */
+    .app-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .input-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-wrapper .input-icon {
+      position: absolute;
+      left: 0.9rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-wrapper .input-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .app-input {
+      width: 100%;
+      padding: 0.8rem 1rem 0.8rem 2.6rem;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: var(--text-primary);
+      background: var(--surface-elevated);
+      transition: border-color var(--transition), box-shadow var(--transition);
+      outline: none;
+    }
+
+    .app-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .app-input:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px var(--brand-ring);
+      background: var(--surface);
+    }
+
+    .app-input:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    /* ── Button ── */
+    .app-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.85rem 1.5rem;
+      background: var(--brand);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
+      letter-spacing: 0.01em;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .app-button:hover:not(:disabled) {
+      background: var(--brand-hover);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+    }
+
+    .app-button:active:not(:disabled) {
+      transform: scale(0.985);
+      box-shadow: 0 1px 2px rgba(79, 70, 229, 0.2);
+    }
+
+    .app-button:focus-visible {
+      outline: 3px solid var(--brand-ring);
+      outline-offset: 2px;
+    }
+
+    .app-button:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    /* ── Loading spinner inside button ── */
+    .spinner {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 2.5px solid rgba(255, 255, 255, 0.35);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ── Status message ── */
+    .app-status {
+      text-align: center;
+      margin-top: 1rem;
+      min-height: 1.5rem;
+      font-size: 0.875rem;
+      transition: color var(--transition);
+    }
+
+    .app-status.success {
+      color: #059669;
+    }
+
+    .app-status.error {
+      color: #dc2626;
+    }
+
+    .app-status.loading-text {
+      color: var(--brand);
+    }
+
+    /* ── Features hint ── */
+    .app-features {
+      display: flex;
+      justify-content: center;
+      gap: 1.75rem;
+      margin-top: 1.75rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .app-feature {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .app-feature svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 520px) {
+      body {
+        padding: 1rem;
+        align-items: flex-start;
+        padding-top: 2.5rem;
+      }
+
+      .app-card {
+        padding: 1.75rem 1.25rem;
+      }
+
+      .app-title {
+        font-size: 1.3rem;
+      }
+
+      .app-features {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.6rem;
+      }
+    }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      .spinner {
+        animation: none;
+        opacity: 0.5;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="app-container">
+    <div class="app-card">
+
+      <!-- Header -->
+      <header class="app-header">
+        <div class="app-icon" aria-hidden="true">
+          <!-- Document research icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="16" y1="13" x2="8" y2="13" />
+            <line x1="16" y1="17" x2="8" y2="17" />
+            <polyline points="10 9 9 9 8 9" />
+          </svg>
+        </div>
+        <h1 class="app-title">Research Document Generator</h1>
+        <p class="app-subtitle">
+          Enter a topic below. We'll research it, analyse the findings, and deliver a structured Word document for download.
+        </p>
+      </header>
+
+      <!-- Form -->
+      <form class="app-form" id="generate-form" novalidate>
+        <div class="input-group">
+          <label class="input-label" for="topic-input">Research Topic</label>
+          <div class="input-wrapper">
+            <span class="input-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            </span>
+            <input
+              class="app-input"
+              id="topic-input"
+              type="text"
+              placeholder="e.g. AI website maintenance agent"
+              required
+              minlength="1"
+              maxlength="500"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <button class="app-button" id="submit-button" type="submit">
+          <span id="button-text">Generate Document</span>
+          <span id="button-spinner" class="spinner" style="display:none;" aria-hidden="true"></span>
+        </button>
+      </form>
+
+      <!-- Status -->
+      <div class="app-status" id="app-status" aria-live="polite"></div>
+
+      <!-- Feature hints -->
+      <div class="app-features" aria-label="Document contents">
+        <div class="app-feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          <span>Executive Summary</span>
+        </div>
+        <div class="app-feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          <span>Key Findings</span>
+        </div>
+        <div class="app-feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          <span>.docx Download</span>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const form = document.getElementById('generate-form');
+      const topicInput = document.getElementById('topic-input');
+      const submitButton = document.getElementById('submit-button');
+      const buttonText = document.getElementById('button-text');
+      const buttonSpinner = document.getElementById('button-spinner');
+      const statusEl = document.getElementById('app-status');
+
+      /**
+       * Set the UI into loading (or idle) state.
+       */
+      function setLoading(isLoading) {
+        topicInput.disabled = isLoading;
+        submitButton.disabled = isLoading;
+        buttonText.style.display = isLoading ? 'none' : 'inline';
+        buttonSpinner.style.display = isLoading ? 'inline-block' : 'none';
+      }
+
+      /**
+       * Display a status message with an optional type.
+       * @param {string} message
+       * @param {'success'|'error'|'loading-text'|''} type
+       */
+      function setStatus(message, type) {
+        statusEl.textContent = message;
+        statusEl.className = 'app-status';
+        if (type) {
+          statusEl.classList.add(type);
+        }
+      }
+
+      /**
+       * Derive a safe filename from the topic string.
+       * @param {string} topic
+       * @returns {string}
+       */
+      function deriveFilename(topic) {
+        const safe = topic
+          .replace(/[^a-zA-Z0-9 _-]/g, '_')
+          .replace(/\s+/g, '_')
+          .slice(0, 60)
+          .trim() || 'report';
+        return safe + '.docx';
+      }
+
+      /**
+       * Trigger a browser download for the given blob.
+       * @param {Blob} blob
+       * @param {string} filename
+       */
+      function triggerDownload(blob, filename) {
+        const url = URL.createObjectURL(blob);
+        const anchor = document.createElement('a');
+        anchor.href = url;
+        anchor.download = filename;
+        document.body.appendChild(anchor);
+        anchor.click();
+        anchor.remove();
+
+        // Revoke the object URL after a short delay to allow the download to start.
+        setTimeout(function () {
+          URL.revokeObjectURL(url);
+        }, 200);
+      }
+
+      /**
+       * Handle form submission.
+       */
+      form.addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const topic = topicInput.value.trim();
+
+        if (!topic) {
+          setStatus('Please enter a research topic.', 'error');
+          topicInput.focus();
+          return;
+        }
+
+        // Enter loading state.
+        setLoading(true);
+        setStatus('Researching and generating your document…', 'loading-text');
+
+        try {
+          const response = await fetch('/generate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ topic: topic }),
+          });
+
+          if (!response.ok) {
+            let detail = 'An unexpected error occurred.';
+            try {
+              const errBody = await response.json();
+              if (errBody.detail) {
+                detail = errBody.detail;
+              }
+            } catch (_) {
+              // Response body wasn't JSON — use status text.
+              detail = response.statusText || detail;
+            }
+            throw new Error(detail);
+          }
+
+          const blob = await response.blob();
+          const filename = deriveFilename(topic);
+
+          triggerDownload(blob, filename);
+          setStatus('Download started! Your document is ready.', 'success');
+        } catch (err) {
+          console.error('Generation failed:', err);
+          setStatus(err.message || 'Something went wrong. Please try again.', 'error');
+        } finally {
+          setLoading(false);
+        }
+      });
+    })();
+  </script>
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Research Document Generator",
+    "url": "http://localhost:8000/",
+    "description": "Generate structured research documents on any topic. Download a complete .docx report powered by AI.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "All"
+  }
+  </script>
+
+</body>
+</html>
