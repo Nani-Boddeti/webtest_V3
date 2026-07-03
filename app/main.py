@@ -7,13 +7,13 @@ a .docx file as a download.
 """
 
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import Response
+from fastapi.responses import StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from app.config import APP_TITLE, APP_VERSION
-from app.services import search_web, generate_document_text
+from app.services import search_service, llm_service
 from app.docx_builder import build_docx
 
 app = FastAPI(title=APP_TITLE, version=APP_VERSION)
@@ -40,14 +40,14 @@ class GenerateRequest(BaseModel):
 async def generate(request: GenerateRequest):
     """Accept a topic, run mock search + LLM, and return a .docx download."""
     try:
-        search_results = await search_web(request.topic)
-        document_text = await generate_document_text(request.topic, search_results)
+        search_results = await search_service(request.topic)
+        document_text = await llm_service(request.topic, search_results)
         docx_bytes = build_docx(request.topic, document_text)
 
         safe_filename = _sanitise_filename(request.topic)
 
-        return Response(
-            content=docx_bytes,
+        return StreamingResponse(
+            content=iter([docx_bytes]),
             media_type=(
                 "application/vnd.openxmlformats-officedocument."
                 "wordprocessingml.document"
