@@ -1,584 +1,603 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alexandra Chen — CV</title>
-  <meta name="description" content="Professional CV of Alexandra Chen, full-stack developer with 8+ years of experience." />
-  <meta property="og:title" content="Alexandra Chen — CV" />
-  <meta property="og:description" content="Professional CV of Alexandra Chen, full-stack developer with 8+ years of experience." />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary" />
-  <link rel="canonical" href="https://example.com/cv" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Haven &amp; Hearth Realty — Find Your Perfect Home</title>
+  <meta name="description" content="Haven &amp; Hearth Realty is a trusted real estate agency helping families find their dream homes. Expert buying, selling, and property management services with a personal touch.">
+  <meta name="author" content="Haven &amp; Hearth Realty">
+  <meta name="robots" content="index, follow">
 
-  <!-- jsPDF for PDF download (placeholder integration) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!-- Open Graph -->
+  <meta property="og:title" content="Haven &amp; Hearth Realty — Find Your Perfect Home">
+  <meta property="og:description" content="Expert real estate services for buyers, sellers, and investors. Discover handpicked properties with a team that treats you like family.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.havenhearthrealty.com">
+  <meta property="og:image" content="https://www.havenhearthrealty.com/assets/images/og-image.png">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Haven &amp; Hearth Realty">
 
-  <style>
-    /* ── Reset & Base ── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Haven &amp; Hearth Realty — Find Your Perfect Home">
+  <meta name="twitter:description" content="Expert real estate services for buyers, sellers, and investors. Discover handpicked properties with a team that treats you like family.">
+  <meta name="twitter:image" content="https://www.havenhearthrealty.com/assets/images/og-image.png">
 
-    body {
-      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      background: #f5f5f5;
-      color: #1a1a1a;
-      line-height: 1.6;
-      padding: 2rem 1rem;
-      -webkit-font-smoothing: antialiased;
-    }
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.havenhearthrealty.com">
 
-    /* ── Layout ── */
-    .cv-wrapper {
-      max-width: 900px;
-      margin: 0 auto;
-      background: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
-      overflow: hidden;
-    }
-
-    .cv-inner {
-      padding: 2.5rem 2rem;
-    }
-
-    /* ── Header ── */
-    .cv-header {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      margin-bottom: 2.5rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid #e0e0e0;
-    }
-
-    .cv-photo {
-      flex-shrink: 0;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: #e8e8e8;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .cv-photo svg {
-      width: 80px;
-      height: 80px;
-      fill: #888;
-    }
-
-    .cv-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .cv-title-group {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .cv-name {
-      font-size: 2rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      color: #111;
-      line-height: 1.2;
-    }
-
-    .cv-role {
-      font-size: 1.05rem;
-      color: #555;
-      margin-top: 0.25rem;
-    }
-
-    /* ── Sections ── */
-    .cv-section {
-      margin-bottom: 2rem;
-    }
-
-    .cv-section:last-child {
-      margin-bottom: 0;
-    }
-
-    .cv-section-title {
-      font-size: 1rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #666;
-      margin-bottom: 0.75rem;
-      padding-bottom: 0.4rem;
-      border-bottom: 2px solid #d4d4d4;
-    }
-
-    .cv-section-content {
-      color: #2a2a2a;
-    }
-
-    .cv-section-content p {
-      margin-bottom: 0.75rem;
-    }
-
-    .cv-section-content p:last-child {
-      margin-bottom: 0;
-    }
-
-    /* ── Experience items ── */
-    .cv-item {
-      margin-bottom: 1.25rem;
-    }
-
-    .cv-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .cv-item-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      flex-wrap: wrap;
-      gap: 0.25rem 0.75rem;
-      margin-bottom: 0.25rem;
-    }
-
-    .cv-item-title {
-      font-weight: 600;
-      font-size: 1.05rem;
-      color: #111;
-    }
-
-    .cv-item-subtitle {
-      color: #444;
-      font-size: 0.95rem;
-    }
-
-    .cv-item-date {
-      font-size: 0.85rem;
-      color: #777;
-      white-space: nowrap;
-    }
-
-    .cv-item-desc {
-      font-size: 0.95rem;
-      color: #333;
-      margin-top: 0.15rem;
-    }
-
-    .cv-item-desc ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .cv-item-desc li {
-      position: relative;
-      padding-left: 1.2rem;
-      margin-bottom: 0.2rem;
-    }
-
-    .cv-item-desc li::before {
-      content: "—";
-      position: absolute;
-      left: 0;
-      color: #999;
-    }
-
-    /* ── Skills ── */
-    .cv-skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem 0.75rem;
-      list-style: none;
-    }
-
-    .cv-skills li {
-      background: #eaeaea;
-      color: #222;
-      padding: 0.3rem 0.9rem;
-      border-radius: 20px;
-      font-size: 0.88rem;
-      font-weight: 500;
-    }
-
-    /* ── Contact ── */
-    .cv-contact {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem 1.5rem;
-      list-style: none;
-    }
-
-    .cv-contact li {
-      font-size: 0.95rem;
-      color: #444;
-    }
-
-    .cv-contact a {
-      color: #333;
-      text-decoration: none;
-      border-bottom: 1px solid #bbb;
-      transition: border-color 0.15s, color 0.15s;
-    }
-
-    .cv-contact a:hover {
-      color: #000;
-      border-bottom-color: #000;
-    }
-
-    /* ── Download button ── */
-    .cv-download {
-      display: block;
-      width: 100%;
-      margin-top: 2rem;
-      padding: 0.9rem 1.5rem;
-      background: #222;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 500;
-      font-family: inherit;
-      cursor: pointer;
-      transition: background 0.2s;
-      text-align: center;
-    }
-
-    .cv-download:hover {
-      background: #000;
-    }
-
-    .cv-download:active {
-      background: #333;
-    }
-
-    /* ── Responsive ── */
-    @media (max-width: 600px) {
-      body { padding: 1rem 0.75rem; }
-      .cv-inner { padding: 1.5rem 1.25rem; }
-      .cv-header {
-        flex-direction: column;
-        text-align: center;
-        gap: 1rem;
+  <!-- Structured Data: RealEstateAgent -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "Haven & Hearth Realty",
+    "description": "Trusted real estate agency helping families find their dream homes with expert buying, selling, and property management services.",
+    "url": "https://www.havenhearthrealty.com",
+    "telephone": "+1-555-123-4567",
+    "email": "hello@havenhearthrealty.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "412 Elmwood Avenue",
+      "addressLocality": "Maplewood",
+      "addressRegion": "IL",
+      "postalCode": "60001",
+      "addressCountry": "US"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "18:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Saturday",
+        "opens": "10:00",
+        "closes": "15:00"
       }
-      .cv-photo {
-        width: 100px;
-        height: 100px;
-      }
-      .cv-photo svg {
-        width: 60px;
-        height: 60px;
-      }
-      .cv-name {
-        font-size: 1.6rem;
-      }
-      .cv-item-header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .cv-contact {
-        flex-direction: column;
-        gap: 0.4rem;
-      }
-    }
+    ],
+    "sameAs": [
+      "https://www.facebook.com/havenhearthrealty",
+      "https://www.twitter.com/havenhearthrlt"
+    ]
+  }
+  </script>
 
-    /* ── Print styles ── */
-    @media print {
-      body {
-        background: #fff;
-        padding: 0.5in;
-        font-size: 11pt;
-      }
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
 
-      .cv-wrapper {
-        box-shadow: none;
-        border-radius: 0;
-      }
-
-      .cv-inner {
-        padding: 0;
-      }
-
-      .cv-download {
-        display: none !important;
-      }
-
-      .cv-section {
-        page-break-inside: avoid;
-      }
-    }
-  </style>
+  <!-- Favicon (inline SVG) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23D4A5A5'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='serif'%3EH%3C/text%3E%3C/svg%3E">
 </head>
 <body>
 
-  <div class="cv-wrapper">
-    <div class="cv-inner">
+  <!-- ═══════════ Navigation ═══════════ -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo" aria-label="Haven &amp; Hearth Realty Home">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="32" height="32" rx="6" fill="#D4A5A5"/>
+          <path d="M16 6L4 20h6v6h12v-6h6L16 6z" fill="#FFFFFF" opacity="0.9"/>
+        </svg>
+        Haven &amp; Hearth
+      </a>
 
-      <!-- ── Header ── -->
-      <header class="cv-header">
-        <div class="cv-photo">
-          <!-- Inline SVG silhouette (placeholder) -->
-          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="35" r="20" />
-            <ellipse cx="50" cy="80" rx="35" ry="25" />
-          </svg>
-          <!--
-            To use a real photo, replace the <svg> block above with:
-            <img src="path/to/photo.jpg" alt="Alexandra Chen" />
-          -->
-        </div>
-        <div class="cv-title-group">
-          <h1 class="cv-name">Alexandra Chen</h1>
-          <p class="cv-role">Full-Stack Developer</p>
-        </div>
-      </header>
+      <div class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#properties">Properties</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#team">Team</a>
+        <a href="#contact">Contact</a>
+        <a href="#contact" class="nav-cta">Get in Touch</a>
+      </div>
 
-      <!-- ── Summary ── -->
-      <section class="cv-section">
-        <h2 class="cv-section-title">Summary</h2>
-        <div class="cv-section-content">
-          <p>
-            Experienced full-stack developer with 8+ years building scalable web applications
-            across fintech, e-commerce, and SaaS. Passionate about clean architecture,
-            performant UIs, and mentoring junior engineers.
-          </p>
-        </div>
-      </section>
-
-      <!-- ── Experience ── -->
-      <section class="cv-section">
-        <h2 class="cv-section-title">Experience</h2>
-        <div class="cv-section-content">
-
-          <div class="cv-item">
-            <div class="cv-item-header">
-              <span class="cv-item-title">Senior Full-Stack Developer</span>
-              <span class="cv-item-date">2021 – Present</span>
-            </div>
-            <div class="cv-item-subtitle">Synapse Technologies · Remote</div>
-            <div class="cv-item-desc">
-              <ul>
-                <li>Led the migration of a monolith into microservices, reducing deployment time by 60%.</li>
-                <li>Designed and built the internal tooling platform used by 200+ support agents.</li>
-                <li>Mentored 4 junior developers through structured code reviews and pair programming.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="cv-item">
-            <div class="cv-item-header">
-              <span class="cv-item-title">Full-Stack Developer</span>
-              <span class="cv-item-date">2018 – 2021</span>
-            </div>
-            <div class="cv-item-subtitle">Meridian Labs · San Francisco, CA</div>
-            <div class="cv-item-desc">
-              <ul>
-                <li>Built real-time collaborative dashboards serving 50K+ daily active users.</li>
-                <li>Optimized API response times by 40% through query tuning and caching strategies.</li>
-                <li>Introduced end-to-end testing with Cypress, raising coverage from 25% to 85%.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="cv-item">
-            <div class="cv-item-header">
-              <span class="cv-item-title">Junior Developer</span>
-              <span class="cv-item-date">2016 – 2018</span>
-            </div>
-            <div class="cv-item-subtitle">Nexa Digital · Austin, TX</div>
-            <div class="cv-item-desc">
-              <ul>
-                <li>Contributed to the core checkout flow for a high-traffic e-commerce platform.</li>
-                <li>Developed reusable React component library used across 5 product teams.</li>
-              </ul>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- ── Education ── -->
-      <section class="cv-section">
-        <h2 class="cv-section-title">Education</h2>
-        <div class="cv-section-content">
-
-          <div class="cv-item">
-            <div class="cv-item-header">
-              <span class="cv-item-title">B.S. in Computer Science</span>
-              <span class="cv-item-date">2012 – 2016</span>
-            </div>
-            <div class="cv-item-subtitle">University of California, Berkeley</div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- ── Skills ── -->
-      <section class="cv-section">
-        <h2 class="cv-section-title">Skills</h2>
-        <ul class="cv-skills">
-          <li>JavaScript / TypeScript</li>
-          <li>React &amp; Next.js</li>
-          <li>Node.js</li>
-          <li>Python</li>
-          <li>PostgreSQL</li>
-          <li>AWS</li>
-          <li>Docker</li>
-          <li>GraphQL</li>
-          <li>CI/CD</li>
-        </ul>
-      </section>
-
-      <!-- ── Contact ── -->
-      <section class="cv-section">
-        <h2 class="cv-section-title">Contact</h2>
-        <ul class="cv-contact">
-          <li>Email: <a href="mailto:alexandra.chen@example.com">alexandra.chen@example.com</a></li>
-          <li>LinkedIn: <a href="https://linkedin.com/in/alexandra-chen" target="_blank" rel="noopener">linkedin.com/in/alexandra-chen</a></li>
-          <li>GitHub: <a href="https://github.com/alexchen" target="_blank" rel="noopener">github.com/alexchen</a></li>
-        </ul>
-      </section>
-
-      <!-- ── Download Button (hidden in print) ── -->
-      <button class="cv-download" onclick="downloadPDF()">
-        ⬇ Download PDF
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
-
     </div>
-  </div>
+  </nav>
 
-  <script>
-    /**
-     * Generates and downloads a styled PDF of the CV using jsPDF.
-     * This is a placeholder integration ready for refinement.
-     */
-    function downloadPDF() {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF('p', 'mm', 'a4');
+  <main>
 
-      const pageWidth = doc.internal.pageSize.getWidth();
-      let y = 20;
-      const lineHeight = 7;
-      const margin = 20;
-      const maxWidth = pageWidth - margin * 2;
+    <!-- ═══════════ Hero ═══════════ -->
+    <section class="hero" id="home" aria-labelledby="hero-heading">
+      <div class="hero-inner">
+        <span class="hero-badge">&#10003; Trusted Since 2008</span>
+        <h1 id="hero-heading">Your Dream Home <em>Starts Here</em></h1>
+        <p class="hero-subtitle">
+          Haven &amp; Hearth Realty brings warmth and expertise to every transaction.
+          Whether you are buying your first home, selling a cherished property, or
+          investing for the future — we are with you every step of the way.
+        </p>
+        <div class="hero-actions">
+          <a href="#properties" class="btn btn-primary">Browse Properties</a>
+          <a href="#about" class="btn btn-outline">Learn More</a>
+        </div>
+      </div>
+    </section>
 
-      function textLine(text, size, style) {
-        doc.setFontSize(size || 11);
-        if (style) doc.setFont(undefined, style);
-        else doc.setFont(undefined, 'normal');
-        doc.text(text, margin, y);
-        y += (size || 11) * 0.45;
-      }
+    <!-- ═══════════ About Us ═══════════ -->
+    <section class="section" id="about" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-image" aria-hidden="true">
+            <svg class="about-image-placeholder" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="40" width="100" height="75" rx="4" fill="#D4A5A5" opacity="0.5"/>
+              <polygon points="10,40 60,5 110,40" fill="#D4A5A5" opacity="0.7"/>
+              <rect x="38" y="68" width="20" height="25" rx="2" fill="#FFFFFF" opacity="0.6"/>
+              <rect x="68" y="55" width="20" height="20" rx="2" fill="#FFFFFF" opacity="0.5"/>
+            </svg>
+          </div>
 
-      // Title
-      doc.setFontSize(22);
-      doc.setFont(undefined, 'bold');
-      doc.text('Alexandra Chen', margin, y);
-      y += 9;
-      doc.setFontSize(12);
-      doc.setFont(undefined, 'normal');
-      doc.setTextColor(100);
-      doc.text('Full-Stack Developer', margin, y);
-      doc.setTextColor(0);
-      y += 12;
+          <div class="about-content">
+            <span class="section-label">About Us</span>
+            <h2 id="about-heading">Rooted in community, built on trust</h2>
+            <p>
+              Founded in 2008, Haven &amp; Hearth Realty began with a simple belief:
+              every family deserves a place to call home. Over the past 15+ years
+              we have grown from a two-person office into a full-service agency
+              serving the greater Maplewood region and beyond.
+            </p>
+            <p>
+              We combine local market knowledge with a genuine passion for helping
+              people. Our agents take the time to understand your unique needs —
+              whether you are upsizing, downsizing, or relocating across the country.
+            </p>
 
-      // Separator
-      doc.setDrawColor(200);
-      doc.line(margin, y, pageWidth - margin, y);
-      y += 8;
+            <div class="about-stats">
+              <div class="about-stat">
+                <div class="about-stat-number">500+</div>
+                <div class="about-stat-label">Homes Sold</div>
+              </div>
+              <div class="about-stat">
+                <div class="about-stat-number">15</div>
+                <div class="about-stat-label">Years Experience</div>
+              </div>
+              <div class="about-stat">
+                <div class="about-stat-number">98%</div>
+                <div class="about-stat-label">Client Satisfaction</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      // Summary
-      doc.setFontSize(11);
-      doc.setFont(undefined, 'bold');
-      textLine('SUMMARY', 11, 'bold');
-      doc.setFont(undefined, 'normal');
-      doc.setFontSize(10);
-      const summary = 'Experienced full-stack developer with 8+ years building scalable web applications across fintech, e-commerce, and SaaS. Passionate about clean architecture, performant UIs, and mentoring junior engineers.';
-      const lines = doc.splitTextToSize(summary, maxWidth);
-      doc.text(lines, margin, y);
-      y += lines.length * 5 + 6;
+    <!-- ═══════════ Services ═══════════ -->
+    <section class="section section-alt" id="services" aria-labelledby="services-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">What We Do</span>
+          <h2 id="services-heading">Comprehensive real estate services</h2>
+          <p>From first-time buyers to seasoned investors, our tailored services cover every stage of the real estate journey.</p>
+        </div>
 
-      // Experience
-      doc.setFontSize(11);
-      doc.setFont(undefined, 'bold');
-      textLine('EXPERIENCE', 11, 'bold');
-      doc.setFont(undefined, 'normal');
-      doc.setFontSize(10);
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon rose">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#B87D7D" stroke-width="2" aria-hidden="true">
+                <path d="M3 12h18M3 12l4-4m-4 4l4 4m14-4l-4-4m4 4l-4 4"/>
+                <rect x="7" y="4" width="10" height="16" rx="1"/>
+              </svg>
+            </div>
+            <h3>Home Buying</h3>
+            <p>Guided tours, market analysis, and skilled negotiation to help you secure the perfect property at the right price.</p>
+          </div>
 
-      const experiences = [
-        { title: 'Senior Full-Stack Developer', org: 'Synapse Technologies · Remote', date: '2021 – Present', items: ['Led the migration of a monolith into microservices, reducing deployment time by 60%.', 'Designed and built the internal tooling platform used by 200+ support agents.', 'Mentored 4 junior developers through structured code reviews and pair programming.'] },
-        { title: 'Full-Stack Developer', org: 'Meridian Labs · San Francisco, CA', date: '2018 – 2021', items: ['Built real-time collaborative dashboards serving 50K+ daily active users.', 'Optimized API response times by 40% through query tuning and caching strategies.', 'Introduced end-to-end testing with Cypress, raising coverage from 25% to 85%.'] },
-        { title: 'Junior Developer', org: 'Nexa Digital · Austin, TX', date: '2016 – 2018', items: ['Contributed to the core checkout flow for a high-traffic e-commerce platform.', 'Developed reusable React component library used across 5 product teams.'] }
-      ];
+          <div class="service-card">
+            <div class="service-icon sky">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#7D9CB8" stroke-width="2" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="8 12 12 16 16 12"/>
+                <line x1="12" y1="8" x2="12" y2="14"/>
+              </svg>
+            </div>
+            <h3>Home Selling</h3>
+            <p>Professional staging, photography, listing syndication, and pricing strategy to maximize your sale value.</p>
+          </div>
 
-      experiences.forEach(exp => {
-        // Check page break needed
-        if (y > 260) {
-          doc.addPage();
-          y = 20;
-        }
+          <div class="service-card">
+            <div class="service-icon mint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#6B9B7D" stroke-width="2" aria-hidden="true">
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                <line x1="8" y1="2" x2="8" y2="4"/>
+                <line x1="16" y1="2" x2="16" y2="4"/>
+                <path d="M12 10v6m-3-3h6"/>
+              </svg>
+            </div>
+            <h3>Property Management</h3>
+            <p>Full-service management for landlords: tenant screening, maintenance coordination, and rent collection.</p>
+          </div>
 
-        doc.setFont(undefined, 'bold');
-        doc.text(exp.title, margin, y);
-        y += 5;
-        doc.setFont(undefined, 'normal');
-        doc.setTextColor(80);
-        doc.text(exp.org + '   ' + exp.date, margin, y);
-        doc.setTextColor(0);
-        y += 5;
-        exp.items.forEach(item => {
-          const itemLines = doc.splitTextToSize('— ' + item, maxWidth - 4);
-          doc.text(itemLines, margin + 2, y);
-          y += itemLines.length * 4.5 + 1;
-        });
-        y += 3;
-      });
+          <div class="service-card">
+            <div class="service-icon lavender">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#8E7DB8" stroke-width="2" aria-hidden="true">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <h3>Investment Advisory</h3>
+            <p>Data-driven insights on rental yields, appreciation potential, and portfolio diversification for smart investors.</p>
+          </div>
 
-      // Education
-      if (y > 250) { doc.addPage(); y = 20; }
-      doc.setFontSize(11);
-      doc.setFont(undefined, 'bold');
-      textLine('EDUCATION', 11, 'bold');
-      doc.setFont(undefined, 'normal');
-      doc.setFontSize(10);
-      doc.setFont(undefined, 'bold');
-      doc.text('B.S. in Computer Science', margin, y);
-      y += 5;
-      doc.setFont(undefined, 'normal');
-      doc.setTextColor(80);
-      doc.text('University of California, Berkeley   2012 – 2016', margin, y);
-      doc.setTextColor(0);
-      y += 8;
+          <div class="service-card">
+            <div class="service-icon gold">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#9E8B5D" stroke-width="2" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 6v12M6 12h12"/>
+              </svg>
+            </div>
+            <h3>Relocation Services</h3>
+            <p>Seamless cross-city and cross-country moves with neighborhood guides, school reports, and virtual tours.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      // Skills
-      if (y > 250) { doc.addPage(); y = 20; }
-      doc.setFontSize(11);
-      doc.setFont(undefined, 'bold');
-      textLine('SKILLS', 11, 'bold');
-      doc.setFont(undefined, 'normal');
-      doc.setFontSize(10);
-      const skills = ['JavaScript / TypeScript', 'React & Next.js', 'Node.js', 'Python', 'PostgreSQL', 'AWS', 'Docker', 'GraphQL', 'CI/CD'];
-      doc.text(skills.join('  ·  '), margin, y);
-      y += 8;
+    <!-- ═══════════ Property Listings ═══════════ -->
+    <section class="section" id="properties" aria-labelledby="properties-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Featured Listings</span>
+          <h2 id="properties-heading">Handpicked properties for every lifestyle</h2>
+          <p>Explore a curated selection of homes currently available. Each listing is verified and presented with complete transparency.</p>
+        </div>
 
-      // Contact
-      if (y > 250) { doc.addPage(); y = 20; }
-      doc.setFontSize(11);
-      doc.setFont(undefined, 'bold');
-      textLine('CONTACT', 11, 'bold');
-      doc.setFont(undefined, 'normal');
-      doc.setFontSize(10);
-      doc.text('Email: alexandra.chen@example.com', margin, y);
-      y += 5;
-      doc.text('LinkedIn: linkedin.com/in/alexandra-chen', margin, y);
-      y += 5;
-      doc.text('GitHub: github.com/alexchen', margin, y);
+        <div class="properties-grid">
+          <!-- Property 1 -->
+          <article class="property-card">
+            <div class="property-image">
+              <span class="property-badge">New</span>
+              <img src="assets/images/property-1.svg" alt="Modern family home with landscaped yard" loading="lazy" width="600" height="400">
+            </div>
+            <div class="property-body">
+              <div class="property-price">$485,000</div>
+              <div class="property-title">Modern Family Retreat</div>
+              <div class="property-meta">
+                <span>&#x1F6CF; 4 Beds</span>
+                <span>&#x1F6C1; 3 Baths</span>
+                <span>&#x2B50; 2,450 sqft</span>
+              </div>
+            </div>
+          </article>
 
-      doc.save('Alexandra_Chen_CV.pdf');
-    }
-  </script>
+          <!-- Property 2 -->
+          <article class="property-card">
+            <div class="property-image">
+              <span class="property-badge">Hot</span>
+              <img src="assets/images/property-2.svg" alt="Chic downtown condo with rooftop access" loading="lazy" width="600" height="400">
+            </div>
+            <div class="property-body">
+              <div class="property-price">$320,000</div>
+              <div class="property-title">Downtown Skyline Condo</div>
+              <div class="property-meta">
+                <span>&#x1F6CF; 2 Beds</span>
+                <span>&#x1F6C1; 2 Baths</span>
+                <span>&#x2B50; 1,200 sqft</span>
+              </div>
+            </div>
+          </article>
 
+          <!-- Property 3 -->
+          <article class="property-card">
+            <div class="property-image">
+              <img src="assets/images/property-3.svg" alt="Spacious suburban colonial with large backyard" loading="lazy" width="600" height="400">
+            </div>
+            <div class="property-body">
+              <div class="property-price">$620,000</div>
+              <div class="property-title">Classic Colonial Estate</div>
+              <div class="property-meta">
+                <span>&#x1F6CF; 5 Beds</span>
+                <span>&#x1F6C1; 3.5 Baths</span>
+                <span>&#x2B50; 3,100 sqft</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Property 4 -->
+          <article class="property-card">
+            <div class="property-image">
+              <img src="assets/images/property-4.svg" alt="Cozy cottage near lakeside with mountain views" loading="lazy" width="600" height="400">
+            </div>
+            <div class="property-body">
+              <div class="property-price">$275,000</div>
+              <div class="property-title">Lakeside Garden Cottage</div>
+              <div class="property-meta">
+                <span>&#x1F6CF; 3 Beds</span>
+                <span>&#x1F6C1; 2 Baths</span>
+                <span>&#x2B50; 1,650 sqft</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ Testimonials ═══════════ -->
+    <section class="section section-alt" id="testimonials" aria-labelledby="testimonials-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Client Stories</span>
+          <h2 id="testimonials-heading">What our clients say</h2>
+          <p>Real experiences from families and individuals we have had the privilege to serve.</p>
+        </div>
+
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <blockquote class="testimonial-text">
+              &ldquo;Haven &amp; Hearth made our first home purchase an absolute joy.
+              Sarah guided us through every step and negotiated a deal well below asking.
+              We could not be happier!&rdquo;
+            </blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar" aria-hidden="true">
+                <img src="assets/images/avatar-placeholder.svg" alt="" width="44" height="44" loading="lazy">
+              </div>
+              <div>
+                <div class="testimonial-name">Michael &amp; Jenna Rowe</div>
+                <div class="testimonial-role">First-Time Homebuyers</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <blockquote class="testimonial-text">
+              &ldquo;After listing with two other agencies and getting nowhere, Haven &amp; Hearth
+              sold our property in under three weeks — and at 8% above our target price.
+              Truly exceptional service.&rdquo;
+            </blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar" aria-hidden="true">
+                <img src="assets/images/avatar-placeholder.svg" alt="" width="44" height="44" loading="lazy">
+              </div>
+              <div>
+                <div class="testimonial-name">David Callahan</div>
+                <div class="testimonial-role">Home Seller</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <blockquote class="testimonial-text">
+              &ldquo;As an out-of-state investor, I rely on their property management team
+              to handle everything. They have consistently found excellent tenants and kept
+              my properties in top shape.&rdquo;
+            </blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar" aria-hidden="true">
+                <img src="assets/images/avatar-placeholder.svg" alt="" width="44" height="44" loading="lazy">
+              </div>
+              <div>
+                <div class="testimonial-name">Priya Kapoor</div>
+                <div class="testimonial-role">Real Estate Investor</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ Team ═══════════ -->
+    <section class="section" id="team" aria-labelledby="team-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Our Team</span>
+          <h2 id="team-heading">Meet the people behind Haven &amp; Hearth</h2>
+          <p>A close-knit team of dedicated agents, each bringing unique expertise and a shared commitment to client success.</p>
+        </div>
+
+        <div class="team-grid">
+          <div class="team-card">
+            <div class="team-photo" aria-hidden="true">
+              <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="30" cy="22" r="14" fill="#D4A5A5" opacity="0.5"/>
+                <ellipse cx="30" cy="55" rx="22" ry="14" fill="#D4A5A5" opacity="0.5"/>
+              </svg>
+            </div>
+            <div class="team-name">Sarah Bennett</div>
+            <div class="team-role">Founder &amp; Lead Agent</div>
+            <p class="team-bio">15 years in residential real estate. Sarah has closed over 300 transactions and is known for her warm, data-driven approach.</p>
+          </div>
+
+          <div class="team-card">
+            <div class="team-photo" aria-hidden="true">
+              <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="30" cy="22" r="14" fill="#A5B8D4" opacity="0.5"/>
+                <ellipse cx="30" cy="55" rx="22" ry="14" fill="#A5B8D4" opacity="0.5"/>
+              </svg>
+            </div>
+            <div class="team-name">Marcus Chen</div>
+            <div class="team-role">Senior Buyer Agent</div>
+            <p class="team-bio">Marcus specializes in first-time homebuyers and relocations. His market analysis skills help clients find hidden gems.</p>
+          </div>
+
+          <div class="team-card">
+            <div class="team-photo" aria-hidden="true">
+              <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="30" cy="22" r="14" fill="#C5B8D4" opacity="0.5"/>
+                <ellipse cx="30" cy="55" rx="22" ry="14" fill="#C5B8D4" opacity="0.5"/>
+              </svg>
+            </div>
+            <div class="team-name">Elena Vasquez</div>
+            <div class="team-role">Listing &amp; Marketing Lead</div>
+            <p class="team-bio">Elena brings a background in interior design and digital marketing, ensuring every listing shines online and in person.</p>
+          </div>
+
+          <div class="team-card">
+            <div class="team-photo" aria-hidden="true">
+              <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="30" cy="22" r="14" fill="#A5D4B8" opacity="0.5"/>
+                <ellipse cx="30" cy="55" rx="22" ry="14" fill="#A5D4B8" opacity="0.5"/>
+              </svg>
+            </div>
+            <div class="team-name">James Okonkwo</div>
+            <div class="team-role">Property Manager</div>
+            <p class="team-bio">James oversees our rental portfolio with diligence and care, ensuring both landlords and tenants feel supported.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ Contact ═══════════ -->
+    <section class="section section-alt" id="contact" aria-labelledby="contact-heading">
+      <div class="container">
+        <div class="contact-grid">
+          <div class="contact-info">
+            <span class="section-label">Get In Touch</span>
+            <h2 id="contact-heading">Let us help you find your haven</h2>
+            <p>Whether you are ready to buy, sell, or simply have questions about the market — we would love to hear from you.</p>
+
+            <div class="contact-details">
+              <div class="contact-item">
+                <div class="contact-item-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#B87D7D" stroke-width="2">
+                    <path d="M4 4h16v16H4V4z"/>
+                    <path d="M4 8h16M8 4v16"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="contact-item-label">Address</div>
+                  <div class="contact-item-value">412 Elmwood Avenue, Maplewood, IL 60001</div>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div class="contact-item-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#B87D7D" stroke-width="2">
+                    <rect x="2" y="4" width="20" height="16" rx="2"/>
+                    <path d="M2 6l10 7 10-7"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="contact-item-label">Email</div>
+                  <div class="contact-item-value">hello@havenhearthrealty.com</div>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div class="contact-item-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#B87D7D" stroke-width="2">
+                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="contact-item-label">Phone</div>
+                  <div class="contact-item-value">+1 (555) 123-4567</div>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div class="contact-item-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#B87D7D" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="contact-item-label">Office Hours</div>
+                  <div class="contact-item-value">Mon–Fri 9am–6pm &bull; Sat 10am–3pm</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-form-box">
+            <h3>Send us a message</h3>
+            <form id="contactForm" novalidate>
+              <div class="form-group">
+                <label for="formName">Full Name</label>
+                <input type="text" id="formName" name="name" placeholder="Your full name" required>
+              </div>
+              <div class="form-group">
+                <label for="formEmail">Email Address</label>
+                <input type="email" id="formEmail" name="email" placeholder="you@example.com" required>
+              </div>
+              <div class="form-group">
+                <label for="formPhone">Phone (optional)</label>
+                <input type="tel" id="formPhone" name="phone" placeholder="+1 (555) 000-0000">
+              </div>
+              <div class="form-group">
+                <label for="formMessage">Message</label>
+                <textarea id="formMessage" name="message" placeholder="Tell us about your real estate needs..." required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary form-submit-btn">Send Message</button>
+              <div id="formMsg" role="status"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════ Footer ═══════════ -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Haven &amp; Hearth Realty</h3>
+        <p>
+          A trusted real estate agency serving Maplewood and surrounding communities
+          since 2008. Licensed, bonded, and committed to finding you the perfect home.
+        </p>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/havenhearthrealty" target="_blank" rel="noopener noreferrer" aria-label="Facebook (opens in new tab)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3V2z"/></svg>
+          </a>
+          <a href="https://www.twitter.com/havenhearthrlt" target="_blank" rel="noopener noreferrer" aria-label="Twitter (opens in new tab)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#properties">Properties</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#team">Our Team</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Home Buying</a></li>
+          <li><a href="#services">Home Selling</a></li>
+          <li><a href="#services">Property Mgmt</a></li>
+          <li><a href="#services">Investment</a></li>
+          <li><a href="#services">Relocation</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li>412 Elmwood Avenue</li>
+          <li>Maplewood, IL 60001</li>
+          <li>+1 (555) 123-4567</li>
+          <li>hello@havenhearthrealty.com</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; 2024 Haven &amp; Hearth Realty. All rights reserved.</span>
+      <span>Licensed Real Estate Broker — State of Illinois</span>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/script.js"></script>
 </body>
 </html>
