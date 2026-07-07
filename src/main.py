@@ -9,10 +9,16 @@ from pathlib import Path
 # or ``python -m src.main``.
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication
 from PySide6.QtCore import Qt
 
 from src.app import OrcaApp
+from src.animation import AnimationManager
+from src.config import ConfigManager
+from src.reminders import ReminderManager
+from src.settings_dialog import SettingsDialog
+from src.startup import apply_startup
 from src.system_tray import SystemTray
 
 
@@ -45,14 +51,51 @@ def main() -> int:
         app.setOrganizationName("ORCA")
         app.setQuitOnLastWindowClosed(False)
 
+        # -- Application icon (taskbar, Alt-Tab, etc.) --
+        icon_path = Path("assets/logo.png")
+        if icon_path.exists():
+            app.setWindowIcon(QIcon(str(icon_path)))
+
+        # -- Config --
+        config = ConfigManager()
+
+        # -- Apply start-up preference on launch --
+        apply_startup(bool(config.get("launch_on_startup", False)))
+
+        # -- Animation manager --
+        anim_manager = AnimationManager()
+
         # -- Create the mascot window --
-        window = OrcaApp()
+        window = OrcaApp(config=config, anim_manager=anim_manager)
 
         # -- System tray --
-        tray = SystemTray(
-            on_settings=lambda: logger.info("Settings placeholder – not yet implemented."),
-        )
+        _reminder_manager = None  # assigned further below
+
+        def _open_settings() -> None:
+            """Open the settings dialog and apply changes on accept."""
+            dlg = SettingsDialog(config, parent=window)
+            if dlg.exec() == SettingsDialog.DialogCode.Accepted:
+                # Re-apply theme, scale, and restart reminders
+                window._apply_theme()
+                window._apply_scale()
+                # Sync start-up registry entry
+                apply_startup(bool(config.get("launch_on_startup", False)))
+                if _reminder_manager is not None:
+                    _reminder_manager.restart()
+
+        tray = SystemTray(on_settings=_open_settings)
         tray.show()
+
+        # -- Reminders --
+        _reminder_manager = ReminderManager(
+            config=config,
+            tray=tray.tray,
+            parent=window,
+        )
+        _reminder_manager.state_change_requested.connect(
+            window.set_animation_state
+        )
+        _reminder_manager.start()
 
         # Show window and start event loop
         window.show()

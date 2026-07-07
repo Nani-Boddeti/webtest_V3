@@ -32,6 +32,17 @@ python src/main.py
 
 The mascot window will appear as a transparent overlay. Right-click the system-tray icon for *Settings* and *Exit*.
 
+## Features
+
+- **Transparent mascot window**: Always-on-top, borderless, draggable
+- **System tray**: Quick access to Settings and Exit
+- **Theme support**: Dark and light themes
+- **Animation states**: Idle, drink, wave, happy, sleep, work, think, celebrate, custom
+- **Hydration reminders**: Configurable interval with desktop notifications
+- **Configurable settings**: Interval, theme, animation speed, scale, sound, and more
+- **Launch on startup**: Optional Windows registry integration
+- **Cross-platform**: Runs on Windows, macOS, and Linux (system tray varies)
+
 ## Development
 
 ```bash
@@ -46,14 +57,24 @@ pylint src/ tests/
 
 ```
 src/
-  main.py          # Entry point – creates QApplication, OrcaApp, SystemTray
-  app.py           # OrcaApp – transparent, draggable QMainWindow with logo
-  system_tray.py   # SystemTray – tray icon with Settings / Exit menu
+  main.py            # Entry point – creates QApplication, wires all components
+  app.py             # OrcaApp – transparent, draggable QMainWindow with mascot
+  animation.py       # AnimationManager – loads and manages character animations
+  config.py          # ConfigManager – JSON-backed user settings
+  reminders.py       # ReminderManager – periodic hydration reminders
+  settings_dialog.py # SettingsDialog – modal dialog for editing preferences
+  startup.py         # Windows start-up registration (winreg)
+  system_tray.py     # SystemTray – tray icon with Settings / Exit menu
 tests/
-  test_app.py      # Unit tests for OrcaApp window creation
-  test_system_tray.py  # Unit tests for system-tray functionality
+  test_app.py              # Unit tests for OrcaApp
+  test_animation.py        # Unit tests for AnimationManager
+  test_integration.py      # Full-session integration tests
+  test_reminders.py        # Unit tests for ReminderManager
+  test_settings_dialog.py  # Unit tests for SettingsDialog
+  test_startup.py          # Unit tests for start-up registration
+  test_system_tray.py      # Unit tests for SystemTray
 assets/
-  logo.png         # Placeholder mascot image
+  logo.png           # Placeholder mascot image and tray icon
 ```
 
 ## Port / URL

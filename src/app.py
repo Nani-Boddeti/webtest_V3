@@ -1,7 +1,9 @@
 """Main controller for the ORCA Companion application.
 
 Provides OrcaApp, which owns the transparent, borderless, always-on-top
-window displaying the mascot / logo image.
+window displaying the mascot / logo image.  Integrates with
+:class:`ConfigManager` for theme and scale, and
+:class:`AnimationManager` for character animation states.
 """
 
 import logging
@@ -41,15 +43,61 @@ def _asset_path(name: str) -> Path:
     return dev_path  # fallback – let the caller handle the missing file
 
 
-class OrcaApp(QMainWindow):
-    """Transparent, borderless, always-on-top mascot window."""
+# -- Theme style sheets ---------------------------------------------------
 
-    def __init__(self, parent: Optional[QWidget] = None) -> None:
+_DARK_THEME = """
+QMainWindow {
+    background: transparent;
+}
+QLabel {
+    background: transparent;
+    color: #c0e0ff;
+}
+"""
+
+_LIGHT_THEME = """
+QMainWindow {
+    background: transparent;
+}
+QLabel {
+    background: transparent;
+    color: #1a1a2e;
+}
+"""
+
+
+class OrcaApp(QMainWindow):
+    """Transparent, borderless, always-on-top mascot window.
+
+    Parameters
+    ----------
+    config:
+        A :class:`ConfigManager` instance for theme and scale settings.
+        When ``None``, sensible defaults are used (dark theme, 1× scale).
+    anim_manager:
+        An optional :class:`AnimationManager` for character animations.
+        When provided, calling :meth:`set_animation_state` switches the
+        displayed image to the corresponding animation asset.
+    parent:
+        Parent widget.
+    """
+
+    def __init__(
+        self,
+        config: Optional["ConfigManager"] = None,      # noqa: F821
+        anim_manager: Optional["AnimationManager"] = None,  # noqa: F821
+        parent: Optional[QWidget] = None,
+    ) -> None:
         super().__init__(parent)
+        self._config = config
+        self._anim_manager = anim_manager
         self._drag_pos: Optional[QPoint] = None
 
         self._setup_window()
         self._setup_ui()
+        self._apply_theme()
+        self._apply_scale()
+
         logger.info("OrcaApp window initialised.")
 
     # ------------------------------------------------------------------
@@ -148,6 +196,79 @@ class OrcaApp(QMainWindow):
         """Clear drag state on release."""
         self._drag_pos = None
         super().mouseReleaseEvent(event)
+
+    # ------------------------------------------------------------------
+    # Theme
+    # ------------------------------------------------------------------
+    def _apply_theme(self) -> None:
+        """Apply the current theme (dark / light) to the window."""
+        theme = "dark"
+        if self._config is not None:
+            theme = str(self._config.get("theme", "dark")).lower()
+
+        sheet = _DARK_THEME if theme == "dark" else _LIGHT_THEME
+        self.setStyleSheet(sheet)
+
+        # Adjust placeholder styling to match theme
+        if theme == "light":
+            self._image_label.setStyleSheet(
+                "background: rgba(220, 220, 240, 200);"
+                "color: #1a1a2e;"
+                "font-size: 24px;"
+                "font-weight: bold;"
+                "border-radius: 12px;"
+            )
+        else:
+            self._image_label.setStyleSheet(
+                "background: rgba(30, 30, 60, 200);"
+                "color: #c0e0ff;"
+                "font-size: 24px;"
+                "font-weight: bold;"
+                "border-radius: 12px;"
+            )
+
+    # ------------------------------------------------------------------
+    # Scale
+    # ------------------------------------------------------------------
+    def _apply_scale(self) -> None:
+        """Scale the displayed image according to the config."""
+        scale = 1.0
+        if self._config is not None:
+            scale = float(self._config.get("scale", 1.0))
+
+        current_pixmap = self._image_label.pixmap()
+        if current_pixmap is not None and not current_pixmap.isNull():
+            new_width = max(1, int(current_pixmap.width() * scale))
+            new_height = max(1, int(current_pixmap.height() * scale))
+            scaled = current_pixmap.scaled(
+                new_width,
+                new_height,
+                Qt.AspectRatioMode.KeepAspectRatio,
+                Qt.TransformationMode.SmoothTransformation,
+            )
+            self._image_label.setPixmap(scaled)
+            self.adjustSize()
+
+    # ------------------------------------------------------------------
+    # Animation
+    # ------------------------------------------------------------------
+    def set_animation_state(self, state_name: str) -> None:
+        """Switch the mascot to the animation for *state_name*.
+
+        Delegates to :class:`AnimationManager` when available; otherwise
+        does nothing.
+        """
+        if self._anim_manager is None:
+            logger.debug("No AnimationManager – ignoring state '%s'.", state_name)
+            return
+
+        self._anim_manager.set_state(state_name)
+        pixmap = self._anim_manager.get_current_pixmap()
+        if pixmap is not None and not pixmap.isNull():
+            self._image_label.setPixmap(pixmap)
+            self._apply_scale()
+            self.adjustSize()
+            logger.debug("Animation state set to '%s'.", state_name)
 
     # ------------------------------------------------------------------
     # Public helpers
