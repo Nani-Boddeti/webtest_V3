@@ -103,6 +103,10 @@ class AnimationManager:
     base_path:
         Root directory containing per-state animation folders.
         Overridable via the ``ANIMATIONS_BASE_PATH`` environment variable.
+    frame_duration_ms:
+        Milliseconds per frame when playing frame sequences.  Defaults to
+        100 ms.  Can be updated after construction via
+        :attr:`frame_duration_ms`.
     """
 
     # Default size of the generated placeholder (square).
@@ -110,10 +114,15 @@ class AnimationManager:
     # Colour used for the placeholder (RGBA).
     PLACEHOLDER_COLOUR: tuple[int, int, int, int] = (30, 30, 200, 255)
 
-    def __init__(self, base_path: str = "assets/animations") -> None:
+    def __init__(
+        self,
+        base_path: str = "assets/animations",
+        frame_duration_ms: int = 100,
+    ) -> None:
         self._base_path = Path(
             os.environ.get("ANIMATIONS_BASE_PATH", base_path)
         )
+        self._frame_duration_ms = frame_duration_ms
         self._current_state: Optional[str] = None
         self._current_asset: Union[None, Image.Image, "QMovie", List[Image.Image]] = (
             None
@@ -198,6 +207,16 @@ class AnimationManager:
     def current_state(self) -> Optional[str]:
         """The most-recently requested state name."""
         return self._current_state
+
+    @property
+    def frame_duration_ms(self) -> int:
+        """Milliseconds per frame for frame-sequence playback."""
+        return self._frame_duration_ms
+
+    @frame_duration_ms.setter
+    def frame_duration_ms(self, value: int) -> None:
+        """Set the frame duration in milliseconds (clamped to ≥ 10)."""
+        self._frame_duration_ms = max(10, value)
 
     @property
     def asset_kind(self) -> Optional[str]:

@@ -92,11 +92,12 @@ class OrcaApp(QMainWindow):
         self._config = config
         self._anim_manager = anim_manager
         self._drag_pos: Optional[QPoint] = None
+        self._original_pixmap: Optional[QPixmap] = None  # unscaled source
 
         self._setup_window()
         self._setup_ui()
-        self._apply_theme()
-        self._apply_scale()
+        self.apply_theme()
+        self.apply_scale()
 
         logger.info("OrcaApp window initialised.")
 
@@ -150,6 +151,7 @@ class OrcaApp(QMainWindow):
             if pixmap.isNull():
                 logger.warning("logo.png could not be decoded – using placeholder.")
             else:
+                self._original_pixmap = pixmap
                 self._image_label.setPixmap(pixmap)
                 logger.debug("logo.png loaded (%dx%d).", pixmap.width(), pixmap.height())
                 return
@@ -162,6 +164,7 @@ class OrcaApp(QMainWindow):
         """Draw a simple 200×200 placeholder bitmap."""
         pixmap = QPixmap(200, 200)
         pixmap.fill(Qt.GlobalColor.transparent)
+        self._original_pixmap = pixmap
         self._image_label.setPixmap(pixmap)
         self._image_label.setText("🐬 ORCA")
         self._image_label.setStyleSheet(
@@ -200,8 +203,11 @@ class OrcaApp(QMainWindow):
     # ------------------------------------------------------------------
     # Theme
     # ------------------------------------------------------------------
-    def _apply_theme(self) -> None:
-        """Apply the current theme (dark / light) to the window."""
+    def apply_theme(self) -> None:
+        """Apply the current theme (dark / light) from config to the window.
+
+        Safe to call multiple times; only the stylesheet is updated.
+        """
         theme = "dark"
         if self._config is not None:
             theme = str(self._config.get("theme", "dark")).lower()
@@ -230,24 +236,29 @@ class OrcaApp(QMainWindow):
     # ------------------------------------------------------------------
     # Scale
     # ------------------------------------------------------------------
-    def _apply_scale(self) -> None:
-        """Scale the displayed image according to the config."""
+    def apply_scale(self) -> None:
+        """Scale the displayed image according to config, from the original.
+
+        Always scales from the stored original pixmap so repeated calls
+        (e.g. after successive config changes) do not compound.
+        """
+        if self._original_pixmap is None or self._original_pixmap.isNull():
+            return
+
         scale = 1.0
         if self._config is not None:
             scale = float(self._config.get("scale", 1.0))
 
-        current_pixmap = self._image_label.pixmap()
-        if current_pixmap is not None and not current_pixmap.isNull():
-            new_width = max(1, int(current_pixmap.width() * scale))
-            new_height = max(1, int(current_pixmap.height() * scale))
-            scaled = current_pixmap.scaled(
-                new_width,
-                new_height,
-                Qt.AspectRatioMode.KeepAspectRatio,
-                Qt.TransformationMode.SmoothTransformation,
-            )
-            self._image_label.setPixmap(scaled)
-            self.adjustSize()
+        new_width = max(1, int(self._original_pixmap.width() * scale))
+        new_height = max(1, int(self._original_pixmap.height() * scale))
+        scaled = self._original_pixmap.scaled(
+            new_width,
+            new_height,
+            Qt.AspectRatioMode.KeepAspectRatio,
+            Qt.TransformationMode.SmoothTransformation,
+        )
+        self._image_label.setPixmap(scaled)
+        self.adjustSize()
 
     # ------------------------------------------------------------------
     # Animation
@@ -265,8 +276,9 @@ class OrcaApp(QMainWindow):
         self._anim_manager.set_state(state_name)
         pixmap = self._anim_manager.get_current_pixmap()
         if pixmap is not None and not pixmap.isNull():
+            self._original_pixmap = pixmap
             self._image_label.setPixmap(pixmap)
-            self._apply_scale()
+            self.apply_scale()
             self.adjustSize()
             logger.debug("Animation state set to '%s'.", state_name)
 

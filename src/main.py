@@ -63,7 +63,9 @@ def main() -> int:
         apply_startup(bool(config.get("launch_on_startup", False)))
 
         # -- Animation manager --
-        anim_manager = AnimationManager()
+        anim_manager = AnimationManager(
+            frame_duration_ms=int(config.get("animation_speed", 100))
+        )
 
         # -- Create the mascot window --
         window = OrcaApp(config=config, anim_manager=anim_manager)
@@ -75,15 +77,21 @@ def main() -> int:
             """Open the settings dialog and apply changes on accept."""
             dlg = SettingsDialog(config, parent=window)
             if dlg.exec() == SettingsDialog.DialogCode.Accepted:
-                # Re-apply theme, scale, and restart reminders
-                window._apply_theme()
-                window._apply_scale()
+                # Re-apply theme, scale, and animation speed
+                window.apply_theme()
+                window.apply_scale()
+                anim_manager.frame_duration_ms = int(
+                    config.get("animation_speed", 100)
+                )
                 # Sync start-up registry entry
                 apply_startup(bool(config.get("launch_on_startup", False)))
                 if _reminder_manager is not None:
                     _reminder_manager.restart()
 
-        tray = SystemTray(on_settings=_open_settings)
+        tray = SystemTray(
+            on_show=window.toggle_visibility,
+            on_settings=_open_settings,
+        )
         tray.show()
 
         # -- Reminders --

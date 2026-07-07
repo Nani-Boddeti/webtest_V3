@@ -120,9 +120,10 @@ class TestSystemTray:
         assert isinstance(menu, QMenu)
 
     def test_menu_has_settings_and_exit(self, system_tray: SystemTray) -> None:
-        """The context menu must contain Settings and Exit actions."""
+        """The context menu must contain Show/Hide, Settings, and Exit actions."""
         actions = system_tray.menu.actions()
         action_texts = [a.text() for a in actions]
+        assert "Show / Hide" in action_texts
         assert "Settings" in action_texts
         assert "Exit" in action_texts
 

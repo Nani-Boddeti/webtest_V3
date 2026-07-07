@@ -15,7 +15,7 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from PySide6.QtTest import QSignalSpy
-from PySide6.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication, QSystemTrayIcon
 
 from src.app import OrcaApp
 from src.animation import AnimationManager
@@ -174,15 +174,27 @@ class TestComponentWiring:
         qapp: QApplication,
     ) -> None:
         """Changing theme in config + re-applying should update stylesheet."""
-        config.set("theme", "light")
+        # Verify dark theme
+        config.set("theme", "dark")
         window = OrcaApp(config=config, anim_manager=anim_manager)
         try:
-            # Light theme should have the light stylesheet
             ss = window.styleSheet()
             assert "transparent" in ss.lower()
+            assert "#c0e0ff" in ss  # dark-theme text colour
         finally:
             window.close()
             window.deleteLater()
+
+        # Verify light theme
+        config.set("theme", "light")
+        window2 = OrcaApp(config=config, anim_manager=anim_manager)
+        try:
+            ss2 = window2.styleSheet()
+            assert "transparent" in ss2.lower()
+            assert "#1a1a2e" in ss2  # light-theme text colour
+        finally:
+            window2.close()
+            window2.deleteLater()
 
     def test_tray_settings_action_triggers_dialog(
         self,
@@ -208,6 +220,51 @@ class TestComponentWiring:
             settings_action.trigger()
             assert len(dialog_opened) == 1
             assert isinstance(dialog_opened[0], SettingsDialog)
+        finally:
+            tray.hide()
+            tray.deleteLater()
+
+    def test_tray_show_action_triggers_callback(
+        self,
+        config: ConfigManager,
+        orca_app: OrcaApp,
+    ) -> None:
+        """The tray Show/Hide action should invoke the on_show callback."""
+        show_called = []
+
+        def _on_show() -> None:
+            show_called.append(True)
+
+        tray = SystemTray(on_show=_on_show)
+        try:
+            from PySide6.QtGui import QAction
+            show_action: QAction = next(
+                a for a in tray.menu.actions() if a.text() == "Show / Hide"
+            )
+            show_action.trigger()
+            assert show_called == [True]
+        finally:
+            tray.hide()
+            tray.deleteLater()
+
+    def test_tray_double_click_triggers_show(
+        self,
+        config: ConfigManager,
+        orca_app: OrcaApp,
+    ) -> None:
+        """Double-clicking the tray icon should invoke the on_show callback."""
+        show_called = []
+
+        def _on_show() -> None:
+            show_called.append(True)
+
+        tray = SystemTray(on_show=_on_show)
+        try:
+            # Simulate double-click activation
+            tray.tray.activated.emit(
+                QSystemTrayIcon.ActivationReason.DoubleClick
+            )
+            assert show_called == [True]
         finally:
             tray.hide()
             tray.deleteLater()

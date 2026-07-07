@@ -30,12 +30,12 @@ cp .env.example .env
 python src/main.py
 ```
 
-The mascot window will appear as a transparent overlay. Right-click the system-tray icon for *Settings* and *Exit*.
+The mascot window will appear as a transparent overlay. Right-click the system-tray icon for *Show/Hide*, *Settings*, and *Exit*.  Double-click the tray icon to toggle window visibility.
 
 ## Features
 
 - **Transparent mascot window**: Always-on-top, borderless, draggable
-- **System tray**: Quick access to Settings and Exit
+- **System tray**: Quick access to Show/Hide, Settings, and Exit; double-click toggles window
 - **Theme support**: Dark and light themes
 - **Animation states**: Idle, drink, wave, happy, sleep, work, think, celebrate, custom
 - **Hydration reminders**: Configurable interval with desktop notifications
@@ -64,7 +64,7 @@ src/
   reminders.py       # ReminderManager – periodic hydration reminders
   settings_dialog.py # SettingsDialog – modal dialog for editing preferences
   startup.py         # Windows start-up registration (winreg)
-  system_tray.py     # SystemTray – tray icon with Settings / Exit menu
+  system_tray.py     # SystemTray – tray icon with Show/Hide, Settings, Exit menu
 tests/
   test_app.py              # Unit tests for OrcaApp
   test_animation.py        # Unit tests for AnimationManager
