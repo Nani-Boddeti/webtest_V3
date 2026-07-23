@@ -1,0 +1,223 @@
+/* ============================================================
+   Phone Comparison Infographic — Samsung S26 Ultra vs iPhone 17 Pro Max
+   Pastel accent palette, red titles, clean two-column layout
+   ============================================================ */
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Base ── */
+html {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #1a1a1a;
+  background: #ffffff;
+}
+
+body {
+  width: 1200px;
+  height: 1500px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+/* ── Infographic Container ── */
+.infographic {
+  width: 1200px;
+  height: 1500px;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  padding: 40px 48px 36px;
+}
+
+/* ── Header ── */
+.ig-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.ig-title {
+  font-size: 48px;
+  font-weight: 700;
+  color: #D32F2F;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.ig-subtitle {
+  font-size: 20px;
+  font-weight: 400;
+  color: #555;
+  margin-top: 6px;
+  letter-spacing: 0.01em;
+}
+
+.ig-header-divider {
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #B3E5FC 0%, #F8BBD0 100%);
+  margin: 16px auto 0;
+  border-radius: 2px;
+}
+
+/* ── Two-Column Layout ── */
+.ig-columns {
+  display: flex;
+  gap: 32px;
+  flex: 1;
+  min-height: 0;
+}
+
+.ig-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.ig-col--samsung {
+  border: 2px solid #B3E5FC;
+  background: #F5FAFE;
+}
+
+.ig-col--iphone {
+  border: 2px solid #F8BBD0;
+  background: #FFFAFC;
+}
+
+/* ── Phone Image Area ── */
+.ig-phone-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px 4px;
+  min-height: 260px;
+}
+
+.ig-phone-img svg {
+  width: auto;
+  height: 220px;
+}
+
+/* ── Phone Name ── */
+.ig-phone-name {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+  color: #D32F2F;
+  padding: 0 16px 4px;
+  letter-spacing: -0.01em;
+}
+
+.ig-phone-tagline {
+  text-align: center;
+  font-size: 15px;
+  color: #777;
+  padding: 0 16px 12px;
+  font-style: italic;
+}
+
+/* ── Specs Table ── */
+.ig-specs {
+  flex: 1;
+  padding: 0 16px 20px;
+}
+
+.ig-specs table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.ig-specs thead th {
+  color: #D32F2F;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 10px 12px 8px;
+  text-align: left;
+  border-bottom: 2px solid;
+}
+
+.ig-col--samsung .ig-specs thead th {
+  border-bottom-color: #B3E5FC;
+  background: #E1F0FD;
+}
+
+.ig-col--iphone .ig-specs thead th {
+  border-bottom-color: #F8BBD0;
+  background: #FDE8EF;
+}
+
+.ig-specs tbody td {
+  padding: 9px 12px;
+  border-bottom: 1px solid #eee;
+  vertical-align: top;
+}
+
+.ig-specs tbody td:first-child {
+  font-weight: 600;
+  color: #444;
+  white-space: nowrap;
+  width: 38%;
+}
+
+.ig-specs tbody td:last-child {
+  color: #1a1a1a;
+}
+
+.ig-col--samsung .ig-specs tbody tr:nth-child(even) td {
+  background: rgba(179, 229, 252, 0.15);
+}
+
+.ig-col--iphone .ig-specs tbody tr:nth-child(even) td {
+  background: rgba(248, 187, 208, 0.15);
+}
+
+.ig-specs tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ── Winner Badge ── */
+.ig-highlight {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  background: #D32F2F;
+  border-radius: 10px;
+  padding: 2px 8px;
+  margin-left: 4px;
+  letter-spacing: 0.03em;
+}
+
+/* ── Footer ── */
+.ig-footer {
+  margin-top: 22px;
+  text-align: center;
+  font-size: 13px;
+  color: #999;
+  line-height: 1.5;
+}
+
+.ig-footer strong {
+  color: #D32F2F;
+  font-weight: 600;
+}
+
+.ig-footer-divider {
+  width: 60px;
+  height: 2px;
+  background: #ddd;
+  margin: 0 auto 10px;
+  border-radius: 1px;
+}
