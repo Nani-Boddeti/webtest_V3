@@ -1,0 +1,17 @@
+{
+  "name": "phone-comparison-infographic",
+  "version": "1.0.0",
+  "description": "Static high-resolution infographic comparing Samsung Galaxy S26 Ultra and iPhone 17 Pro Max",
+  "private": true,
+  "scripts": {
+    "generate": "node generate.js",
+    "validate": "node validate.js"
+  },
+  "dependencies": {
+    "@sparticuz/chromium": "^149.0.0",
+    "puppeteer": "^23.11.1"
+  },
+  "allowScripts": {
+    "puppeteer@23.11.1": true
+  }
+}
