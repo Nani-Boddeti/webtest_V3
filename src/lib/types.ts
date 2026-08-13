@@ -16,6 +16,24 @@ export type AttributeKey =
 /** User-adjustable importance weights, one entry per attribute. */
 export type AttributeWeights = Record<AttributeKey, number>;
 
+/** Canonical ordering of the five compared attributes. */
+export const ATTRIBUTE_KEYS = [
+  'price',
+  'batteryLife',
+  'sleepTracking',
+  'durability',
+  'subscriptionFree',
+] as const;
+
+/** Human-readable labels for the five compared attributes. */
+export const ATTRIBUTE_LABELS: Record<AttributeKey, string> = {
+  price: 'Price',
+  batteryLife: 'Battery Life',
+  sleepTracking: 'Sleep Tracking',
+  durability: 'Durability',
+  subscriptionFree: 'Subscription-Free',
+};
+
 /** Request body for POST /api/compare. */
 export interface CompareRequest {
   /** Watch names to compare. Must contain at least two entries. */

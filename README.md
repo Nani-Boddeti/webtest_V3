@@ -5,8 +5,9 @@ attributes: **price, battery life, sleep tracking, durability, and subscription-
 operation**. Users can adjust the importance of each attribute before generating a verdict.
 
 This repository currently contains the project scaffold (Next.js App Router, TypeScript,
-Tailwind CSS, ESLint, Vitest + React Testing Library). The comparison form and the
-`/api/compare` route are implemented in later steps.
+Tailwind CSS, ESLint, Vitest + React Testing Library) plus the backend comparison API
+(`POST /api/compare`) with its SerpAPI client, attribute extraction, and weighted scoring.
+The interactive comparison form is implemented in a later step.
 
 ## Prerequisites
 
@@ -28,7 +29,7 @@ cp .env.example .env.local
 ```
 
 Then edit `.env.local` and set `SERPAPI_API_KEY` to your SerpAPI key (required by the
-comparison API, implemented in a later step). Never commit a real key to source control.
+comparison API). Never commit a real key to source control.
 
 ## Run the development server
 
@@ -73,4 +74,4 @@ npm start
 
 | Variable          | Required | Description                                              |
 | ----------------- | -------- | -------------------------------------------------------- |
-| `SERPAPI_API_KEY` | Yes      | SerpAPI key used by the `/api/compare` route (later step) |
+| `SERPAPI_API_KEY` | Yes      | SerpAPI key used by the `/api/compare` route            |
