@@ -34,6 +34,27 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-background text-foreground antialiased">
+        <script
+          type="application/ld+json"
+          // Structured data describing the tool itself; safe to render inline.
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebApplication',
+              name: 'Smartwatch Comparison',
+              url: 'http://localhost:3000',
+              description:
+                'Compare smartwatches side by side across price, battery life, sleep tracking, durability, and subscription-free operation.',
+              applicationCategory: 'UtilityApplication',
+              operatingSystem: 'Any',
+              offers: {
+                '@type': 'Offer',
+                price: '0',
+                priceCurrency: 'USD',
+              },
+            }),
+          }}
+        />
         {children}
       </body>
     </html>

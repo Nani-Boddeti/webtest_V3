@@ -4,10 +4,12 @@ A minimalist, responsive web app for comparing smartwatches side by side across 
 attributes: **price, battery life, sleep tracking, durability, and subscription-free
 operation**. Users can adjust the importance of each attribute before generating a verdict.
 
-This repository currently contains the project scaffold (Next.js App Router, TypeScript,
-Tailwind CSS, ESLint, Vitest + React Testing Library) plus the backend comparison API
-(`POST /api/compare`) with its SerpAPI client, attribute extraction, and weighted scoring.
-The interactive comparison form is implemented in a later step.
+The app includes a responsive client form (`src/app/page.tsx` and components under
+`src/components`) for entering two or more watch names, adjusting the five importance
+weight sliders, and adding an optional purpose. On submit it calls the backend comparison
+API (`POST /api/compare`), which uses the SerpAPI client, attribute extraction, and
+weighted scoring, then renders a side-by-side comparison table, per-watch warnings, and a
+final verdict.
 
 ## Prerequisites
 
@@ -48,8 +50,16 @@ npm run lint
 
 ## Test
 
+Run the full test suite:
+
 ```bash
 npm test
+```
+
+Run only the component tests:
+
+```bash
+npm test -- src/components
 ```
 
 ## Build for production
@@ -66,8 +76,9 @@ npm start
 
 ## Project structure
 
-- `src/app` — App Router pages, global layout, and global styles
-- `src/lib` — shared TypeScript types (request/response contracts)
+- `src/app` — App Router pages, API route, global layout, and global styles
+- `src/components` — form, weight controls, results table, and verdict panel
+- `src/lib` — shared types, weight normalization, SerpAPI client, extraction, and scoring
 - `.env.example` — required environment variables (no real secrets)
 
 ## Environment variables

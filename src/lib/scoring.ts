@@ -17,6 +17,9 @@ import {
   type WatchResult,
 } from './types';
 import type { AttributeEvidence, ExtractedAttributes } from './extraction';
+import { normalizeWeights } from './weights';
+
+export { normalizeWeights };
 
 /** Neutral score assigned when an attribute's value is unknown. */
 export const NEUTRAL_SCORE = 50;
@@ -30,29 +33,6 @@ export interface WatchExtraction {
   extracted: ExtractedAttributes | null;
   /** Optional failure reason for total failures. */
   error?: string;
-}
-
-/**
- * Normalize weights so they sum to one. Negative/NaN values are treated as
- * zero, and an all-zero weight set falls back to equal weights.
- */
-export function normalizeWeights(weights: AttributeWeights): AttributeWeights {
-  const total = ATTRIBUTE_KEYS.reduce(
-    (sum, key) => sum + Math.max(0, Number(weights[key]) || 0),
-    0,
-  );
-
-  const result = {} as Record<AttributeKey, number>;
-  if (total <= 0) {
-    const equal = 1 / ATTRIBUTE_KEYS.length;
-    for (const key of ATTRIBUTE_KEYS) result[key] = equal;
-    return result;
-  }
-
-  for (const key of ATTRIBUTE_KEYS) {
-    result[key] = Math.max(0, Number(weights[key]) || 0) / total;
-  }
-  return result;
 }
 
 /** Score price relative to the cheapest watch (lower price scores higher). */
