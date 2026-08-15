@@ -1,0 +1,38 @@
+{
+  "search_metadata": {
+    "status": "Success"
+  },
+  "knowledge_graph": {
+    "title": "Apple Watch Series 10",
+    "description": "Apple Watch Series 10 is a smartwatch with a bright OLED display, sleep tracking, water resistance to 50 meters, and up to 18 hours of battery life. Core features work without a subscription."
+  },
+  "answer_box": {
+    "type": "organic_result",
+    "title": "Apple Watch Series 10",
+    "snippet": "The Apple Watch Series 10 offers 18-hour battery life, sleep tracking, and 50m water resistance. No subscription is required for core features."
+  },
+  "organic_results": [
+    {
+      "position": 1,
+      "title": "Apple Watch Series 10 - Apple",
+      "link": "https://example.com/apple-watch-series-10",
+      "snippet": "Apple Watch Series 10 features an 18-hour battery, sleep tracking, and water resistance up to 50 meters. No monthly subscription required."
+    },
+    {
+      "position": 2,
+      "title": "Apple Watch Series 10 review",
+      "link": "https://example.com/apple-watch-series-10-review",
+      "snippet": "The Series 10 adds sleep apnea detection and a brighter display. Battery life is rated at 18 hours."
+    }
+  ],
+  "shopping_results": [
+    {
+      "position": 1,
+      "title": "Apple Watch Series 10 (GPS) 42mm",
+      "link": "https://example.com/shop/apple-watch-series-10",
+      "source": "example-shop",
+      "price": "$399.00",
+      "extracted_price": 399
+    }
+  ]
+}
