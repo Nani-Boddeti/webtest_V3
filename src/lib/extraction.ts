@@ -1,14 +1,14 @@
 /**
- * Deterministic attribute extraction from SerpAPI search results.
+ * Deterministic attribute extraction from Serper.dev search results.
  *
- * The extractor pulls candidate values from `shopping_results`,
- * `knowledge_graph`, `answer_box`, and `organic_results`. SerpAPI result
- * formats vary, so extraction is best-effort: when a value cannot be found the
- * returned evidence has `value: null` and `confidence: 'none'`, which callers
- * turn into a warning for that watch.
+ * The extractor pulls candidate values from `shopping`, `knowledgeGraph`,
+ * `answerBox`, and `organic`. Serper.dev result formats vary, so extraction is
+ * best-effort: when a value cannot be found the returned evidence has
+ * `value: null` and `confidence: 'none'`, which callers turn into a warning
+ * for that watch.
  */
 
-import type { SerpApiResponse } from './serpapi';
+import type { SerperResponse } from './serper';
 
 export type Confidence = 'high' | 'medium' | 'low' | 'none';
 
@@ -18,7 +18,7 @@ export interface AttributeEvidence {
   value: number | null;
   /** Human-readable display value. */
   display: string;
-  /** Where the value came from (e.g. "shopping_results", "knowledge_graph"). */
+  /** Where the value came from (e.g. "shopping", "knowledgeGraph"). */
   source: string;
   /** Confidence in the extracted value. */
   confidence: Confidence;
@@ -42,41 +42,41 @@ function isNonEmptyString(value: unknown): value is string {
   return typeof value === 'string' && value.trim().length > 0;
 }
 
-/** Gather candidate text from every SerpAPI block we know how to read. */
-function collectTextChunks(data: SerpApiResponse): TextChunk[] {
+/** Gather candidate text from every Serper.dev block we know how to read. */
+function collectTextChunks(data: SerperResponse): TextChunk[] {
   const chunks: TextChunk[] = [];
 
-  if (data.knowledge_graph) {
-    if (isNonEmptyString(data.knowledge_graph.title)) {
-      chunks.push({ source: 'knowledge_graph', text: data.knowledge_graph.title });
+  if (data.knowledgeGraph) {
+    if (isNonEmptyString(data.knowledgeGraph.title)) {
+      chunks.push({ source: 'knowledgeGraph', text: data.knowledgeGraph.title });
     }
-    if (isNonEmptyString(data.knowledge_graph.description)) {
-      chunks.push({ source: 'knowledge_graph', text: data.knowledge_graph.description });
-    }
-  }
-
-  if (data.answer_box) {
-    if (isNonEmptyString(data.answer_box.title)) {
-      chunks.push({ source: 'answer_box', text: data.answer_box.title });
-    }
-    if (isNonEmptyString(data.answer_box.snippet)) {
-      chunks.push({ source: 'answer_box', text: data.answer_box.snippet });
-    }
-    if (isNonEmptyString(data.answer_box.answer)) {
-      chunks.push({ source: 'answer_box', text: data.answer_box.answer });
+    if (isNonEmptyString(data.knowledgeGraph.description)) {
+      chunks.push({ source: 'knowledgeGraph', text: data.knowledgeGraph.description });
     }
   }
 
-  for (const result of data.organic_results ?? []) {
+  if (data.answerBox) {
+    if (isNonEmptyString(data.answerBox.title)) {
+      chunks.push({ source: 'answerBox', text: data.answerBox.title });
+    }
+    if (isNonEmptyString(data.answerBox.snippet)) {
+      chunks.push({ source: 'answerBox', text: data.answerBox.snippet });
+    }
+    if (isNonEmptyString(data.answerBox.answer)) {
+      chunks.push({ source: 'answerBox', text: data.answerBox.answer });
+    }
+  }
+
+  for (const result of data.organic ?? []) {
     const parts = [result.title, result.snippet].filter(isNonEmptyString);
     if (parts.length > 0) {
-      chunks.push({ source: 'organic_results', text: parts.join('. ') });
+      chunks.push({ source: 'organic', text: parts.join('. ') });
     }
   }
 
-  for (const result of data.shopping_results ?? []) {
+  for (const result of data.shopping ?? []) {
     if (isNonEmptyString(result.title)) {
-      chunks.push({ source: 'shopping_results', text: result.title });
+      chunks.push({ source: 'shopping', text: result.title });
     }
   }
 
@@ -84,10 +84,10 @@ function collectTextChunks(data: SerpApiResponse): TextChunk[] {
 }
 
 const SOURCE_PRIORITY: Record<string, number> = {
-  answer_box: 0,
-  knowledge_graph: 1,
-  organic_results: 2,
-  shopping_results: 3,
+  answerBox: 0,
+  knowledgeGraph: 1,
+  organic: 2,
+  shopping: 3,
 };
 
 function sourcePriority(source: string): number {
@@ -116,8 +116,8 @@ function parseHours(text: string): number | null {
   return null;
 }
 
-function extractPrice(data: SerpApiResponse): AttributeEvidence {
-  for (const result of data.shopping_results ?? []) {
+function extractPrice(data: SerperResponse): AttributeEvidence {
+  for (const result of data.shopping ?? []) {
     // Prefer the raw price string to preserve the retailer's formatting.
     if (isNonEmptyString(result.price)) {
       const parsed = parseMoney(result.price);
@@ -125,18 +125,10 @@ function extractPrice(data: SerpApiResponse): AttributeEvidence {
         return {
           value: parsed,
           display: result.price.trim(),
-          source: 'shopping_results',
+          source: 'shopping',
           confidence: 'high',
         };
       }
-    }
-    if (typeof result.extracted_price === 'number' && result.extracted_price > 0) {
-      return {
-        value: result.extracted_price,
-        display: formatMoney(result.extracted_price),
-        source: 'shopping_results',
-        confidence: 'high',
-      };
     }
   }
 
@@ -151,7 +143,7 @@ function extractPrice(data: SerpApiResponse): AttributeEvidence {
   return { value: null, display: 'Not available', source: 'none', confidence: 'none' };
 }
 
-function extractBatteryLife(data: SerpApiResponse): AttributeEvidence {
+function extractBatteryLife(data: SerperResponse): AttributeEvidence {
   const chunks = [...collectTextChunks(data)].sort(
     (a, b) => sourcePriority(a.source) - sourcePriority(b.source),
   );
@@ -172,7 +164,7 @@ function extractBatteryLife(data: SerpApiResponse): AttributeEvidence {
   return { value: null, display: 'Not available', source: 'none', confidence: 'none' };
 }
 
-function extractSleepTracking(data: SerpApiResponse): AttributeEvidence {
+function extractSleepTracking(data: SerperResponse): AttributeEvidence {
   const text = collectTextChunks(data)
     .map((chunk) => chunk.text)
     .join(' \n ');
@@ -191,7 +183,7 @@ function extractSleepTracking(data: SerpApiResponse): AttributeEvidence {
   return { value: null, display: 'Not available', source: 'none', confidence: 'none' };
 }
 
-function extractDurability(data: SerpApiResponse): AttributeEvidence {
+function extractDurability(data: SerperResponse): AttributeEvidence {
   const text = collectTextChunks(data)
     .map((chunk) => chunk.text)
     .join(' \n ');
@@ -239,7 +231,7 @@ function extractDurability(data: SerpApiResponse): AttributeEvidence {
   };
 }
 
-function extractSubscriptionFree(data: SerpApiResponse): AttributeEvidence {
+function extractSubscriptionFree(data: SerperResponse): AttributeEvidence {
   const text = collectTextChunks(data)
     .map((chunk) => chunk.text)
     .join(' \n ');
@@ -276,8 +268,8 @@ function extractSubscriptionFree(data: SerpApiResponse): AttributeEvidence {
   return { value: null, display: 'Not available', source: 'none', confidence: 'none' };
 }
 
-/** Extract evidence for all five attributes from a SerpAPI response. */
-export function extractAttributes(data: SerpApiResponse): ExtractedAttributes {
+/** Extract evidence for all five attributes from a Serper.dev response. */
+export function extractAttributes(data: SerperResponse): ExtractedAttributes {
   return {
     price: extractPrice(data),
     batteryLife: extractBatteryLife(data),

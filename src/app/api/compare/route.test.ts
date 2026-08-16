@@ -19,12 +19,12 @@ function jsonRequest(body: unknown): Request {
 }
 
 beforeEach(() => {
-  vi.stubEnv('SERPAPI_API_KEY', 'test-key');
+  vi.stubEnv('SERPER_API_KEY', 'test-key');
   vi.stubGlobal('fetch', mockFetch);
   mockFetch.mockReset();
-  mockFetch.mockImplementation(async (url: string) => {
-    const parsed = new URL(url);
-    const query = parsed.searchParams.get('q') ?? '';
+  mockFetch.mockImplementation(async (_url: string, init?: RequestInit) => {
+    const body = JSON.parse(String(init?.body ?? '{}')) as { q?: string };
+    const query = body.q ?? '';
     const data = query.toLowerCase().includes('apple') ? appleData : garminData;
     return { ok: true, status: 200, json: async () => data };
   });
@@ -67,8 +67,8 @@ describe('POST /api/compare', () => {
     expect(response.status).toBe(400);
   });
 
-  it('returns 500 when SERPAPI_API_KEY is missing', async () => {
-    vi.stubEnv('SERPAPI_API_KEY', '');
+  it('returns 500 when SERPER_API_KEY is missing', async () => {
+    vi.stubEnv('SERPER_API_KEY', '');
 
     const response = await POST(
       jsonRequest({
@@ -79,7 +79,7 @@ describe('POST /api/compare', () => {
 
     expect(response.status).toBe(500);
     const body = await response.json();
-    expect(body.error).toContain('SERPAPI_API_KEY');
+    expect(body.error).toContain('SERPER_API_KEY');
   });
 
   it('returns comparison results and a verdict', async () => {

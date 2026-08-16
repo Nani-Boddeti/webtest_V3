@@ -67,8 +67,8 @@ describe('CompareForm', () => {
   });
 
   it('renders a submit error when the API reports a failure', () => {
-    renderForm({ submitError: 'Server is missing the SERPAPI_API_KEY environment variable.' });
+    renderForm({ submitError: 'Server is missing the SERPER_API_KEY environment variable.' });
 
-    expect(screen.getByRole('alert')).toHaveTextContent(/serpapi_api_key/i);
+    expect(screen.getByRole('alert')).toHaveTextContent(/serper_api_key/i);
   });
 });
