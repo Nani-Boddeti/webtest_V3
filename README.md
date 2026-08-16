@@ -7,7 +7,7 @@ operation**. Users can adjust the importance of each attribute before generating
 The app includes a responsive client form (`src/app/page.tsx` and components under
 `src/components`) for entering two or more watch names, adjusting the five importance
 weight sliders, and adding an optional purpose. On submit it calls the backend comparison
-API (`POST /api/compare`), which uses the SerpAPI client, attribute extraction, and
+API (`POST /api/compare`), which uses the Serper.dev client, attribute extraction, and
 weighted scoring, then renders a side-by-side comparison table, per-watch warnings, and a
 final verdict.
 
@@ -30,7 +30,7 @@ Copy the example environment file:
 cp .env.example .env.local
 ```
 
-Then edit `.env.local` and set `SERPAPI_API_KEY` to your SerpAPI key (required by the
+Then edit `.env.local` and set `SERPER_API_KEY` to your Serper.dev key (required by the
 comparison API). Never commit a real key to source control.
 
 ## Run the development server
@@ -78,11 +78,12 @@ npm start
 
 - `src/app` — App Router pages, API route, global layout, and global styles
 - `src/components` — form, weight controls, results table, and verdict panel
-- `src/lib` — shared types, weight normalization, SerpAPI client, extraction, and scoring
+- `src/lib` — shared types, weight normalization, Serper.dev client, extraction, and scoring
 - `.env.example` — required environment variables (no real secrets)
 
 ## Environment variables
 
 | Variable          | Required | Description                                              |
 | ----------------- | -------- | -------------------------------------------------------- |
-| `SERPAPI_API_KEY` | Yes      | SerpAPI key used by the `/api/compare` route            |
+| `SERPER_API_KEY` | Yes      | Serper.dev key used by the `/api/compare` route            |
+

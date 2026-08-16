@@ -4,13 +4,13 @@ import appleData from './fixtures/apple-watch-series-10.json';
 import garminData from './fixtures/garmin-forerunner-265.json';
 
 describe('extractAttributes', () => {
-  it('extracts price from shopping_results', () => {
+  it('extracts price from shopping results', () => {
     const extracted = extractAttributes(appleData);
 
     expect(extracted.price.value).toBe(399);
     expect(extracted.price.display).toBe('$399.00');
     expect(extracted.price.confidence).toBe('high');
-    expect(extracted.price.source).toBe('shopping_results');
+    expect(extracted.price.source).toBe('shopping');
   });
 
   it('extracts battery life in hours, converting days to hours', () => {
@@ -36,7 +36,7 @@ describe('extractAttributes', () => {
   });
 
   it('returns null values for attributes that cannot be found', () => {
-    const extracted = extractAttributes({ search_metadata: { status: 'Success' } });
+    const extracted = extractAttributes({});
 
     expect(extracted.price.value).toBeNull();
     expect(extracted.batteryLife.value).toBeNull();

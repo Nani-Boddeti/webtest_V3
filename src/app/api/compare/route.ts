@@ -2,17 +2,17 @@
  * POST /api/compare
  *
  * Accepts two or more watch names plus optional importance weights and a
- * purpose, fetches SerpAPI results for each watch server-side, extracts the
+ * purpose, fetches Serper.dev results for each watch server-side, extracts the
  * five comparison attributes, and returns weighted scores plus a verdict.
  *
- * The SerpAPI key is read from `process.env.SERPAPI_API_KEY` and is never
+ * The Serper.dev key is read from `process.env.SERPER_API_KEY` and is never
  * returned to the client or included in error messages.
  */
 
 import { NextResponse } from 'next/server';
 import { extractAttributes } from '../../../lib/extraction';
 import { buildVerdict, computeResults, type WatchExtraction } from '../../../lib/scoring';
-import { fetchSerpApiResults } from '../../../lib/serpapi';
+import { fetchSerperResults } from '../../../lib/serper';
 import {
   ATTRIBUTE_KEYS,
   type AttributeKey,
@@ -86,15 +86,15 @@ export async function POST(request: Request): Promise<NextResponse> {
 
   const purpose = parsePurpose(body);
 
-  const apiKey = process.env.SERPAPI_API_KEY;
+  const apiKey = process.env.SERPER_API_KEY;
   if (!apiKey) {
-    return error(500, 'Server is missing the SERPAPI_API_KEY environment variable.');
+    return error(500, 'Server is missing the SERPER_API_KEY environment variable.');
   }
 
   const entries: WatchExtraction[] = [];
   for (const name of watches) {
     try {
-      const data = await fetchSerpApiResults(name, apiKey);
+      const data = await fetchSerperResults(name, apiKey);
       entries.push({ name, extracted: extractAttributes(data) });
     } catch {
       entries.push({ name, extracted: null, error: `Could not retrieve search results for ${name}.` });

@@ -142,14 +142,14 @@ describe('Home page', () => {
   it('shows an error state when the API responds with an error', async () => {
     vi.stubGlobal(
       'fetch',
-      vi.fn(async () => jsonResponse({ error: 'Server is missing the SERPAPI_API_KEY environment variable.' }, 500)),
+      vi.fn(async () => jsonResponse({ error: 'Server is missing the SERPER_API_KEY environment variable.' }, 500)),
     );
     render(<Home />);
 
     fillTwoWatches();
     submitForm();
 
-    expect(await screen.findByRole('alert')).toHaveTextContent(/serpapi_api_key/i);
+    expect(await screen.findByRole('alert')).toHaveTextContent(/serper_api_key/i);
   });
 
   it('shows an error state when the network request fails', async () => {

@@ -1,17 +1,18 @@
 {
-  "search_metadata": {
-    "status": "Success"
+  "searchParameters": {
+    "q": "Garmin Forerunner 265",
+    "type": "search",
+    "engine": "google"
   },
-  "knowledge_graph": {
+  "knowledgeGraph": {
     "title": "Garmin Forerunner 265",
     "description": "The Garmin Forerunner 265 is a GPS running watch with up to 13 days of battery life in smartwatch mode, sleep tracking, 5 ATM water resistance, and no subscription required."
   },
-  "answer_box": {
-    "type": "organic_result",
+  "answerBox": {
     "title": "Garmin Forerunner 265",
     "snippet": "Garmin Forerunner 265 offers up to 13 days of battery life, advanced sleep tracking, and 5 ATM water resistance. No subscription required."
   },
-  "organic_results": [
+  "organic": [
     {
       "position": 1,
       "title": "Garmin Forerunner 265 - Garmin",
@@ -19,14 +20,15 @@
       "snippet": "Forerunner 265 smartwatch with up to 13 days battery life, sleep tracking, and 5 ATM water resistance. No subscription needed."
     }
   ],
-  "shopping_results": [
+  "shopping": [
     {
       "position": 1,
       "title": "Garmin Forerunner 265",
       "link": "https://example.com/shop/garmin-forerunner-265",
       "source": "example-shop",
       "price": "$449.99",
-      "extracted_price": 449.99
+      "rating": 4.6,
+      "ratingCount": 890
     }
   ]
 }
